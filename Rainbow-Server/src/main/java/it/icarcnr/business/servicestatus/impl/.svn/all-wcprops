@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl
+END
+CriteriaStatusBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/CriteriaStatusBL.java
+END
+ServiceStatusChangeBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/ServiceStatusChangeBL.java
+END
+ServiceLogViewBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/ServiceLogViewBL.java
+END
+ServiceOperationListBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/ServiceOperationListBL.java
+END
+DisableThresholdBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/DisableThresholdBL.java
+END
+ServiceBL.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/servicestatus/impl/ServiceBL.java
+END

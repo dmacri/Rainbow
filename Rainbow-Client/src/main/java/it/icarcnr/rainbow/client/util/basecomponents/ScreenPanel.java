@@ -1,0 +1,58 @@
+package it.icarcnr.rainbow.client.util.basecomponents;
+
+import java.util.Date;
+
+import com.gwtext.client.data.Record;
+import com.gwtext.client.data.RecordDef;
+import com.gwtext.client.data.Store;
+
+
+public abstract class ScreenPanel extends BasePanel {
+
+    protected static final String EVENT = "event";
+    protected static final String MESSAGE = "message";
+
+
+    private RecordDef recordDef;
+    private Store store;
+    
+    
+    protected void log(String eventType, String messsage) {
+        if (recordDef != null) {
+            Record record = recordDef.createRecord(new Object[]{
+                    new Date(),
+                    eventType,
+                    messsage
+            });
+            store.insert(0, record);
+        }
+    }
+
+    protected boolean showEvents() {
+        return false;
+    }
+
+    public String getSourceUrl() {
+        return null;
+    }
+
+    public String getHtmlUrl() {
+        return null;
+    }
+
+    public String getXmlDataUrl() {
+        return null;
+    }
+
+    public String getJsonDataUrl() {
+        return null;
+    }
+
+    public String getCssUrl() {
+        return null;
+    }
+
+    public String getIntro() {
+        return null;
+    }
+}

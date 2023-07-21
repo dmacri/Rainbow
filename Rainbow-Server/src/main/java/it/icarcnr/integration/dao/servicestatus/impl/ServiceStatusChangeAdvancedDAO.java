@@ -1,0 +1,398 @@
+package it.icarcnr.integration.dao.servicestatus.impl;
+
+import it.icarcnr.integration.dao.generated.Criteria;
+import it.icarcnr.integration.dao.generated.CriteriaChangeStatus;
+import it.icarcnr.integration.dao.generated.EntityManagerHelper;
+import it.icarcnr.integration.dao.generated.Request;
+import it.icarcnr.integration.dao.generated.Service;
+import it.icarcnr.integration.dao.servicestatus.bean.CriteriaHistoryBean;
+import it.icarcnr.integration.dao.servicestatus.service.IServiceStatusChangeAdvancedDAO;
+import it.icarcnr.integration.dao.util.DateUtil;
+import it.icarcnr.integration.dao.util.INetworkConstants;
+import it.icarcnr.integration.dao.util.JPAUtil;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class ServiceStatusChangeAdvancedDAO implements	IServiceStatusChangeAdvancedDAO {
+
+	private EntityManager getEntityManager() {
+		return EntityManagerHelper.getEntityManager();
+	}
+
+	private static final Log log = LogFactory.getLog(ServiceStatusChangeAdvancedDAO.class);
+
+	public List<Service> getServiceStatusChangeList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap) {
+		EntityManagerHelper.log("getServiceStatusChangeList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap)", Level.INFO, null);
+		
+		// verify if associated criteria is active
+		Time currentTime = new Time(currentDate.getTime());
+		String dayOfWeekString = DateUtil.getDayOfWeek(currentDate);
+		java.sql.Date currentSqlDate = new java.sql.Date(currentTime.getTime());
+		
+		//Data about one week
+		Calendar calendar = Calendar.getInstance();
+		Integer period = 1;
+		if(startDetectionDate!=null){
+			calendar.setTime(startDetectionDate);
+		}else if(criteriaMap!=null && criteriaMap.containsKey("period")){
+			String[] mapValue = (String[])criteriaMap.get("period");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				period = Integer.valueOf(mapValue[0]);
+			}
+			calendar.add(Calendar.DATE, -period);
+		}
+		Integer serviceRequestId = null;
+		if(criteriaMap!=null && criteriaMap.containsKey("serviceRequestId")){
+			String [] mapValue = (String[])criteriaMap.get("serviceRequestId");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				serviceRequestId = Integer.valueOf(mapValue[0]);
+				if(serviceRequestId==-1){
+					serviceRequestId=null;
+				}
+			}
+		}
+		Boolean criticalChangeStatus=false;
+		if(criteriaMap!=null && criteriaMap.containsKey("criticalChangeStatus")){
+			String [] mapValue = (String[])criteriaMap.get("criticalChangeStatus");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				criticalChangeStatus = Boolean.valueOf(mapValue[0]);
+			}
+		}
+
+		String criticalStatus =null;
+		if(criteriaMap!=null && criteriaMap.containsKey("criticalStatus")){
+			String [] mapValue = (String[])criteriaMap.get("criticalStatus");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				criticalStatus = String.valueOf(mapValue[0]);
+			}
+		}
+
+		try {
+			StringBuilder queryString = new StringBuilder("select DISTINCT criteriaChangeStatus.serviceOperation.service ");
+			queryString.append(	" from ");
+			queryString.append(CriteriaChangeStatus.class.getName()+" criteriaChangeStatus ");
+
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			Boolean firstWhereCondition = Boolean.TRUE;
+			
+			// subQueryString verify if associated criteria is active
+			
+			StringBuilder subQueryString = new StringBuilder();
+			
+			subQueryString.append(" criteriaChangeStatus.serviceOperation.id = ");
+			subQueryString.append(" ( ");
+			subQueryString.append("SELECT criteria.serviceOperation.id ");
+			subQueryString.append(" FROM ");
+			subQueryString.append(Criteria.class.getName());
+			subQueryString.append(" as criteria ");
+			subQueryString.append("WHERE criteria.startDate <= :currentSqlDate AND criteria.endDate>= :currentSqlDate ");
+			subQueryString.append("AND criteria.startTime <= :currentTime AND criteria.endTime>= :currentTime ");
+			if(dayOfWeekString!=null){
+				subQueryString.append("AND criteria."+dayOfWeekString+" = :trueValue ");
+			}
+			subQueryString.append("AND criteria.enabled = :trueValue ");
+			subQueryString.append("AND criteria.serviceOperation.id = criteriaChangeStatus.serviceOperation.id ");
+			
+			subQueryString.append(" ) ");
+			
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, subQueryString.toString());
+			
+			// end subQueryString verify if associated criteria is active
+
+			
+			//			String condition = null;
+
+			if(startDetectionDate!=null){
+				String condition = " criteriaChangeStatus.dateDetection >= :startDate ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}else{
+				String condition = " criteriaChangeStatus.date >= :startDate ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+
+			}
+			if(criticalChangeStatus){
+				String condition ="(criteriaChangeStatus.statusFrom= :criticalStatus OR criteriaChangeStatus.statusTo= :criticalStatus)";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+			}
+
+			if(serviceRequestId!=null){
+				String condition = " criteriaChangeStatus.serviceOperation.service.request.id= :serviceRequestId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+			}
+
+			firstWhereCondition =  JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteriaChangeStatus.serviceOperation.service.nodeByIdNode.", "criteriaChangeStatus.serviceOperation.service.", firstWhereCondition);
+
+			Query query = getEntityManager().createQuery(queryString.toString());
+			
+			// set subQueryString parameters in order to verify if associated criteria is active
+			query.setParameter("currentSqlDate", currentSqlDate);
+			query.setParameter("currentTime", currentTime);
+			query.setParameter("trueValue", Boolean.TRUE);
+			//end set  subQueryString parameters
+			
+			query.setParameter("startDate", calendar.getTime());
+
+			if(serviceRequestId!=null){
+				query.setParameter("serviceRequestId",serviceRequestId);
+			}
+			if(criticalChangeStatus){
+				query.setParameter("criticalStatus", criticalStatus);
+			}
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getServiceStatusChangeList(List<Integer> enabledNetworkFunctionList, Date startDetectionDate, Map criteriaMap)", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+
+	public Long getTotalServiceStatusChangeList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap) {
+		EntityManagerHelper.log("getTotalServiceStatusChangeList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap)", Level.INFO, null);
+		
+		// verify if associated criteria is active
+		Time currentTime = new Time(currentDate.getTime());
+		String dayOfWeekString = DateUtil.getDayOfWeek(currentDate);
+		java.sql.Date currentSqlDate = new java.sql.Date(currentTime.getTime());
+		
+		//Data about one week
+		Calendar calendar = Calendar.getInstance();
+		Integer period = 1;
+		if(startDetectionDate!=null){
+			calendar.setTime(startDetectionDate);
+		}else if(criteriaMap!=null && criteriaMap.containsKey("period")){
+			String[] mapValue = (String[])criteriaMap.get("period");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				period = Integer.valueOf(mapValue[0]);
+			}
+			calendar.add(Calendar.DATE, -period);
+		}
+
+
+		try {
+			StringBuilder queryString = new StringBuilder("select COUNT (DISTINCT criteriaChangeStatus.serviceOperation.service) ");
+			queryString.append(	" from ");
+			queryString.append(CriteriaChangeStatus.class.getName()+" criteriaChangeStatus ");
+
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			Boolean firstWhereCondition = Boolean.TRUE;
+			String condition = null;
+			if(startDetectionDate!=null){
+				condition = " criteriaChangeStatus.dateDetection >= :startDate ";
+			}else{
+				condition = " criteriaChangeStatus.date >= :startDate ";
+			}
+
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			
+			// subQueryString verify if associated criteria is active
+			
+			StringBuilder subQueryString = new StringBuilder();
+			
+			subQueryString.append(" criteriaChangeStatus.serviceOperation.id = ");
+			subQueryString.append(" ( ");
+			subQueryString.append("SELECT criteria.serviceOperation.id ");
+			subQueryString.append(" FROM ");
+			subQueryString.append(Criteria.class.getName());
+			subQueryString.append(" as criteria ");
+			subQueryString.append("WHERE criteria.startDate <= :currentSqlDate AND criteria.endDate>= :currentSqlDate ");
+			subQueryString.append("AND criteria.startTime <= :currentTime AND criteria.endTime>= :currentTime ");
+			if(dayOfWeekString!=null){
+				subQueryString.append("AND criteria."+dayOfWeekString+" = :trueValue ");
+			}
+			subQueryString.append("AND criteria.enabled = :trueValue ");
+			subQueryString.append("AND criteria.serviceOperation.id = criteriaChangeStatus.serviceOperation.id ");
+			
+			subQueryString.append(" ) ");
+			
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, subQueryString.toString());
+			
+			// end subQueryString verify if associated criteria is active
+
+			firstWhereCondition =  JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteriaChangeStatus.serviceOperation.service.nodeByIdNode.", "criteriaChangeStatus.serviceOperation.service.", firstWhereCondition);
+
+			Query query = getEntityManager().createQuery(queryString.toString());
+			
+			// set subQueryString parameters in order to verify if associated criteria is active
+			query.setParameter("currentSqlDate", currentSqlDate);
+			query.setParameter("currentTime", currentTime);
+			query.setParameter("trueValue", Boolean.TRUE);
+			//end set  subQueryString parameters
+
+			query.setParameter("startDate", calendar.getTime());
+
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return (Long)query.getSingleResult();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getTotalServiceStatusChangeList(List<Integer> enabledNetworkFunctionList,Date startDetectionDate, Map criteriaMap)", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Request> getStatusChangeRequestList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap) {
+		EntityManagerHelper.log("getStatusChangeRequestList(List<Integer> enabledNetworkFunctionList, Date currentDate, Date startDetectionDate, Map criteriaMap)", Level.INFO, null);
+		
+		// verify if associated criteria is active
+		Time currentTime = new Time(currentDate.getTime());
+		String dayOfWeekString = DateUtil.getDayOfWeek(currentDate);
+		java.sql.Date currentSqlDate = new java.sql.Date(currentTime.getTime());
+		
+		//Data about one week
+		Calendar calendar = Calendar.getInstance();
+		Integer period = 1;
+		Integer networkId = null;
+		//		Date timeField =null;
+		if(startDetectionDate!=null){
+			calendar.setTime(startDetectionDate);
+		} 
+		if(criteriaMap!=null && criteriaMap.containsKey("period")){
+			String[] mapValue = (String[])criteriaMap.get("period");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				period = Integer.valueOf(mapValue[0]);
+			}
+			calendar.add(Calendar.DATE, -period);
+		}
+
+		if(criteriaMap!=null && criteriaMap.containsKey("networkId")){
+			String [] mapValue =(String[])criteriaMap.get("networkId");
+			if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+				networkId=Integer.valueOf(mapValue[0]);
+			}
+		}
+
+		try {
+			StringBuilder queryString = new StringBuilder("select DISTINCT criteriaChangeStatus.serviceOperation.service.request ");
+			queryString.append(	" from ");
+			queryString.append(CriteriaChangeStatus.class.getName()+" criteriaChangeStatus ");
+
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			Boolean firstWhereCondition = Boolean.TRUE;
+			
+			// subQueryString verify if associated criteria is active
+			
+			StringBuilder subQueryString = new StringBuilder();
+			
+			subQueryString.append(" criteriaChangeStatus.serviceOperation.id = ");
+			subQueryString.append(" ( ");
+			subQueryString.append("SELECT criteria.serviceOperation.id ");
+			subQueryString.append(" FROM ");
+			subQueryString.append(Criteria.class.getName());
+			subQueryString.append(" as criteria ");
+			subQueryString.append("WHERE criteria.startDate <= :currentSqlDate AND criteria.endDate>= :currentSqlDate ");
+			subQueryString.append("AND criteria.startTime <= :currentTime AND criteria.endTime>= :currentTime ");
+			if(dayOfWeekString!=null){
+				subQueryString.append("AND criteria."+dayOfWeekString+" = :trueValue ");
+			}
+			subQueryString.append("AND criteria.enabled = :trueValue ");
+			subQueryString.append("AND criteria.serviceOperation.id = criteriaChangeStatus.serviceOperation.id ");
+			
+			subQueryString.append(" ) ");
+			
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, subQueryString.toString());
+			
+			// end subQueryString verify if associated criteria is active
+
+			if(startDetectionDate!=null){
+				String condition = " criteriaChangeStatus.dateDetection >= :startDate ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}else{
+				String condition = " criteriaChangeStatus.date >= :startDate ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}
+
+
+			if(networkId!=null){
+				String condition = " criteriaChangeStatus.serviceOperation.service.nodeByIdNode.network.id= :networkId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+			}
+
+			firstWhereCondition =  JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteriaChangeStatus.serviceOperation.service.nodeByIdNode.", "criteriaChangeStatus.serviceOperation.service.", firstWhereCondition);
+
+			Query query = getEntityManager().createQuery(queryString.toString());
+			
+			// set subQueryString parameters in order to verify if associated criteria is active
+			query.setParameter("currentSqlDate", currentSqlDate);
+			query.setParameter("currentTime", currentTime);
+			query.setParameter("trueValue", Boolean.TRUE);
+			//end set  subQueryString parameters
+
+			if(networkId!=null){
+				query.setParameter("networkId",networkId);
+			}
+
+			query.setParameter("startDate", calendar.getTime());
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getStatusChangeRequestList(List<Integer> enabledNetworkFunctionList, Date startDetectionDate, Map criteriaMap)", Level.SEVERE, re);
+			throw re;
+		}
+	}
+	public CriteriaHistoryBean getServiceHistory(Integer serviceOperationId, Date currentDate,Integer networkId) {
+
+		EntityManagerHelper.log("getServiceHistory(Integer serviceOperationId, Date currentDate,Integer networkId)", Level.INFO, null);
+
+		java.sql.Date currentSqlDate = new java.sql.Date(currentDate.getTime());
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+
+			queryString.append("SELECT NEW "+CriteriaHistoryBean.class.getName()+"(criteriahistory.id.idServiceOperation, criteriahistory.id.date, " +
+					"criteriahistory.value, criteriahistory.valueCheckMajor, " +
+					"criteriahistory.valueCheckCritical," +
+					"criteriahistory.valueCheckSecondaryMajor," +
+					"criteriahistory.valueCheckSecondaryCritical" +
+			")");
+
+			queryString.append(" FROM ");
+
+			queryString.append(INetworkConstants.CRITERIA_HISTORY_CLASS_NAME[networkId-1]);
+
+			queryString.append(" as criteriahistory ");			
+
+			queryString.append(" WHERE criteriahistory.id.idServiceOperation = :serviceOperationId ");
+			queryString.append(" AND (criteriahistory.id.date = :currentSqlDate ) ");
+			//			
+			queryString.append(" ORDER BY criteriahistory.id.date ASC");
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("serviceOperationId", serviceOperationId);
+			query.setParameter("currentSqlDate", currentSqlDate);
+
+			CriteriaHistoryBean result = null;
+			List<CriteriaHistoryBean> list = query.getResultList();
+			if(list.size() == 1){
+				result = list.get(0);
+			}else if(list.size() > 1){
+				log.error("getServiceHistory(Integer serviceOperationId, Date currentDate,Integer networkId)) returned more than one result.");
+			}
+			return result;
+
+
+
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getServiceHistory(Integer serviceOperationId, Date currentDate,Integer networkId)", Level.SEVERE, re);
+			throw re;
+		}
+	}
+}

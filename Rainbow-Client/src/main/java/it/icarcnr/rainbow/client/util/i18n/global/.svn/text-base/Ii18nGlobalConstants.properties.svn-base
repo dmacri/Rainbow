@@ -1,0 +1,19 @@
+#General Constants
+Service_Status_Critical=CRITICAL
+Service_Status_Major=MAJOR
+Service_Status_Normal=NORMAL
+Service_Status_Suspended=SUSPENDED
+
+#WelcomeView
+WelcomeView_Overview=Overview
+
+#VmcClient.java
+VmcClient_Warning=Attenzione
+VmcClient_Info=Info
+
+#ScreenManager.java
+ScreenManager_Collapse_All=Compatta tutto
+ScreenManager_Error=Si &\#232; verificato un errore
+ScreenManager_Loading_data=Caricamento in corso ...
+ScreenManager_Service_Explorer=Service Explorer
+ScreenManager_System_busy_Please_try_later=Sistema occupato. Si prega di riprovare pi\u00F9 tardi.

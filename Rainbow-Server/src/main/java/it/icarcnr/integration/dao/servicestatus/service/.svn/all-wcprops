@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service
+END
+ICriteriaStatusChangeAdvancedDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service/ICriteriaStatusChangeAdvancedDAO.java
+END
+IServiceAdvancedDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service/IServiceAdvancedDAO.java
+END
+ICriteriaAdvancedDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service/ICriteriaAdvancedDAO.java
+END
+ICriteriaHistoryAdvancedDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service/ICriteriaHistoryAdvancedDAO.java
+END
+IServiceStatusChangeAdvancedDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/servicestatus/service/IServiceStatusChangeAdvancedDAO.java
+END

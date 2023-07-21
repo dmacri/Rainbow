@@ -1,0 +1,105 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractServiceOperation entity provides the base persistence definition of
+ * the ServiceOperation entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractServiceOperation implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Service service;
+	private Operation operation;
+	private Set<CriteriaChangeStatus> criteriaChangeStatuses = new HashSet<CriteriaChangeStatus>(
+			0);
+	private Set<Criteria> criterias = new HashSet<Criteria>(0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractServiceOperation() {
+	}
+
+	/** minimal constructor */
+	public AbstractServiceOperation(Service service, Operation operation) {
+		this.service = service;
+		this.operation = operation;
+	}
+
+	/** full constructor */
+	public AbstractServiceOperation(Service service, Operation operation,
+			Set<CriteriaChangeStatus> criteriaChangeStatuses,
+			Set<Criteria> criterias) {
+		this.service = service;
+		this.operation = operation;
+		this.criteriaChangeStatuses = criteriaChangeStatuses;
+		this.criterias = criterias;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Service", nullable = false)
+	public Service getService() {
+		return this.service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Operation", nullable = false)
+	public Operation getOperation() {
+		return this.operation;
+	}
+
+	public void setOperation(Operation operation) {
+		this.operation = operation;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serviceOperation")
+	public Set<CriteriaChangeStatus> getCriteriaChangeStatuses() {
+		return this.criteriaChangeStatuses;
+	}
+
+	public void setCriteriaChangeStatuses(
+			Set<CriteriaChangeStatus> criteriaChangeStatuses) {
+		this.criteriaChangeStatuses = criteriaChangeStatuses;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "serviceOperation")
+	public Set<Criteria> getCriterias() {
+		return this.criterias;
+	}
+
+	public void setCriterias(Set<Criteria> criterias) {
+		this.criterias = criterias;
+	}
+
+}

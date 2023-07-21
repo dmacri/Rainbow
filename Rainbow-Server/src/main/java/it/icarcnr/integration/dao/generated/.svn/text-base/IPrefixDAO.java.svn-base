@@ -1,0 +1,111 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.List;
+
+/**
+ * Interface for PrefixDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IPrefixDAO {
+	/**
+	 * Perform an initial save of a previously unsaved Prefix entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IPrefixDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Prefix entity);
+
+	/**
+	 * Delete a persistent Prefix entity. This operation must be performed
+	 * within the a database transaction context for the entity's data to be
+	 * permanently deleted from the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IPrefixDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Prefix entity);
+
+	/**
+	 * Persist a previously saved Prefix entity and return it or a copy of it to
+	 * the sender. A copy of the Prefix entity parameter is returned when the
+	 * JPA persistence mechanism has not previously been tracking the updated
+	 * entity. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+	 * operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = IPrefixDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to update
+	 * @return Prefix the persisted Prefix entity instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Prefix update(Prefix entity);
+
+	public Prefix findById(Integer id);
+
+	/**
+	 * Find all Prefix entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Prefix property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Prefix> found by query
+	 */
+	public List<Prefix> findByProperty(String propertyName, Object value,
+			int... rowStartIdxAndCount);
+
+	public List<Prefix> findByPrefix(Object prefix, int... rowStartIdxAndCount);
+
+	/**
+	 * Find all Prefix entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Prefix> all Prefix entities
+	 */
+	public List<Prefix> findAll(int... rowStartIdxAndCount);
+}

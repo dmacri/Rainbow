@@ -1,0 +1,36 @@
+package it.telecom.vmc.client.util.i18n.main;
+
+import com.google.gwt.i18n.client.Constants;
+
+public interface IMain extends Constants {
+	
+	/**
+	 * #Main.VmcMain.java
+	 */
+	String VmcMain_Are_you_sure_you_want_to_do_that();
+	String VmcMain_Change_Password();
+	String VmcMain_Change_Status_Detected();
+	String VmcMain_Change_Status_All_Platforms();
+	String VmcMain_Close_Other_Tabs();
+	String VmcMain_Close_Tab();
+	String VmcMain_Confirm();
+	String VmcMain_Error();
+	String VmcMain_Logout_failed();
+	String VmcMain_Main_Content();
+	String VmcMain_Critical();
+	String VmcMain_Major();
+	String VmcMain_Normal();
+	String VmcMain_Suspended();
+	String VmcMain_Overview();
+	String VmcMain_Service_Management();
+	String VmcMain_Summary();
+	String VmcMain_User();
+	String VmcMain_Options();
+	String VmcMain_Manual();
+	String VmcMain_Manual_Vasmoncat();
+	String VmcMain_Manual_Ipcc();
+	String VmcMain_English();
+	String VmcMain_Italian();
+	String VmcMain_Languages();
+
+}

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="rainbowServerPU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- DEVELOPMENT non-jta-data-source 
+			<non-jta-data-source>java:rainbow</non-jta-data-source>
+		-->
+		<!-- Rainbow non-jta-data-source -->
+		<non-jta-data-source>java:rainbow</non-jta-data-source>
+	
+
+		<class>it.icarcnr.integration.dao.generated.SensoreSoglie</class>
+		<class>it.icarcnr.integration.dao.generated.Function</class>
+		<class>it.icarcnr.integration.dao.generated.NodoRasSen</class>
+		<class>it.icarcnr.integration.dao.generated.Position</class>
+		<class>it.icarcnr.integration.dao.generated.UtilityAnf</class>
+		<class>it.icarcnr.integration.dao.generated.NodeRas</class>
+		<class>it.icarcnr.integration.dao.generated.Action</class>
+		<class>it.icarcnr.integration.dao.generated.Criteria</class>
+		<class>it.icarcnr.integration.dao.generated.Node</class>
+		<class>it.icarcnr.integration.dao.generated.NodeRelation</class>
+		<class>it.icarcnr.integration.dao.generated.NodeSen</class>
+		<class>it.icarcnr.integration.dao.generated.Type</class>
+		<class>it.icarcnr.integration.dao.generated.ServiceNodeSource</class>
+		<class>it.icarcnr.integration.dao.generated.GroupAnf</class>
+		<class>it.icarcnr.integration.dao.generated.Location</class>
+		<class>it.icarcnr.integration.dao.generated.MwSensoreLastUpdates</class>
+		<class>it.icarcnr.integration.dao.generated.Q1fPerMappa</class>
+		<class>it.icarcnr.integration.dao.generated.Area</class>
+		<class>it.icarcnr.integration.dao.generated.ActionNetworkFunction</class>
+		<class>it.icarcnr.integration.dao.generated.Release</class>
+		<class>it.icarcnr.integration.dao.generated.Group</class>
+		<class>it.icarcnr.integration.dao.generated.Cronjob</class>
+		<class>it.icarcnr.integration.dao.generated.Service</class>
+		<class>it.icarcnr.integration.dao.generated.LocationGeoRas</class>
+		<class>it.icarcnr.integration.dao.generated.Valori</class>
+		<class>it.icarcnr.integration.dao.generated.UserPassword</class>
+		<class>it.icarcnr.integration.dao.generated.LocationGeoSen</class>
+		<class>it.icarcnr.integration.dao.generated.TipoSoglie</class>
+		<class>it.icarcnr.integration.dao.generated.UtilityGroup</class>
+		<class>it.icarcnr.integration.dao.generated.Network</class>
+		<class>it.icarcnr.integration.dao.generated.TipoSensore</class>
+		<class>it.icarcnr.integration.dao.generated.CriteriaHistoryPk3</class>
+		<class>it.icarcnr.integration.dao.generated.User</class>
+		<class>it.icarcnr.integration.dao.generated.Holtwinters</class>
+		<class>it.icarcnr.integration.dao.generated.Request</class>
+		<class>it.icarcnr.integration.dao.generated.CriteriaChangeStatus</class>
+		<class>it.icarcnr.integration.dao.generated.Q2fPerGrafici</class>
+		<class>it.icarcnr.integration.dao.generated.CalculationParameter</class>
+		<class>it.icarcnr.integration.dao.generated.ServiceOperation</class>
+		<class>it.icarcnr.integration.dao.generated.Utility</class>
+		<class>it.icarcnr.integration.dao.generated.NetworkFunction</class>
+		<class>it.icarcnr.integration.dao.generated.Sensore</class>
+		<class>it.icarcnr.integration.dao.generated.Operation</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractSensoreSoglie</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractFunction</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNodoRasSen</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractPosition</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractUtilityAnf</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNodeRas</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractAction</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractCriteria</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNode</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNodeRelation</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNodeSen</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractType</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractServiceNodeSource</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractGroupAnf</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractLocation</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractMwSensoreLastUpdates</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractQ1fPerMappa</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractArea</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractActionNetworkFunction</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractRelease</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractGroup</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractCronjob</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractService</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractLocationGeoRas</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractValori</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractUserPassword</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractLocationGeoSen</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractTipoSoglie</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractUtilityGroup</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNetwork</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractTipoSensore</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractCriteriaHistoryPk3</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractUser</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractHoltwinters</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractRequest</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractCriteriaChangeStatus</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractQ2fPerGrafici</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractCalculationParameter</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractServiceOperation</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractUtility</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractNetworkFunction</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractSensore</class>
+		<class>it.icarcnr.integration.dao.generated.AbstractOperation</class>
+		<class>it.icarcnr.integration.dao.generated.Q2fPerGraficiId</class>
+		<class>it.icarcnr.integration.dao.generated.HoltwintersId</class>
+		<class>it.icarcnr.integration.dao.generated.CriteriaHistoryPk3Id</class>
+		<class>it.icarcnr.integration.dao.generated.ValoriId</class>
+		<class>it.icarcnr.integration.dao.generated.Q1fPerMappaId</class>
+		<class>it.icarcnr.integration.dao.generated.NodoRasSenId</class>
+		<properties>
+			<!-- RAINBOW DATA SOURCE 
+				<property name="hibernate.connection.datasource" value="java:rainbow" />
+					<property name="hibernate.connection.url"
+				value="jdbc:mysql://150.145.63.203:3306/rainbow" />
+				
+			-->
+			<property name="hibernate.connection.url"
+				value="jdbc:mysql://150.145.63.203:3306/rainbow" />
+			<property name="hibernate.connection.username" value="root" />
+			<property name="hibernate.connection.password" value="root" />
+
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQLDialect" />
+
+			<!-- RAINBOW CATALOG -->
+			<property name="hibernate.default_catalog" value="rainbow" />
+
+		</properties>
+	</persistence-unit>
+
+</persistence>

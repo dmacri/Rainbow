@@ -1,0 +1,45 @@
+#ComboBox.NetworkComboBox
+NetworkComboBox_Enter_Network=Inserisci Rete
+NetworkComboBox_Network=Rete
+NetworkComboBox_Searching=Ricerca in corso...
+
+#ComboBox.FunctionComboBox
+FunctionComboBox_Enter_Function=Inserisci Tipo Servizio 
+FunctionComboBox_Function=Tipo Servizio
+FunctionComboBox_Searching=Ricerca in corso...
+
+#ComboBox.FilesComboBox
+FilesComboBox_Select_File=Seleziona File
+FilesComboBox_Files=Files
+FilesComboBox_Searching=Ricerca in corso\t
+
+#ComboBox.District
+CoboBoxDistrict_Districts=Distretti
+CoboBoxDistrict_Insert_District=Inserire Distretto
+ComboBoxDistrict_Searching=Ricerca in corso...
+
+#ComboBox.NodeComboBox
+NodeTypeComboBox_Enter_node_type=Inserisci Tipo Nodo
+NodeTypeComboBox_Node_Type=Tipo Nodo
+NodeTypeComboBox_Searching=Ricerca in corso...
+
+#ComboBox.ServiceComboBox
+ServiceComboBox_Enter_service=Inserisci Servizio
+ServiceComboBox_Searching=Ricerca in corso...
+ServiceComboBox_Service=Servizio
+
+#ComboBox.ServiceTypeComboBox
+ServiceTypeComboBox_Enter_service_type=Inserisci servizio
+ServiceTypeComboBox_Searching=Ricerca in corso...
+ServiceTypeComboBox_Service=Servizio
+ServiceTypeComboBox_You_are_not_authorized_for_the_Service_or_the_selected_node=Non sei autorizzato per il Servizio o il Nodo selezionato
+
+#ComboBox.UtilityTypeComboBox
+UtilityComboBox_Utility=Utility
+UtilityComboBox_Enter_Utility=Inserici Utility
+UtilityComboBox_Searching=Ricerca in corso...
+
+#ComboBox.NodeServiceComboBox
+	NodeServiceComboBox_Enter_nodoService_type= Inserisci nodo
+	NodeServiceComboBox_Searching=Ricerca in corso...
+	NodeServiceComboBox_Node=Nodo

@@ -1,0 +1,11 @@
+#Graph.NetworkGraph
+NetworkGraph_Drawing_nodes=Disegno nodi...
+NetworkGraph_Graphical_View=Vista grafica
+NetworkGraph_Loading=Caricamento in corso...
+NetworkGraph_Monitoring=Monitoring
+NetworkGraph_firstTooltipMessage=Click tasto sinistro per esplodere il nodo
+NetworkGraph_secondTooltipMessage =Click tasto destro per visualizzare lo stato dei servizi
+NetworkGraph_NoServiceForThisNetworkItem=Nessun servizio per questo elemento di rete
+
+NetworkGraphAlarmedNode_NoAlarmedNode=Nessun nodo &\#232; allarmato
+NetworkGraphAlarmedNode_AlarmedNodes=Nodi allarmati

@@ -1,0 +1,482 @@
+/**
+ * 
+ */
+package it.telecom.business.network.impl;
+
+import it.telecom.business.function.impl.FunctionBL;
+import it.telecom.business.function.service.IFunctionBL;
+import it.telecom.business.menutree.util.UserInterfaceUtil;
+import it.telecom.business.network.bean.AlarmedNodeBean;
+import it.telecom.business.network.bean.AlarmedServiceBean;
+import it.telecom.business.network.bean.NetworkItemBean;
+import it.telecom.business.network.service.INetworkBL;
+import it.telecom.business.network.util.AlarmedNodeBeanComparator;
+import it.telecom.business.node.impl.NodeBL;
+import it.telecom.business.node.service.INodeBL;
+import it.telecom.business.servicestatus.impl.ServiceBL;
+import it.telecom.business.servicestatus.service.IServiceBL;
+import it.telecom.integration.dao.function.impl.FunctionAdvancedDAO;
+import it.telecom.integration.dao.function.service.IFunctionAdvancedDAO;
+import it.telecom.integration.dao.generated.Function;
+import it.telecom.integration.dao.generated.INetworkDAO;
+import it.telecom.integration.dao.generated.INodeDAO;
+import it.telecom.integration.dao.generated.Network;
+import it.telecom.integration.dao.generated.NetworkDAO;
+import it.telecom.integration.dao.generated.Node;
+import it.telecom.integration.dao.generated.NodeDAO;
+import it.telecom.integration.dao.generated.NodeRelation;
+import it.telecom.integration.dao.network.impl.NetworkAdvancedDAO;
+import it.telecom.integration.dao.network.service.INetworkAdvancedDAO;
+import it.telecom.integration.dao.node.impl.NodeAdvancedDAO;
+import it.telecom.integration.dao.node.service.INodeAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.bean.LightServiceSatusBean;
+import it.telecom.integration.dao.servicestatus.impl.ServiceAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.service.IServiceAdvancedDAO;
+import it.telecom.integration.dao.util.IServiceConstants;
+import it.telecom.integration.dao.util.IServiceConstants.Status;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.beanutils.BeanComparator;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * @author Graziano
+ *
+ */
+public class NetworkBL implements INetworkBL {
+
+	private static final int NODE_NAME_MAX_LENGHT = 25;
+	private static final Log log = LogFactory.getLog(NetworkBL.class);
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.network.service.INetworkBL#findAll(java.util.Map, int[])
+	 */
+	public Network findById(List<Integer> enabledNetworkFunctionList, Integer networkId) throws Exception {
+		final String method = "findById(List<Integer> enabledNetworkFunctionList, Integer networkId)";
+		log.info(method);
+		try{
+			INetworkAdvancedDAO iNetworkAdvancedDAO = new NetworkAdvancedDAO();
+			return iNetworkAdvancedDAO.findById(enabledNetworkFunctionList, networkId);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.network.service.INetworkBL#findAll(java.util.Map, int[])
+	 */
+	public List<Network> findAll(List<Integer> enabledNetworkFunctionList, int... rowStartIdxAndCount) throws Exception {
+		final String method = "findAll(List<Integer> enabledNetworkFunctionList, Integer areaId, int... rowStartIdxAndCount)";
+		log.info(method);
+		try{
+			INetworkAdvancedDAO iNetworkAdvancedDAO = new NetworkAdvancedDAO();
+			return iNetworkAdvancedDAO.findAll(enabledNetworkFunctionList,  rowStartIdxAndCount);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	public List<Node> getRootNodes(List<Integer> enabledNetworkFunctionList, Integer idNetwork) throws Exception {
+		final String method = "getRootNodes(List<Integer> enabledNetworkFunctionList, Integer idNetwork)";
+		log.info(method);
+		try{
+			INodeAdvancedDAO iNodeAdvancedDAO = new NodeAdvancedDAO();
+			return iNodeAdvancedDAO.getRootNodes(enabledNetworkFunctionList, idNetwork);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	public NetworkItemBean getNetworkItemBean( List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Date currentDate) throws Exception {
+
+		NetworkItemBean networkItemBean = new NetworkItemBean();
+
+		Network network = findById(enabledNetworkFunctionList, networkId);
+		if(network!=null){
+
+			networkItemBean.setName(network.getDescription());
+
+			StringBuilder fullName = new StringBuilder();
+			fullName.append(network.getDescription());
+			networkItemBean.setFullName(fullName.toString());
+
+			networkItemBean.setId(network.getId().toString());
+
+
+			//			networkItemBean.setNetworkId(network.getId());
+			networkItemBean.setNetworkId(-1);
+			networkItemBean.setFunctionId(null);
+			networkItemBean.setNodeId(null);
+
+			//			INodeBL iNodeBL = new NodeBL();
+			//			Status status = iNodeBL.getStatus(enabledNetworkFunctionList, network.getId(), null, null, currentDate);
+			//			networkItemBean.setStatus(status);
+			networkItemBean.setStatus(null);
+
+			String icon = UserInterfaceUtil.getNodeIcon(network);
+			networkItemBean.setImage("url(\'"+icon+"\')");
+
+			List<NetworkItemBean> children = new ArrayList<NetworkItemBean>();
+			if(functionId!=null){
+				IFunctionBL iFunctionBL = new FunctionBL();
+				Function function = iFunctionBL.findById(enabledNetworkFunctionList, functionId);
+				if(function!=null){
+					NetworkItemBean functionItemBean = getFunctionItemBean(null, network, function, currentDate, network.getId().toString());
+					children.add(functionItemBean);
+				}
+			}else{
+				IFunctionAdvancedDAO iFunctionAdvancedDAO = new FunctionAdvancedDAO();
+				List<Function> functions = iFunctionAdvancedDAO.findAll(enabledNetworkFunctionList,network.getId());
+				for (Function function : functions) {
+					NetworkItemBean functionItemBean = getFunctionItemBean(null, network, function, currentDate, network.getId().toString());
+					children.add(functionItemBean);
+				}
+			}
+
+			addChildren(networkItemBean, children);
+		}
+
+
+
+		return networkItemBean;
+	}
+
+	/**
+	 * @param enabledNetworkFunctionList
+	 * @param network
+	 * @param function
+	 * @param currentDate
+	 * @param parentNodeUniqueId
+	 * @return
+	 * @throws Exception 
+	 */
+	private NetworkItemBean getFunctionItemBean(
+			List<Integer> enabledNetworkFunctionList, Network network,
+			Function function, Date currentDate, String parentNodeUniqueId) throws Exception {
+
+		String nodeUniqueId = parentNodeUniqueId+"_"+function.getId();
+		NetworkItemBean networkItemBean = new NetworkItemBean();
+		networkItemBean.setName(function.getName());
+
+		StringBuilder fullName = new StringBuilder();
+		fullName.append(network.getDescription());
+		fullName.append(" - ");
+		fullName.append(function.getName());
+
+		networkItemBean.setFullName(fullName.toString());
+		networkItemBean.setId(nodeUniqueId);
+
+		//		networkItemBean.setNetworkId(network.getId());
+		//		networkItemBean.setFunctionId(function.getId());
+		networkItemBean.setNetworkId(-1);
+		networkItemBean.setFunctionId(-1);
+		networkItemBean.setNodeId(null);
+
+		//		INodeBL iNodeBL = new NodeBL();
+		//		Status status = iNodeBL.getStatus(enabledNetworkFunctionList, network.getId(), function.getId(), null, currentDate);
+		//		networkItemBean.setStatus(status);
+		networkItemBean.setStatus(null);
+
+		String icon = UserInterfaceUtil.getNodeIcon(function);
+		networkItemBean.setImage("url(\'"+icon+"\')");
+
+
+		List<NetworkItemBean> children = getNetworkItemBeans(enabledNetworkFunctionList, network, function, currentDate, nodeUniqueId);
+
+		addChildren(networkItemBean, children);
+
+		return networkItemBean;
+	}
+
+
+	/**
+	 * @param networkItemBean
+	 * @param children
+	 */
+	private void addChildren(NetworkItemBean networkItemBean,
+			List<NetworkItemBean> children) {
+
+		networkItemBean.setChildren(children);
+
+		Status chidrenStatus = null;
+
+		if(!children.isEmpty()){
+			//			chidrenStatus = CriteriaStatus.NORMAL;
+			for (NetworkItemBean childItemBean : children) {
+				if (chidrenStatus == null || ( childItemBean.getStatus() != null  && childItemBean.getStatus().getSeverity() > chidrenStatus.getSeverity()) ){
+					chidrenStatus = childItemBean.getStatus();
+				}
+
+				if ( chidrenStatus == null || (childItemBean.getChildrenStatus()!=null && childItemBean.getChildrenStatus().getSeverity()>chidrenStatus.getSeverity())){
+					chidrenStatus = childItemBean.getChildrenStatus();
+				}
+			}
+		}
+
+		networkItemBean.setChildrenStatus(chidrenStatus);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.network.service.INetworkBL#getNetworkItemBeans(java.util.List, java.lang.Integer, java.util.Date)
+	 */
+	private List<NetworkItemBean> getNetworkItemBeans(List<Integer> enabledNetworkFunctionList, Network network, Function function, Date currentDate, String parentNodeUniqueId)
+	throws Exception {
+		List<NetworkItemBean> networkItemBeans = new ArrayList<NetworkItemBean>();
+		List<Node> networkRootNodes = getRootNodes(enabledNetworkFunctionList, network.getId());
+		for (Node networkRootNode : networkRootNodes) {
+			INodeBL iNodeBL = new NodeBL();
+			if(iNodeBL.hasService(enabledNetworkFunctionList, currentDate, networkRootNode, function, Boolean.TRUE)){
+				networkItemBeans.add(getNetworkItemBean(enabledNetworkFunctionList, network, function, networkRootNode, currentDate, parentNodeUniqueId));
+			}
+		}
+		return networkItemBeans;
+	}
+
+	private NetworkItemBean getNetworkItemBean(List<Integer> enabledNetworkFunctionList, Network network, Function function, Node node, Date currentDate, String parentNodeUniqueId) throws Exception{
+		String nodeUniqueId = parentNodeUniqueId+"_"+node.getId();
+		NetworkItemBean networkItemBean = new NetworkItemBean();
+		String name = null;
+		StringBuilder fullName = new StringBuilder();
+		String nodeDescription = node.getDescription();
+		if(nodeDescription!= null && nodeDescription.length()> NODE_NAME_MAX_LENGHT){
+			name = nodeDescription.substring(0, NODE_NAME_MAX_LENGHT-1) + " ...";
+		}else{
+			name = nodeDescription;
+		}
+		fullName.append(network.getDescription());
+		fullName.append(" - ");
+		fullName.append(function.getName());
+		fullName.append(" - ");
+		fullName.append(nodeDescription);
+
+		networkItemBean.setName(name);
+		networkItemBean.setFullName(fullName.toString());
+		networkItemBean.setId(nodeUniqueId);
+
+		networkItemBean.setNetworkId(network.getId());
+		networkItemBean.setFunctionId(function.getId());
+		networkItemBean.setNodeId(node.getId());
+
+		INodeBL iNodeBL = new NodeBL();
+		Status status = iNodeBL.getStatus(enabledNetworkFunctionList, network.getId(), function.getId(), node.getId(), currentDate);
+		networkItemBean.setStatus(status);
+
+		String icon = UserInterfaceUtil.getNodeIcon(node);
+		networkItemBean.setImage("url(\'"+icon+"\')");
+
+		List<NetworkItemBean> children = new ArrayList<NetworkItemBean>();
+		Set<NodeRelation> nodeRelationSet = node.getNodeRelationsForIdParent();
+		//		CriteriaStatus chidrenStatus = CriteriaStatus.NORMAL;
+		Status chidrenStatus = null;
+		if(!nodeRelationSet.isEmpty()){
+			// Sort nodeRelationList by id
+			List<NodeRelation> nodeRelationList = new ArrayList<NodeRelation>(nodeRelationSet);
+			Comparator compare = new BeanComparator( "id" );
+			Collections.sort( nodeRelationList, compare );
+
+			for (NodeRelation nodeRelation : nodeRelationList) {
+				Node childNode = nodeRelation.getNodeByIdChild();
+				if(iNodeBL.hasService(enabledNetworkFunctionList, currentDate, childNode,function,Boolean.TRUE)){
+					NetworkItemBean childItemBean = getNetworkItemBean(enabledNetworkFunctionList, network, function, childNode, currentDate, nodeUniqueId);
+					children.add(childItemBean);
+
+					//					CriteriaStatus childStatus = childItemBean.getStatus();
+					//					
+					//					if(chidrenStatus==null){
+					//						chidrenStatus = CriteriaStatus.NORMAL;
+					//					}
+					if (chidrenStatus == null || ( childItemBean.getStatus() != null  && childItemBean.getStatus().getSeverity() > chidrenStatus.getSeverity()) ){
+						chidrenStatus = childItemBean.getStatus();
+					}
+
+					if ( chidrenStatus == null || (childItemBean.getChildrenStatus()!=null && childItemBean.getChildrenStatus().getSeverity()>chidrenStatus.getSeverity())){
+						chidrenStatus = childItemBean.getChildrenStatus();
+					}
+					//				if(childNode.getType().getId()<=3 
+					//						|| childNode.getType().getId()==9 
+					//						){
+
+					//				}
+				}
+			}
+
+		}
+		networkItemBean.setChildren(children);
+		networkItemBean.setChildrenStatus(chidrenStatus);
+		return networkItemBean;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.network.service.INetworkBL#findById(java.lang.Integer)
+	 */
+	public Network findById(Integer networkId) throws Exception {
+		final String method = "findById(Integer networkId)";
+		log.info(method);
+		try{
+			INetworkDAO iNetworkDAO = new NetworkDAO();
+			return iNetworkDAO.findById(networkId);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	public List<AlarmedNodeBean> getAlarmedNodes(List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Date currentDate) throws Exception{
+		final String method = "getAlarmedNodes(List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Date currentDate)";
+		log.info(method);
+		try{
+			NetworkItemBean networkItemBean = getNetworkItemBean(enabledNetworkFunctionList, networkId, functionId, currentDate);
+			Map<String,NetworkItemBean> alarmedNodeMap = new HashMap<String, NetworkItemBean>();
+			//			visitNetwork(networkItemBean, serviceStatus, alarmedNodeMap);
+			visitNetwork(networkItemBean, alarmedNodeMap);
+			return getAlarmedNodes(enabledNetworkFunctionList, alarmedNodeMap, currentDate);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	private List<AlarmedNodeBean> getAlarmedNodes(List<Integer> enabledNetworkFunctionList, Map<String, NetworkItemBean> alarmedNodeMap, Date currentDate) throws Exception {
+		final String method = "getAlarmedNodes(List<Integer> enabledNetworkFunctionList, Map<String, NetworkItemBean> alarmedNodeMap, Date currentDate)";
+		log.info(method);
+		List<AlarmedNodeBean> alarmedNodeBeans = new ArrayList<AlarmedNodeBean>();
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			INodeDAO iNodeDAO = new NodeDAO();
+			for (NetworkItemBean networkItemBean : alarmedNodeMap.values()) {
+				AlarmedNodeBean alarmedNodeBean = new AlarmedNodeBean();
+				alarmedNodeBean.setNodeUniqueId(networkItemBean.getId());
+				//				alarmedNodeBean.setName(networkItemBean.getFullName());
+				alarmedNodeBean.setFunctionId(networkItemBean.getFunctionId());
+				alarmedNodeBean.setStatus(networkItemBean.getStatus().getSeverityName());
+				Node node = iNodeDAO.findById(networkItemBean.getNodeId());
+				String nodeIconCls = UserInterfaceUtil.getNodeIconCls(node);
+				alarmedNodeBean.setIconCls(nodeIconCls);
+				List<AlarmedServiceBean> alarmedServiceBeans = new ArrayList<AlarmedServiceBean>();
+
+				boolean firstTime = true;
+				List<LightServiceSatusBean> criticalLightServiceSatusBeans = iServiceAdvancedDAO.getServicesByStatus(null, networkItemBean.getNetworkId(), networkItemBean.getFunctionId(), networkItemBean.getNodeId(), currentDate, IServiceConstants.CRITICAL);
+				for (LightServiceSatusBean criticalLightServiceSatusBean : criticalLightServiceSatusBeans) {
+					if(firstTime){
+						updateNodeName(alarmedNodeBean, criticalLightServiceSatusBean, node);
+						firstTime = false;
+					}
+					AlarmedServiceBean alarmedServiceBean = makeAlarmedServiceBean(networkItemBean, criticalLightServiceSatusBean);
+					alarmedServiceBeans.add(alarmedServiceBean);
+				}
+				List<LightServiceSatusBean> majorLightServiceSatusBeans = iServiceAdvancedDAO.getServicesByStatus(null, networkItemBean.getNetworkId(), networkItemBean.getFunctionId(), networkItemBean.getNodeId(), currentDate, IServiceConstants.MAJOR);
+				for (LightServiceSatusBean majorLightServiceSatusBean : majorLightServiceSatusBeans) {
+					if(firstTime){
+						updateNodeName(alarmedNodeBean, majorLightServiceSatusBean, node);
+						firstTime = false;
+					}
+					AlarmedServiceBean alarmedServiceBean = makeAlarmedServiceBean(networkItemBean, majorLightServiceSatusBean);
+					alarmedServiceBeans.add(alarmedServiceBean);
+				}
+				
+				
+				alarmedNodeBean.setAlarmedServices(alarmedServiceBeans);
+				alarmedNodeBeans.add(alarmedNodeBean);
+			}
+			AlarmedNodeBeanComparator alarmedNodeBeanComparator = new AlarmedNodeBeanComparator();
+			Collections.sort(alarmedNodeBeans, alarmedNodeBeanComparator );
+				
+			return alarmedNodeBeans;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	private void updateNodeName(AlarmedNodeBean alarmedNodeBean,
+			LightServiceSatusBean criticalLightServiceSatusBean, Node node) {
+		StringBuilder nodeName = new StringBuilder();
+		nodeName.append(node.getDescription());
+		nodeName.append(" (");
+		nodeName.append(criticalLightServiceSatusBean.getService().getFunction().getName());
+		nodeName.append(")");
+		alarmedNodeBean.setName(nodeName.toString());
+	}
+
+
+	private AlarmedServiceBean makeAlarmedServiceBean(
+			NetworkItemBean networkItemBean,
+			LightServiceSatusBean criticalLightServiceSatusBean) throws Exception {
+		AlarmedServiceBean alarmedServiceBean = new AlarmedServiceBean();
+		alarmedServiceBean.setNodeUniqueId(networkItemBean.getId());
+		IServiceBL service = new ServiceBL();
+		String name = service.getSources(criticalLightServiceSatusBean.getService());
+		criticalLightServiceSatusBean.getService().getServiceNodeSources();
+		alarmedServiceBean.setName(criticalLightServiceSatusBean.getService().getRequest().getDescription()+" ("+name+")");
+		alarmedServiceBean.setStatus(criticalLightServiceSatusBean.getStatus());
+
+		String serviceIconCls = "services-tree-status-icon";
+		//						String serviceIconCls = UserInterfaceUtil.getNodeIconCls(lightServiceSatusBean.getService());
+		//						serviceIconCls = "services-tree-status-icon";
+		if(IServiceConstants.CRITICAL.equals(criticalLightServiceSatusBean.getStatus())){
+			serviceIconCls = "circle-red-icon";
+		}else if(IServiceConstants.MAJOR.equals(criticalLightServiceSatusBean.getStatus())){
+			serviceIconCls = "circle-orange-icon";
+		}
+		alarmedServiceBean.setIconCls(serviceIconCls);
+		return alarmedServiceBean;
+	}
+
+
+	public List<AlarmedNodeBean> getAlarmedNodes(List<Integer> enabledNetworkFunctionList, NetworkItemBean networkItemBean, Date currentDate) throws Exception {
+		final String method = "getAlarmedNodes(List<Integer> enabledNetworkFunctionList, NetworkItemBean networkItemBean, Date currentDate)";
+		log.info(method);
+		try{
+			Map<String,NetworkItemBean> alarmedNodeMap = new HashMap<String, NetworkItemBean>();
+			visitNetwork(networkItemBean, alarmedNodeMap);
+			return getAlarmedNodes(enabledNetworkFunctionList, alarmedNodeMap, currentDate);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	private void visitNetwork(NetworkItemBean networkItemBean, Map<String,NetworkItemBean> alarmedNodeMap) throws Exception{
+		final String method = "visitNetwork(NetworkItemBean networkItemBean, Map<String,NetworkItemBean> alarmedNodeMap)";
+		log.info(method);
+		try{
+			Status networkItemStatus = networkItemBean.getStatus();
+			if(networkItemStatus!=null){
+				if(networkItemStatus.getSeverityName().equals(IServiceConstants.CRITICAL) ||
+						networkItemStatus.getSeverityName().equals(IServiceConstants.MAJOR)){
+					String key = networkItemBean.getNetworkId()+ "_" +networkItemBean.getFunctionId()+"_"+networkItemBean.getNodeId();
+					alarmedNodeMap.put(key, networkItemBean);
+				}
+			}
+			List<NetworkItemBean> children = networkItemBean.getChildren();
+			for (NetworkItemBean child : children) {
+				visitNetwork(child, alarmedNodeMap);
+			}
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+
+	}
+
+}

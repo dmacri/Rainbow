@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package it.telecom.presentation.action.util;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IRequestConstants {
+
+	String ENABLED_NETWORK_FUNCTION_LIST = "enabledNetworkFunctionList";
+
+}

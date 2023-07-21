@@ -1,0 +1,37 @@
+.white-panel-body {
+	background-color:#FFFFFF !important;  
+}
+
+.grey-panel-body {
+	background-color:#ece7e1 !important;  
+}
+
+.grey-panel-body-login {
+	background-color:#afaffd !important;  
+}
+
+.white-toolbar-body {
+	background:#FFFFFF !important;
+}
+
+.critical-background-color {
+	background:#F16243 !important;
+}
+
+.major-background-color {
+	background:#F6CC3A !important;
+}
+
+.normal-background-color {
+	background:#ACD373 !important;
+}
+
+.mycronjob_user {
+	background:#FFF8E4 !important;
+	border-bottom:1px solid #FFCF40 !important;
+}
+
+.mycronjob_others {
+	background:#FFFFFF !important;
+	border-bottom:1px solid #CCCCCC !important;
+}

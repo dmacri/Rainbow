@@ -1,0 +1,106 @@
+/**
+ * 
+ */
+package it.telecom.integration.dao.serviceoperation.impl;
+
+import it.telecom.integration.dao.generated.Criteria;
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.generated.ServiceOperation;
+import it.telecom.integration.dao.serviceoperation.service.IServiceOperationAdvancedDAO;
+import it.telecom.integration.dao.util.JPAUtil;
+import it.telecom.presentation.action.util.IParameterHttpServletRequestContants;
+
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * @author Graziano
+ *
+ */
+public class ServiceOperationAdvancedDAO implements	IServiceOperationAdvancedDAO {
+
+	private static final Log log = LogFactory.getLog(IServiceOperationAdvancedDAO.class);
+
+	/* (non-Javadoc)
+	 * @see it.telecom.persistence.serviceoperation.service.IServiceOperationAdvancedDAO#getServiceOperationId(java.util.List, java.lang.Integer, java.lang.String)
+	 */
+	public Integer getServiceOperationId(List<Integer> enabledNetworkFunctionList, Integer serviceId, String operation) {
+		EntityManagerHelper.log("getServiceOperationId(List<Integer> enabledNetworkFunctionList, Integer serviceId, String operation)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+
+			StringBuilder queryString = new StringBuilder();
+			queryString.append(" SELECT serviceOperation.id FROM "+ServiceOperation.class.getName()+" as serviceOperation");
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			queryString.append(" WHERE serviceOperation.service.id = :serviceId  ");
+			queryString.append(" AND serviceOperation.operation.name = :operation ");
+
+			Boolean firstWhereCondition = Boolean.FALSE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "serviceOperation.service.nodeByIdNode.", "serviceOperation.service.", firstWhereCondition);
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter(IParameterHttpServletRequestContants.SERVICE_ID, serviceId);
+			query.setParameter("operation", operation);
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			List<Integer> list = query.getResultList();
+			Integer result = null;
+			if(list.size() == 1){
+				result = list.get(0);
+			}else if(list.size() > 1){
+				log.error("getServiceOperationId(List<Integer> enabledNetworkFunctionList, Integer serviceId, String operation) returned more than one result.");
+			}
+
+			return result;
+
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getServiceOperationId(List<Integer> enabledNetworkFunctionList, Integer serviceId, String operation)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see it.telecom.integration.dao.serviceoperation.service.IServiceOperationAdvancedDAO#findAll(java.util.List, java.lang.Integer)
+	 */
+	public List<ServiceOperation> findAll(List<Integer> enabledNetworkFunctionList, Integer serviceId) {
+		EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer serviceId", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+
+			StringBuilder queryString = new StringBuilder();
+			queryString.append(" SELECT DISTINCT criteria.serviceOperation FROM "+Criteria.class.getName()+" as criteria");
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			Boolean firstWhereCondition = Boolean.TRUE;
+			String condition = " criteria.serviceOperation.service.id = :serviceId ";
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+
+			condition = " criteria.enabled = :trueValue ";
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteria.serviceOperation.service.nodeByIdNode.", "criteria.serviceOperation.service.", firstWhereCondition);
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter(IParameterHttpServletRequestContants.SERVICE_ID, serviceId);
+			query.setParameter("trueValue", Boolean.TRUE);
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return query.getResultList();
+
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer serviceId",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+}
+

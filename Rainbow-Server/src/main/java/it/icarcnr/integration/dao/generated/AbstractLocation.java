@@ -1,0 +1,86 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractLocation entity provides the base persistence definition of the
+ * Location entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractLocation implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private String name;
+	private String province;
+	private Set<Node> nodes = new HashSet<Node>(0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractLocation() {
+	}
+
+	/** minimal constructor */
+	public AbstractLocation(String name, String province) {
+		this.name = name;
+		this.province = province;
+	}
+
+	/** full constructor */
+	public AbstractLocation(String name, String province, Set<Node> nodes) {
+		this.name = name;
+		this.province = province;
+		this.nodes = nodes;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = "name", unique = true, nullable = false, length = 45)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "province", nullable = false, length = 2)
+	public String getProvince() {
+		return this.province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "location")
+	public Set<Node> getNodes() {
+		return this.nodes;
+	}
+
+	public void setNodes(Set<Node> nodes) {
+		this.nodes = nodes;
+	}
+
+}

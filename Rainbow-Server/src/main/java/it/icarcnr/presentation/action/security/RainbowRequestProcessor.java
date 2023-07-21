@@ -1,0 +1,121 @@
+package it.icarcnr.presentation.action.security;
+
+import it.icarcnr.business.login.bean.UserLoginBean;
+import it.icarcnr.business.security.impl.SecurityBL;
+import it.icarcnr.business.security.service.ISecurityBL;
+import it.icarcnr.presentation.action.util.IParameterHttpServletRequestContants;
+import it.icarcnr.presentation.action.util.IRequestConstants;
+import it.icarcnr.presentation.action.util.ISessionConstants;
+import it.icarcnr.presentation.action.util.SecurityUtil;
+import it.icarcnr.presentation.action.util.SecurityUtil.Role;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.RequestProcessor;
+
+public class RainbowRequestProcessor extends RequestProcessor {
+
+	private static final Log log = LogFactory.getLog(RainbowRequestProcessor.class);
+
+
+	/* (non-Javadoc)
+	 * @see org.apache.struts.action.RequestProcessor#processPreprocess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
+	@Override
+	protected boolean processPreprocess(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		init(request);
+
+		return super.processPreprocess(request, response);
+	}
+
+
+	@Override
+	protected boolean processRoles(HttpServletRequest request,
+			HttpServletResponse response, ActionMapping mapping)
+	throws IOException, ServletException {
+
+		if (hasPermission(request,mapping)){
+			return true;
+		}
+
+		// The current user is not authorized for this action
+		if (log.isDebugEnabled()) {
+			log.debug(" User '" + request.getRemoteUser() +
+			"' does not have any required role, denying access");
+		}
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+				getInternal().getMessage("notAuthorized",
+						mapping.getPath()));
+		return false;
+	}
+
+
+	/**
+	 * @param request
+	 */
+	private void init(HttpServletRequest request) {
+		request.setAttribute(IRequestConstants.ENABLED_NETWORK_FUNCTION_LIST, new ArrayList<Integer>(0));
+	}
+
+
+	/**
+	 * @param request
+	 * @param mapping 
+	 */
+	private boolean hasPermission(HttpServletRequest request, ActionMapping mapping) {
+		final String method = "hasPermission(HttpServletRequest request, ActionMapping mapping)";
+		boolean  hasPermission = false;
+		Role role = SecurityUtil.getRole(mapping);
+		if(role.equals(Role.USER_NOT_LOGGED)){
+			hasPermission = true;
+		}else{
+			String sessionId = SecurityUtil.getCookieSessionID(request);
+			if (sessionId!=null){
+				String jSessionId = (String)request.getSession().getAttribute(ISessionConstants.JSESSIONID);
+				if (jSessionId!=null && jSessionId.equals(sessionId) && request.getSession().getId().equals(sessionId) ){
+					UserLoginBean userLoginBean = SecurityUtil.getUser(request);
+					if(userLoginBean!=null){
+						//							logged user
+						if(role.equals(Role.USER_LOGGED)){
+							hasPermission = true;
+						}else if(userLoginBean.isEnabled()){
+							if(role.equals(Role.USER_ENABLED)){
+								hasPermission = true;
+							}else{//Role.USER_ENABLED_CHECK_PERMISSION
+								ISecurityBL iSecurityBL = new SecurityBL();
+								String actionPath = mapping.getPath();
+								Integer networkId = request.getParameter(IParameterHttpServletRequestContants.NODE_SENSOR_ID)!=null?Integer.valueOf(request.getParameter(IParameterHttpServletRequestContants.NODE_SENSOR_ID)):null;			
+								Integer functionId = request.getParameter(IParameterHttpServletRequestContants.SENSOR_ID)!=null?Integer.valueOf(request.getParameter(IParameterHttpServletRequestContants.SENSOR_ID)):null;			
+								try {
+									//												String parameter = mapping.getParameter();
+									//												JSONObject jsonParameter = new JSONObject(parameter);
+									//												PermissionType permissionType = jsonParameter.has("permissionType")?PermissionType.valueOf(jsonParameter.getString("permissionType")):null;
+
+									List<Integer> enabledNetworkFunctionList = iSecurityBL.getEnabledNetworkFunctionList(userLoginBean.getId(), actionPath, networkId, functionId);
+									if(enabledNetworkFunctionList!=null && !enabledNetworkFunctionList.isEmpty()){
+										request.setAttribute(IRequestConstants.ENABLED_NETWORK_FUNCTION_LIST, enabledNetworkFunctionList);
+										hasPermission = true;								
+									}
+								} catch (Exception e) {
+									log.error(method, e);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return hasPermission;
+	}
+}

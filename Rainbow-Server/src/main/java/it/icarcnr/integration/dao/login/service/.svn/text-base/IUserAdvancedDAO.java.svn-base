@@ -1,0 +1,14 @@
+package it.telecom.integration.dao.login.service;
+
+import it.telecom.integration.dao.generated.User;
+import it.telecom.integration.dao.generated.UserPassword;
+
+public interface IUserAdvancedDAO {
+	
+	public User login(String name, String password);
+	
+	public UserPassword oldestPSW(Integer id);
+	
+	public Long findCountUserPasswordByID(Integer id);
+
+}

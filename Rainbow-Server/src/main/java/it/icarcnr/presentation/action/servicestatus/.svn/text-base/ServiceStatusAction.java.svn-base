@@ -1,0 +1,144 @@
+package it.telecom.presentation.action.servicestatus;
+
+
+import it.telecom.business.login.bean.UserLoginBean;
+import it.telecom.business.security.impl.SecurityBL;
+import it.telecom.business.security.service.ISecurityBL;
+import it.telecom.business.servicestatus.bean.ServiceStatusBean;
+import it.telecom.business.servicestatus.impl.ServiceBL;
+import it.telecom.business.servicestatus.service.IServiceBL;
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.util.IServiceConstants;
+import it.telecom.presentation.action.util.HttpServletResponseUtil;
+import it.telecom.presentation.action.util.IActionConstants;
+import it.telecom.presentation.action.util.IErrorMessageConstants;
+import it.telecom.presentation.action.util.IParameterHttpServletRequestContants;
+import it.telecom.presentation.action.util.SecurityUtil;
+import it.telecom.util.IDateFormatUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+
+public class ServiceStatusAction extends Action {
+
+	private static final int ID_REQUEST_403_FORBIDDEN_REGISTER = 155;
+	private static final Log log = LogFactory.getLog(ServiceStatusAction.class);
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+	throws Exception {
+
+		final String method = "execute";
+
+		try {
+			List<Integer> enabledNetworkFunctionList = SecurityUtil.getEnabledNetworkFunctionList(request);
+
+			Map criteriaMap = request.getParameterMap();
+
+			int start = request.getParameter("start")!=null?Integer.valueOf( request.getParameter("start")):0;
+			int limit = request.getParameter("limit")!=null?Integer.valueOf( request.getParameter("limit")):30;
+			SimpleDateFormat dateTimeFormat= new SimpleDateFormat(IDateFormatUtil.DATE_TIME_FORMAT);
+
+			Calendar calendar = Calendar.getInstance();
+			Date currentDate = calendar.getTime();
+
+			JSONObject result = new JSONObject();
+			JSONArray records = new JSONArray();
+
+			IServiceBL iServiceBL = new ServiceBL();
+			UserLoginBean userLoginBean = SecurityUtil.getUser(request);
+			ISecurityBL iSecurityBL = new SecurityBL();
+
+			List<ServiceStatusBean> serviceStatus = iServiceBL.getServiceStatus(enabledNetworkFunctionList, currentDate, criteriaMap, start, limit);
+
+			for (ServiceStatusBean serviceStatusBean : serviceStatus) {
+				JSONObject record = new JSONObject();
+				record.put(IParameterHttpServletRequestContants.SERVICE_ID, serviceStatusBean.getServiceId());
+				record.put(IParameterHttpServletRequestContants.REQUEST_ID, serviceStatusBean.getRequestId());
+				record.put(IParameterHttpServletRequestContants.NETWORK_ID, serviceStatusBean.getNetworkId());
+				record.put("requestName", serviceStatusBean.getRequestName());
+				record.put("nodeName", serviceStatusBean.getNodeName());
+				record.put("isTakingCharge", serviceStatusBean.getIsTakingCharge());
+				record.put("tackingChargePermission", iSecurityBL.hasPermission(userLoginBean.getId(), IActionConstants.TAKE_CARE_ACTION, serviceStatusBean.getNetworkId(), serviceStatusBean.getFunctionId()));
+				record.put("source",serviceStatusBean.getSources());
+				record.put("samplingPeriod", serviceStatusBean.getSamplingPeriod());
+				record.put("valueStatus", serviceStatusBean.getValueStatus());
+				record.put("deltaValueStatus", serviceStatusBean.getDeltaValueStatus());
+				record.put("status", serviceStatusBean.getStatus());
+				
+				boolean findCLI403ForbiddenPermission = iSecurityBL.hasPermission(userLoginBean.getId(), IActionConstants.SEARCH_CLI_403FORB_REG_ACTION_PATH, serviceStatusBean.getNetworkId(), serviceStatusBean.getFunctionId());
+				
+				if(findCLI403ForbiddenPermission && serviceStatusBean.getRequestId()==ID_REQUEST_403_FORBIDDEN_REGISTER && serviceStatusBean.getStatus().equals(IServiceConstants.CRITICAL)){
+					record.put("request403ForbiddenRegister", Boolean.TRUE);
+				}else{
+					record.put("request403ForbiddenRegister", Boolean.FALSE);
+				}
+				
+				String lastCheck = serviceStatusBean.getLastCheck() != null ? dateTimeFormat.format(serviceStatusBean.getLastCheck()) : null;
+				record.put("lastCheck", lastCheck);
+				record.put("description",serviceStatusBean.getDescription());
+				record.put("extendedDescription", serviceStatusBean.getExtendedDescription());
+				record.put("reference", serviceStatusBean.getReference());
+				record.put("nodeFrom", serviceStatusBean.getNodeFrom());
+				record.put("nodeTo", serviceStatusBean.getNodeTo());
+				record.put("logPresent", serviceStatusBean.getLogPresent() && iSecurityBL.hasPermission(userLoginBean.getId(), IActionConstants.LOG_VIEW_ACTION, serviceStatusBean.getNetworkId(), serviceStatusBean.getFunctionId()));
+				record.put("valueTypeCheck", serviceStatusBean.getValueTypeCheck());
+				record.put("deltaValueTypeCheck", serviceStatusBean.getDeltaValueTypeCheck());
+				record.put("criticalValue", serviceStatusBean.getCriticalValue());				
+				record.put("majorValue", serviceStatusBean.getMajorValue());
+				record.put("criticalDeltaValue",serviceStatusBean.getCriticalDeltaValue());
+				record.put("majorDeltaValue", serviceStatusBean.getMajorDeltaValue());
+				record.put("secondaryMajorValue", serviceStatusBean.getSecondaryMajorValue());
+				record.put("secondaryMajorDeltaValue", serviceStatusBean.getSecondaryMajorDeltaValue());
+				record.put("secondaryCriticalValue", serviceStatusBean.getSecondaryCriticalValue());
+				record.put("secondaryCriticalDeltaValue", serviceStatusBean.getSecondaryCriticalDeltaValue());
+
+
+				record.put("value",serviceStatusBean.getValue());
+				record.put("idCriteriaValue", serviceStatusBean.getCriteriaIdValue());
+
+				record.put("deltaValue",serviceStatusBean.getDeltaValue());
+				record.put("idCriteriaDeltaValue", serviceStatusBean.getCriteriaIdDeltaValue());
+				record.put("networkName", serviceStatusBean.getNetworkName());
+				record.put("functionName", serviceStatusBean.getFunctionName());
+
+				records.put(record);
+			}
+
+			result.put("root", records);
+			result.put("totalCount", iServiceBL.getTotalServiceStatus(enabledNetworkFunctionList, currentDate, criteriaMap));
+			result.put("threadid",Thread.currentThread().getId());
+
+			HttpServletResponseUtil.setJsonResponse(response);
+
+			response.getOutputStream().println(result.toString());
+			response.flushBuffer();
+		} catch (Exception e) {
+			log.error(method,e);
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,IErrorMessageConstants.INTERNAL_SERVER_ERROR);
+		}
+		finally{
+			EntityManagerHelper.closeEntityManager();
+		}
+		return null;
+	}
+
+}

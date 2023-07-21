@@ -1,0 +1,40 @@
+/**
+ * 
+ */
+package it.icarcnr.integration.dao.security.service;
+
+import java.util.List;
+
+
+
+
+public interface IGroupAnfAdvancedDAO {
+
+	/**
+	 * @param groupId
+	 * @param actionPath
+	 * @param networkId
+	 * @param functionId
+	 * @return
+	 */
+	public List<Integer> getEnabledNetworkFunctionList(Integer groupId,	String actionPath, Integer networkId, Integer functionId);
+
+	/**
+	 * @param groupId
+	 * @param actionPath
+	 * @param networkId
+	 * @param functionId
+	 * @return
+	 */
+	public boolean hasPermission(Integer groupId, String actionPath, Integer networkId, Integer functionId);
+
+	/**
+	 * @param groupId
+	 * @param areaId
+	 * @param networkId
+	 * @param functionId
+	 * @return
+	 */
+	public boolean hasPermission(Integer groupId, Integer areaId, Integer networkId, Integer functionId);
+
+}

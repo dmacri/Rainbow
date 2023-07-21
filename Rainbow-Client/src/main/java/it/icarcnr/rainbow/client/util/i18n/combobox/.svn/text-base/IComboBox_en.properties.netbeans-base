@@ -1,0 +1,45 @@
+#ComboBox.NetworkComboBox
+NetworkComboBox_Enter_Network=Enter Network
+NetworkComboBox_Network=Network
+NetworkComboBox_Searching=Searching ...
+
+#ComboBox.FunctionComboBox
+FunctionComboBox_Enter_Function=Enter Service Type
+FunctionComboBox_Function=Service Type
+FunctionComboBox_Searching=Searching ...
+
+#ComboBox.FilesComboBox
+FilesComboBox_Select_File=Select File
+FilesComboBox_Files=Files
+FilesComboBox_Searching=Searching ..\t
+
+#ComboBox.District
+CoboBoxDistrict_Districts=Districts
+CoboBoxDistrict_Insert_District=Insert District
+ComboBoxDistrict_Searching=Searching ...
+
+#ComboBox.NodeComboBox
+NodeTypeComboBox_Enter_node_type=Enter Node type
+NodeTypeComboBox_Node_Type=Node Type
+NodeTypeComboBox_Searching=Searching ...
+
+#ComboBox.ServiceComboBox
+ServiceComboBox_Enter_service=Enter service
+ServiceComboBox_Searching=Searching ...
+ServiceComboBox_Service=Service
+
+#ComboBox.ServiceTypeComboBox
+ServiceTypeComboBox_Enter_service_type=Enter service type
+ServiceTypeComboBox_Searching=Searching ...
+ServiceTypeComboBox_Service=Service
+ServiceTypeComboBox_You_are_not_authorized_for_the_Service_or_the_selected_node=You are not authorized for the Service or the selected node
+
+#ComboBox.UtilityTypeComboBox
+UtilityComboBox_Utility=Utility
+UtilityComboBox_Enter_Utility=Enter Utility
+UtilityComboBox_Searching=Searching ...
+
+#ComboBox.NodeServiceComboBox
+	NodeServiceComboBox_Enter_nodoService_type= Enter node type
+	NodeServiceComboBox_Searching=Searching...
+	NodeServiceComboBox_Node=Node

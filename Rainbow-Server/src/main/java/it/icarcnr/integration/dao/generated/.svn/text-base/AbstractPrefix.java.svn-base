@@ -1,0 +1,53 @@
+package it.telecom.integration.dao.generated;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractPrefix entity provides the base persistence definition of the Prefix
+ * entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractPrefix implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private String prefix;
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractPrefix() {
+	}
+
+	/** full constructor */
+	public AbstractPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = "prefix", unique = true, nullable = false, length = 5)
+	public String getPrefix() {
+		return this.prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+}

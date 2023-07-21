@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus
+END
+SummaryServiceStatusAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/SummaryServiceStatusAction.java
+END
+CriteriaServiceAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/CriteriaServiceAction.java
+END
+ServiceStatusAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/ServiceStatusAction.java
+END
+StatusChangeHistoryAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/StatusChangeHistoryAction.java
+END
+LogViewAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/LogViewAction.java
+END
+LastChangeStatusAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/servicestatus/LastChangeStatusAction.java
+END

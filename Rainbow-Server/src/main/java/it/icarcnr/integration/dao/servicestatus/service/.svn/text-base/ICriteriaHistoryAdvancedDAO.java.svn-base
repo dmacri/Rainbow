@@ -1,0 +1,12 @@
+package it.telecom.integration.dao.servicestatus.service;
+
+import it.telecom.integration.dao.servicestatus.bean.CriteriaHistoryBean;
+
+import java.util.Date;
+import java.util.List;
+
+public interface ICriteriaHistoryAdvancedDAO {
+	
+	public List<CriteriaHistoryBean> getServiceHistory (Integer serviceOperationId, Date startDate, Date endDate, Integer networkId);
+
+}

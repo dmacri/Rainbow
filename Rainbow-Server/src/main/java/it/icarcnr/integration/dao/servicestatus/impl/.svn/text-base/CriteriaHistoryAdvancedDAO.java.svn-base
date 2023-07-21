@@ -1,0 +1,60 @@
+package it.telecom.integration.dao.servicestatus.impl;
+
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.servicestatus.bean.CriteriaHistoryBean;
+import it.telecom.integration.dao.servicestatus.service.ICriteriaHistoryAdvancedDAO;
+import it.telecom.integration.dao.util.INetworkConstants;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+public class CriteriaHistoryAdvancedDAO implements ICriteriaHistoryAdvancedDAO {
+	
+	
+	
+	public List<CriteriaHistoryBean> getServiceHistory (Integer serviceOperationId, Date startDate, Date endDate, Integer networkId) {
+
+		EntityManagerHelper.log("getServiceHistory (Integer serviceOperationId, Date startDate, Date endDate)", Level.INFO, null);
+		
+		Timestamp startSqlDate = new Timestamp(startDate.getTime());
+		Timestamp endSqlDate = new Timestamp(endDate.getTime());
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			
+			queryString.append("SELECT NEW "+CriteriaHistoryBean.class.getName()+"(criteriahistory.id.idServiceOperation, criteriahistory.id.date, " +
+					"criteriahistory.value, criteriahistory.valueCheckMajor, " +
+					"criteriahistory.valueCheckCritical," +
+					"criteriahistory.valueCheckSecondaryMajor," +
+					"criteriahistory.valueCheckSecondaryCritical" +
+					")");
+
+			queryString.append(" FROM ");
+			
+			queryString.append(INetworkConstants.CRITERIA_HISTORY_CLASS_NAME[networkId-1]);
+
+			queryString.append(" as criteriahistory ");			
+			
+			queryString.append(" WHERE criteriahistory.id.idServiceOperation = :serviceOperationId ");
+			queryString.append(" AND (criteriahistory.id.date BETWEEN :startDate AND :endDate) ");
+//			
+			queryString.append(" ORDER BY criteriahistory.id.date ASC");
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("serviceOperationId", serviceOperationId);
+			query.setParameter("startDate", startSqlDate);
+			query.setParameter("endDate", endSqlDate);
+			return query.getResultList();
+			
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getServiceHistory (Integer serviceOperationId, Date startDate, Date endDate, Integer networkId)", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+}

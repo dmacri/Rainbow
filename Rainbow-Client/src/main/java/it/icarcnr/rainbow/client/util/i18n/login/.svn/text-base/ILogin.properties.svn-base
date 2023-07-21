@@ -1,0 +1,12 @@
+#Login.PasswordChangePanel
+PasswordChangePanel_Change_password=Cambio Password...
+PasswordChangePanel_Confirm_New_Password=Conferma Nuova Password
+PasswordChangePanel_Info=Info
+PasswordChangePanel_Name=Nome
+PasswordChangePanel_New_Password=Nuova Password
+PasswordChangePanel_Old_Password=Vecchia Password
+PasswordChangePanel_Password_changed_successfully=Password cambiata con successo
+PasswordChangePanel_Save=Salva
+PasswordChangePanel_Surname=Cognome
+PasswordChangePanel_Username=Username
+PasswordChangePanel_Warning=Attenzione

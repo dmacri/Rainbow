@@ -1,0 +1,15 @@
+package it.telecom.business.report.service;
+
+import it.telecom.business.charts.util.IChartsConstants.ChartMode;
+import it.telecom.business.report.bean.ChartBean;
+
+import java.util.Date;
+import java.util.List;
+
+import org.jfree.chart.JFreeChart;
+
+public interface IChartReportBL {
+
+	public JFreeChart getJFreeChart(List<ChartBean> chartBeans,Date startDate, Date endDate, ChartMode chartMode) throws Exception;
+	
+}

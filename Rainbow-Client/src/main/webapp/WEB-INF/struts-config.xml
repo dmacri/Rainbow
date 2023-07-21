@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+	<form-beans />
+	<global-exceptions />
+	<global-forwards />
+
+	<!-- Roles info : role USER_NOT_LOGGED identify user not logged; role USER_LOGGED 
+		identify user logged but at first access or with expired password; role USER_ENABLED 
+		identify user logged and enabled role USER_ENABLED_CHECK_PERMISSION identify 
+		user logged and enabled -->
+	<action-mappings>
+
+		<!-- Login Actions -->
+
+		<action path="/login/login" scope="request"
+			type="it.icarcnr.presentation.action.login.LoginAction" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_NOT_LOGGED" />
+		</action>
+
+		<action path="/login/checkLoggedUser"
+			type="it.icarcnr.presentation.action.login.CheckLoggedUserAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_NOT_LOGGED" />
+		</action>
+
+		<action path="/login/userLoginInfo"
+			type="it.icarcnr.presentation.action.login.UserLoginInfoAction"
+			validate="false">
+			<set-property property="roles" value="USER_LOGGED" />
+			<set-property property="cancellable" value="true" />
+		</action>
+
+		<action path="/login/logout"
+			type="it.icarcnr.presentation.action.login.LogoutAction" validate="false">
+			<set-property property="roles" value="USER_LOGGED" />
+			<set-property property="cancellable" value="true" />
+		</action>
+
+		<action path="/login/changePassword"
+			type="it.icarcnr.presentation.action.login.ChangePasswordAction"
+			validate="false">
+			<set-property property="roles" value="USER_LOGGED" />
+			<set-property property="cancellable" value="true" />
+		</action>
+
+		<action path="/main/manual"
+			type="it.icarcnr.presentation.action.main.DownloadManualAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<action path="/main/ipccManual"
+			type="it.icarcnr.presentation.action.main.DownloadManulIpccAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<!-- End Login Actions -->
+
+		<!-- Desktop Area Actions -->
+
+
+		<action path="/menutree/xmlMenuTree"
+			type="it.icarcnr.presentation.action.menutree.XMLMenuTreeAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+  <!-- 
+		<action path="/security/checkChartPermissionAction"
+			type="it.icarcnr.presentation.action.security.CheckChartPermissionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+  -->
+		<action path="/security/checkServicesStatusPermissionAction"
+			type="it.icarcnr.presentation.action.security.CheckServicesStatusPermissionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<action path="/security/checkJobStatusPermissionAction"
+			type="it.icarcnr.presentation.action.security.CheckJobStatusPermissionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<action path="/security/checkPortalServiceStatus"
+			type="it.icarcnr.presentation.action.security.CheckPortalServiceStatusPermissionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<action path="/security/checkDownloadManualIpccPermission"
+			type="it.icarcnr.presentation.action.security.CheckDownloadManualIpccPermissionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED" />
+		</action>
+
+		<!-- End Desktop Area Actions -->
+
+
+		<!-- Portal Action -->
+
+		<action path="/portal/summaryPanelServiceStatus"
+			type="it.icarcnr.presentation.action.portal.SummaryPanelServiceStatusAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+
+		<!-- End Portal Action -->
+
+
+
+		<!-- Services Status Actions - area 1 -->
+
+		<action path="/services/serviceStatus"
+			type="it.icarcnr.presentation.action.servicestatus.ServiceStatusAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/services/summaryServiceStatus"
+			type="it.icarcnr.presentation.action.servicestatus.SummaryServiceStatusAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/services/logView"
+			type="it.icarcnr.presentation.action.servicestatus.LogViewAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/services/criteriaService"
+			type="it.icarcnr.presentation.action.servicestatus.CriteriaServiceAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<!-- Taking Charge Actions - area 1 -->
+
+		<action path="/job/disableThreshold"
+			type="it.icarcnr.presentation.action.job.DisableThresholdAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+			<set-property property="parameter" value="USER_LOGGED" />
+		</action>
+
+		<action path="/job/changeComment"
+			type="it.icarcnr.presentation.action.job.ChangeCommentAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+			<set-property property="parameter" value="USER_LOGGED" />
+		</action>
+
+
+
+		<action path="/job/takeCare"
+			type="it.icarcnr.presentation.action.job.AnomalyTakingCareAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+			<set-property property="parameter" value="{permissionType:WRITE}" />
+		</action>
+
+		<action path="/job/listOpenJob"
+			type="it.icarcnr.presentation.action.job.ListOpenJobAction" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/job/closeJob"
+			type="it.icarcnr.presentation.action.job.CloseJobAction" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+			<set-property property="parameter" value="{permissionType:WRITE}" />
+		</action>
+
+		<!-- End Services Status Actions / Taking Charge Actions - area 1 -->
+
+		<!-- Services Status Change History Actions area 2 -->
+
+		<action path="/services/statusChangeHistory"
+			type="it.icarcnr.presentation.action.servicestatus.StatusChangeHistoryAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/changeStatusComboBox"
+			type="it.icarcnr.presentation.action.combobox.ChangeStatusComboBoxAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/services/summaryChangeStatus"
+			type="it.icarcnr.presentation.action.servicestatus.SummaryChangeStatusAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/services/lastChangeStatus"
+			type="it.icarcnr.presentation.action.servicestatus.LastChangeStatusAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<!-- End Services Status Change History Actions area 2 -->
+
+
+
+		<!-- Charts Actions - area 3 -->
+
+		<action path="/charts/serviceChart"
+			type="it.icarcnr.presentation.action.charts.ServiceChartAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/reports/chartReport"
+			type="it.icarcnr.presentation.action.reports.ChartReportAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/reports/csvReport"
+			type="it.icarcnr.presentation.action.reports.CsvReportAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+	<!-- <set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />   -->		
+		</action>
+
+		<action path="/reports/onlyChartReport"
+			type="it.icarcnr.presentation.action.reports.OnlyChartReportAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+    <!-- Maps Actions - area 5 -->
+    
+		<action path="/maps/serviceMaps"
+			type="it.icarcnr.presentation.action.maps.ServiceMapsAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/networkList"
+			type="it.icarcnr.presentation.action.combobox.NetworkListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<action path="/combobox/functionList"
+			type="it.icarcnr.presentation.action.combobox.FuctionListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/nodeTypeList"
+			type="it.icarcnr.presentation.action.combobox.NodeTypeListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/serviceTypeList"
+			type="it.icarcnr.presentation.action.combobox.ServiceTypeListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/NodeServiceTypeList"
+			type="it.icarcnr.presentation.action.combobox.NodeServiceTypeList"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<action path="/checkboxtree/ServiceCheckBoxTree"
+			type="it.icarcnr.presentation.action.checkboxtree.ServiceCheckBoxTreeAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/serviceOperationList"
+			type="it.icarcnr.presentation.action.combobox.ServiceOperationListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<!-- End Charts Actions - area 3 -->
+
+		<!-- Utility Actions - area 4 -->
+
+		<action path="/utility/utilityAction"
+			type="it.icarcnr.presentation.action.utility.UtilityAction" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/checkIpLock"
+			type="it.icarcnr.presentation.action.utility.CheckIpLockAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/checkIpLockExecution"
+			type="it.icarcnr.presentation.action.utility.CheckIpLockExecutionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/myCronjobAction"
+			type="it.icarcnr.presentation.action.utility.MyCronjobAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/myCronjobViewLog"
+			type="it.icarcnr.presentation.action.utility.MyCronjobViewLogAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/myCronjobViewLogTimer"
+			type="it.icarcnr.presentation.action.utility.MyCronjobViewLogTimerAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/tiumAlignment"
+			type="it.icarcnr.presentation.action.utility.TiumAlignmentAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/recoveryService"
+			type="it.icarcnr.presentation.action.utility.RecoveryServiceAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/networkListRecoveryService"
+			type="it.icarcnr.presentation.action.combobox.NetworkListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/utilityList"
+			type="it.icarcnr.presentation.action.combobox.UtilityListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/combobox/GeoAreaListOutputFiles"
+			type="it.icarcnr.presentation.action.combobox.GeoAlignListOutputFilesAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+        
+        <action path="/combobox/GeoPrefixListOutputFiles"
+			type="it.icarcnr.presentation.action.combobox.GeoPrefixListOutputFilesAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<action path="/combobox/GeoAreaOnSelectOutputFile"
+			type="it.icarcnr.presentation.action.combobox.GeoAreaOnSelectOutputFileAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<action path="/combobox/GeoAreaDistrictList" type="it.icarcnr.presentation.action.combobox.GeoAreaDistrictListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/recoveryServiceAffectedList"
+			type="it.icarcnr.presentation.action.utility.RecoveryServiceAffectedListAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/infoCliPK3"
+			type="it.icarcnr.presentation.action.utility.InfoCliPK3Action" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/infoCliPoste"
+			type="it.icarcnr.presentation.action.utility.InfoCliPosteAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<action path="/utility/InfoCliPK0" type="it.icarcnr.presentation.action.utility.InfoCliPK0Action"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<action path="/utility/InfoCliMSAN" type="it.icarcnr.presentation.action.utility.InfoCliMSANAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<action path="/utility/infoCliContactCenter"
+			type="it.icarcnr.presentation.action.utility.InfoCliContactCenterAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<action path="/utility/TiUMManager"
+			type="it.icarcnr.presentation.action.utility.TiUMManagerAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/TiUMSetPin"
+			type="it.icarcnr.presentation.action.utility.TiUMSetPinAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/TiUMChangePin"
+			type="it.icarcnr.presentation.action.utility.TiUMChangePinAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+
+		<action path="/utility/TiUMCreateProfile"
+			type="it.icarcnr.presentation.action.utility.TiUMCreateProfileAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/TiUMDeleteProfile"
+			type="it.icarcnr.presentation.action.utility.TiUMDeleteProfileAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/TiUMEnableNotify"
+			type="it.icarcnr.presentation.action.utility.TiUMEnableNotifyAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/searchCLI403ForbReg"
+			type="it.icarcnr.presentation.action.utility.SearchCLI403ForbRegAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/GeoAreaPk3"
+			type="it.icarcnr.presentation.action.utility.GeoAreaPK3Action"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<action path="/utility/GeoAreaPK3District" type="it.icarcnr.presentation.action.utility.GeoAreaPK3DistrictAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+        <action path="/utility/GeoAreaPK0District" type="it.icarcnr.presentation.action.utility.GeoAreaPK0DistrictAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/GeoAreaPk0"
+			type="it.icarcnr.presentation.action.utility.GeoAreaPK0Action"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/GeoAreaResultUdb"
+			type="it.icarcnr.presentation.action.utility.GeoAreaResultUdbAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		<!-- End Utility Actions - area 4 -->
+
+		<!-- Graph Actions - area 5 -->
+		<action path="/graph/loadGraph"
+			type="it.icarcnr.presentation.action.graph.LoadGraphAction" validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/graph/alarmedNode"
+			type="it.icarcnr.presentation.action.graph.AlarmedNodeAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/CheckCnc"
+			type="it.icarcnr.presentation.action.utility.CheckCncAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<action path="/utility/CheckCncExecution"
+			type="it.icarcnr.presentation.action.utility.CheckCncExecutionAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+		
+		<!-- End Graph Actions - area 5 -->
+
+		<!-- VoIP Control Actions - area 6 -->
+		<action path="/voipcontrol/voipControl"
+			type="it.icarcnr.presentation.action.voipControl.VoipControlAction"
+			validate="false">
+			<set-property property="cancellable" value="true" />
+			<set-property property="roles" value="USER_ENABLED_CHECK_PERMISSION" />
+		</action>
+
+		<!-- End VoIP Control Actions - area 6 -->
+
+	</action-mappings>
+
+	<controller
+		processorClass="it.icarcnr.presentation.action.security.RainbowRequestProcessor" />
+
+
+	<message-resources parameter="ApplicationResources" />
+
+	<plug-in className="it.icarcnr.presentation.plugin.SchedulerPlugIn">
+		<set-property property="startOnLoad" value="true" />
+		<set-property property="startupDelay" value="0" />
+	</plug-in>
+
+	<plug-in className="it.icarcnr.presentation.plugin.LogStartApplicationPlugIn">
+		<set-property property="startOnLoad" value="true" />
+		<set-property property="startupDelay" value="0" />
+	</plug-in>
+
+</struts-config>
+

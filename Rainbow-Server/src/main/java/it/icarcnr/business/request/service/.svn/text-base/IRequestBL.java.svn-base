@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package it.telecom.business.request.service;
+
+import it.telecom.integration.dao.generated.Request;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IRequestBL {
+	public List<Request> findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, int... rowStartIdxAndCount) throws Exception;
+
+}

@@ -1,0 +1,79 @@
+package it.icarcnr.presentation.action.login;
+
+import it.icarcnr.business.login.bean.UserChangePasswordFormBean;
+import it.icarcnr.business.login.bean.UserLoginBean;
+import it.icarcnr.business.login.impl.LoginUserBL;
+import it.icarcnr.business.login.service.ILoginUserBL;
+import it.icarcnr.integration.dao.generated.EntityManagerHelper;
+import it.icarcnr.presentation.action.util.HttpServletResponseUtil;
+import it.icarcnr.presentation.action.util.IErrorMessageConstants;
+import it.icarcnr.presentation.action.util.SecurityUtil;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class ChangePasswordAction extends Action {
+	
+	private static final Log log = LogFactory.getLog(ChangePasswordAction.class);
+	
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		final String method = "execute";
+
+		String oldPassword = request.getParameter("oldPassword");
+		String newPassword = request.getParameter("newPassword");
+		String confirmNewPassword = request.getParameter("confirmNewPassword");
+		
+		JSONObject result = new JSONObject();
+		JSONArray errors = new JSONArray();
+		
+		try {
+			
+			UserLoginBean userLoginBean = SecurityUtil.getUser(request);
+			UserChangePasswordFormBean userChangePasswordFormBean = new UserChangePasswordFormBean(userLoginBean.getId(),oldPassword, newPassword, confirmNewPassword);
+			
+			String errorMessage = userChangePasswordFormBean.validate();
+			
+			ILoginUserBL iLoginUserBL = new LoginUserBL();
+			
+			if(errorMessage==null){
+				iLoginUserBL.updatePassword(userLoginBean.getId(), newPassword);
+				result.put("success", true);
+			}else{
+				result.put("success", false);
+				JSONObject error = new JSONObject();
+				error.put("id", "changePassword");
+				error.put("msg", errorMessage);
+				errors.put(error);
+			}
+			
+			result.put("errors", errors);
+
+			HttpServletResponseUtil.setJsonResponse(response);
+			response.getWriter().println(result.toString());
+			response.flushBuffer();
+
+		} catch (Exception e) {
+			log.error(method,e);
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,IErrorMessageConstants.INTERNAL_SERVER_ERROR);
+		}
+		finally{
+			EntityManagerHelper.closeEntityManager();
+		}
+		return null;
+		
+	}
+
+}

@@ -1,0 +1,113 @@
+package it.icarcnr.presentation.action.checkboxtree;
+
+
+import it.icarcnr.business.servicestatus.impl.ServiceBL;
+import it.icarcnr.business.servicestatus.service.IServiceBL;
+import it.icarcnr.integration.dao.generated.EntityManagerHelper;
+import it.icarcnr.integration.dao.generated.Service;
+import it.icarcnr.presentation.action.util.IErrorMessageConstants;
+import it.icarcnr.presentation.action.util.SecurityUtil;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.w3c.dom.Document;
+
+
+
+public class ServiceCheckBoxTreeAction extends Action {
+
+	private static final Log log = LogFactory.getLog(ServiceCheckBoxTreeAction.class);
+
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)	throws Exception {
+
+		final String method = "execute";
+		
+		Calendar calendar = Calendar.getInstance();
+		Date currentDate = calendar.getTime();
+
+		Integer nodeTypeId = null;
+		Integer serviceRequestId = null;
+		Integer nodeServiceId = null;
+
+		try {
+
+			List<Integer> enabledNetworkFunctionList = SecurityUtil.getEnabledNetworkFunctionList(request);
+
+			Map criteriaMap = request.getParameterMap();
+
+			if(criteriaMap!=null){
+				String[] mapValue = (String[])criteriaMap.get("nodeTypeId");
+				if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+					nodeTypeId = Integer.valueOf(mapValue[0]);
+				}
+				mapValue = (String[])criteriaMap.get("serviceRequestId");
+				if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+					serviceRequestId = Integer.valueOf(mapValue[0]);
+				}
+				mapValue = (String[])criteriaMap.get("nodeServiceId");
+				if(mapValue!=null && mapValue.length>0 && mapValue[0]!=null){
+					nodeServiceId = Integer.valueOf(mapValue[0]);
+				}
+
+			}
+
+			List<Service> serviceList = new ArrayList<Service>();
+
+			if(nodeTypeId!=null){
+				if(serviceRequestId!=null || nodeServiceId!=null){
+					IServiceBL iServiceBL = new ServiceBL();
+					serviceList = iServiceBL.findAll(enabledNetworkFunctionList, currentDate, criteriaMap, true /*orderByService*/, false /*orderByNode*/);
+					
+				}
+				
+			}
+			
+
+			Document xmlTree =XMLServicesTree.getXmlTree(serviceList,nodeServiceId);
+
+			response.reset();
+			response.setContentType("text/xml; charset=ISO-8859-1");
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0);
+
+			DOMSource source = new DOMSource(xmlTree);
+			StreamResult result = new StreamResult(response.getWriter());
+			// Use a Transformer for output
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = tFactory.newTransformer();
+			transformer.transform(source, result); 
+
+			response.flushBuffer();
+
+		} catch (Exception e) {
+			log.error(method,e);
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,IErrorMessageConstants.INTERNAL_SERVER_ERROR);
+		}
+		finally{
+			EntityManagerHelper.closeEntityManager();
+		}
+
+		return null;
+	}
+
+}

@@ -1,0 +1,84 @@
+package it.icarcnr.business.report.util;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporter;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRCsvExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+
+public final class JasperExporter {
+
+
+	public static void exportToStream(JRExporter exporter, JasperPrint jasperPrint,OutputStream outputStream) throws IOException, JRException {
+		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+		exporter.exportReport();
+	}
+
+	/**
+	 * @param response
+	 * @param jasperPrint
+	 * @throws IOException
+	 * @throws JRException
+	 */
+	public static void exportToPDF(HttpServletResponse response, JasperPrint jasperPrint)	throws IOException, JRException {
+		JRPdfExporter exporter = new JRPdfExporter();
+		response.setContentType("application/pdf");
+		exportToStream(exporter, jasperPrint, response.getOutputStream());
+	}
+	
+	/**
+	 * @param outputStream
+	 * @param jasperPrint
+	 * @throws IOException
+	 * @throws JRException
+	 */
+	public static void exportToPDF(OutputStream outputStream, JasperPrint jasperPrint)	throws IOException, JRException {
+		JRPdfExporter exporter = new JRPdfExporter();
+		exportToStream(exporter, jasperPrint, outputStream);
+	}
+	
+	public static void exportToCsv(OutputStream outputStream, JasperPrint jasperPrint) throws IOException, JRException{
+		JRCsvExporter exporter = new JRCsvExporter();
+		exportToStream(exporter, jasperPrint, outputStream);
+	}
+	
+	public static void exportToXls(OutputStream outputStream, JasperPrint jasperPrint) throws IOException, JRException{
+		JRXlsExporter exporter = new JRXlsExporter();
+		exportToStream(exporter, jasperPrint, outputStream);
+	}
+
+	/**
+	 * @param response
+	 * @param jasperPrint
+	 * @throws IOException
+	 * @throws JRException
+	 */
+	public static void exportToHTML(HttpServletResponse response, JasperPrint jasperPrint) throws IOException, JRException {
+		JRHtmlExporter exporter = new JRHtmlExporter();
+		response.setContentType("text/html");
+		exportToStream(exporter, jasperPrint, response.getOutputStream());
+	}
+
+	/**
+	 * @param response
+	 * @param jasperPrint
+	 * @throws IOException
+	 * @throws JRException
+	 */
+	public static void exportToHTML(OutputStream outputStream, JasperPrint jasperPrint) throws IOException, JRException {
+		JRHtmlExporter exporter = new JRHtmlExporter();
+		exporter.setParameter(JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN, Boolean.FALSE);
+		exportToStream(exporter, jasperPrint, outputStream);
+	}
+
+}

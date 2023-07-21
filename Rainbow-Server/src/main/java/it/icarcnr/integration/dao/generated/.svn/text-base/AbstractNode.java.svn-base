@@ -1,0 +1,182 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractNode entity provides the base persistence definition of the Node
+ * entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractNode implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Type type;
+	private Network network;
+	private Location location;
+	private String name;
+	private String description;
+	private Set<Service> servicesForIdNode = new HashSet<Service>(0);
+	private Set<ServiceNodeSource> serviceNodeSources = new HashSet<ServiceNodeSource>(
+			0);
+	private Set<NodeRelation> nodeRelationsForIdParent = new HashSet<NodeRelation>(
+			0);
+	private Set<NodeRelation> nodeRelationsForIdChild = new HashSet<NodeRelation>(
+			0);
+	private Set<Service> servicesForIdReceiver = new HashSet<Service>(0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractNode() {
+	}
+
+	/** minimal constructor */
+	public AbstractNode(Type type, Network network, Location location,
+			String name, String description) {
+		this.type = type;
+		this.network = network;
+		this.location = location;
+		this.name = name;
+		this.description = description;
+	}
+
+	/** full constructor */
+	public AbstractNode(Type type, Network network, Location location,
+			String name, String description, Set<Service> servicesForIdNode,
+			Set<ServiceNodeSource> serviceNodeSources,
+			Set<NodeRelation> nodeRelationsForIdParent,
+			Set<NodeRelation> nodeRelationsForIdChild,
+			Set<Service> servicesForIdReceiver) {
+		this.type = type;
+		this.network = network;
+		this.location = location;
+		this.name = name;
+		this.description = description;
+		this.servicesForIdNode = servicesForIdNode;
+		this.serviceNodeSources = serviceNodeSources;
+		this.nodeRelationsForIdParent = nodeRelationsForIdParent;
+		this.nodeRelationsForIdChild = nodeRelationsForIdChild;
+		this.servicesForIdReceiver = servicesForIdReceiver;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Type", nullable = false)
+	public Type getType() {
+		return this.type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Network", nullable = false)
+	public Network getNetwork() {
+		return this.network;
+	}
+
+	public void setNetwork(Network network) {
+		this.network = network;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Location", nullable = false)
+	public Location getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	@Column(name = "name", unique = true, nullable = false, length = 45)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "description", nullable = false, length = 100)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "nodeByIdNode")
+	public Set<Service> getServicesForIdNode() {
+		return this.servicesForIdNode;
+	}
+
+	public void setServicesForIdNode(Set<Service> servicesForIdNode) {
+		this.servicesForIdNode = servicesForIdNode;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "node")
+	public Set<ServiceNodeSource> getServiceNodeSources() {
+		return this.serviceNodeSources;
+	}
+
+	public void setServiceNodeSources(Set<ServiceNodeSource> serviceNodeSources) {
+		this.serviceNodeSources = serviceNodeSources;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "nodeByIdParent")
+	public Set<NodeRelation> getNodeRelationsForIdParent() {
+		return this.nodeRelationsForIdParent;
+	}
+
+	public void setNodeRelationsForIdParent(
+			Set<NodeRelation> nodeRelationsForIdParent) {
+		this.nodeRelationsForIdParent = nodeRelationsForIdParent;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "nodeByIdChild")
+	public Set<NodeRelation> getNodeRelationsForIdChild() {
+		return this.nodeRelationsForIdChild;
+	}
+
+	public void setNodeRelationsForIdChild(
+			Set<NodeRelation> nodeRelationsForIdChild) {
+		this.nodeRelationsForIdChild = nodeRelationsForIdChild;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "nodeByIdReceiver")
+	public Set<Service> getServicesForIdReceiver() {
+		return this.servicesForIdReceiver;
+	}
+
+	public void setServicesForIdReceiver(Set<Service> servicesForIdReceiver) {
+		this.servicesForIdReceiver = servicesForIdReceiver;
+	}
+
+}

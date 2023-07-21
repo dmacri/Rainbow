@@ -1,0 +1,399 @@
+package it.icarcnr.business.servicestatus.bean;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class ServiceStatusBean implements Serializable {
+
+	private Integer serviceId;
+	private Integer requestId;
+	private String	requestName;
+	private String nodeName;
+	private Integer criteriaIdDeltaValue;
+	private Integer criteriaIdValue;
+	
+	private Double majorValue;
+	private Double criticalValue;
+	private Double majorDeltaValue;
+	private Double criticalDeltaValue;
+	
+	private String valueTypeCheck;
+	private String deltaValueTypeCheck;
+	
+	private Double secondaryMajorValue;
+	private Double secondaryCriticalValue;
+	private Double secondaryMajorDeltaValue;
+	private Double secondaryCriticalDeltaValue;
+	
+	
+	private Integer samplingPeriod;
+	private String description;
+	private String extendedDescription;
+	private String reference;
+	private String nodeFrom;
+	private String nodeTo;
+	private Boolean isTakingCharge;
+	private Integer networkId;
+	private Integer functionId;
+	private String sources;
+	private String valueStatus;
+	private String deltaValueStatus;
+	private String status;
+	private Date lastCheck;
+	private Double value;
+	private Double deltaValue;
+	private Boolean logPresent;
+	private String networkName; 
+	private String functionName; 
+
+
+	/**
+	 * 
+	 */
+	public ServiceStatusBean() {
+		super();
+	}
+	
+	/**
+	 * @param serviceId
+	 * @param criteriaIdDeltaValue
+	 * @param criteriaIdValue
+	 * @param majorValue
+	 * @param criticalValue
+	 * @param majorDeltaValue
+	 * @param criticalDeltaValue
+	 * @param valueTypeCheck
+	 * @param deltaValueTypeCheck
+	 * @param secondaryMajorValue
+	 * @param secondaryCriticalValue
+	 * @param secondaryMajorDeltaValue
+	 * @param secondaryCriticalDeltaValue
+	 * @param samplingPeriod
+	 * @param description
+	 * @param extendedDescription
+	 * @param nodeFrom
+	 * @param nodeTo
+	 * @param isTakingCharge
+	 * @param networkId
+	 * @param functionId
+	 * @param sources
+	 * @param valueStatus
+	 * @param deltaValueStatus
+	 * @param status
+	 * @param lastCheck
+	 * @param value
+	 * @param deltaValue
+	 * @param logPresent
+	 * @param networkName
+	 * @param functionName
+	 */
+	public ServiceStatusBean(Integer serviceId, Integer requestId, String requestName, String nodeName, Integer criteriaIdDeltaValue,
+			Integer criteriaIdValue, Double majorValue, Double criticalValue,
+			Double majorDeltaValue, Double criticalDeltaValue,
+			String valueTypeCheck, String deltaValueTypeCheck,
+			Double secondaryMajorValue, Double secondaryCriticalValue,
+			Double secondaryMajorDeltaValue,
+			Double secondaryCriticalDeltaValue, Integer samplingPeriod,
+			String description, String extendedDescription, String nodeFrom,
+			String nodeTo, Boolean isTakingCharge, Integer networkId, 
+			Integer functionId, String sources, String valueStatus, String deltaValueStatus,
+			String status, Date lastCheck, Double value, Double deltaValue,
+			Boolean logPresent, String networkName, String functionName) {
+		super();
+		this.serviceId = serviceId;
+		this.requestId = requestId;
+		this.requestName = requestName;
+		this.nodeName = nodeName;
+		this.criteriaIdDeltaValue = criteriaIdDeltaValue;
+		this.criteriaIdValue = criteriaIdValue;
+		this.majorValue = majorValue;
+		this.criticalValue = criticalValue;
+		this.majorDeltaValue = majorDeltaValue;
+		this.criticalDeltaValue = criticalDeltaValue;
+		this.valueTypeCheck = valueTypeCheck;
+		this.deltaValueTypeCheck = deltaValueTypeCheck;
+		this.secondaryMajorValue = secondaryMajorValue;
+		this.secondaryCriticalValue = secondaryCriticalValue;
+		this.secondaryMajorDeltaValue = secondaryMajorDeltaValue;
+		this.secondaryCriticalDeltaValue = secondaryCriticalDeltaValue;
+		this.samplingPeriod = samplingPeriod;
+		this.description = description;
+		this.extendedDescription = extendedDescription;
+		this.nodeFrom = nodeFrom;
+		this.nodeTo = nodeTo;
+		this.isTakingCharge = isTakingCharge;
+		this.networkId = networkId;
+		this.functionId = functionId;
+		this.sources = sources;
+		this.valueStatus = valueStatus;
+		this.deltaValueStatus = deltaValueStatus;
+		this.status = status;
+		this.lastCheck = lastCheck;
+		this.value = value;
+		this.deltaValue = deltaValue;
+		this.logPresent = logPresent;
+		this.networkName = networkName;
+		this.functionName = functionName;
+	}
+
+
+
+
+
+
+	/**
+	 * @param serviceId
+	 * @param status
+	 * @param lastCheck
+	 */
+	public ServiceStatusBean(Integer serviceId, String status, Date lastCheck,String description) {
+		super();
+		this.serviceId = serviceId;
+		this.status = status;
+		this.lastCheck = lastCheck;
+		this.description = description;
+	}
+	public Integer getServiceId() {
+		return serviceId;
+	}
+	public void setServiceId(Integer serviceId) {
+		this.serviceId = serviceId;
+	}
+	public Integer getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(Integer requestId) {
+		this.requestId = requestId;
+	}
+
+	public String getRequestName() {
+		return requestName;
+	}
+
+	public void setRequestName(String requestName) {
+		this.requestName = requestName;
+	}
+
+	public String getNodeName() {
+		return nodeName;
+	}
+
+	public void setNodeName(String nodeName) {
+		this.nodeName = nodeName;
+	}
+
+	public Integer getCriteriaIdDeltaValue() {
+		return criteriaIdDeltaValue;
+	}
+	public void setCriteriaIdDeltaValue(Integer criteriaIdDeltaValue) {
+		this.criteriaIdDeltaValue = criteriaIdDeltaValue;
+	}
+	public Integer getCriteriaIdValue() {
+		return criteriaIdValue;
+	}
+	public void setCriteriaIdValue(Integer criteriaIdValue) {
+		this.criteriaIdValue = criteriaIdValue;
+	}
+	public Double getMajorValue() {
+		return majorValue;
+	}
+	public void setMajorValue(Double majorValue) {
+		this.majorValue = majorValue;
+	}
+	public Double getCriticalValue() {
+		return criticalValue;
+	}
+	public void setCriticalValue(Double criticalValue) {
+		this.criticalValue = criticalValue;
+	}
+	public Double getMajorDeltaValue() {
+		return majorDeltaValue;
+	}
+	public void setMajorDeltaValue(Double majorDeltaValue) {
+		this.majorDeltaValue = majorDeltaValue;
+	}
+	public Double getCriticalDeltaValue() {
+		return criticalDeltaValue;
+	}
+	public void setCriticalDeltaValue(Double criticalDeltaValue) {
+		this.criticalDeltaValue = criticalDeltaValue;
+	}
+	public String getValueTypeCheck() {
+		return valueTypeCheck;
+	}
+
+	public void setValueTypeCheck(String valueTypeCheck) {
+		this.valueTypeCheck = valueTypeCheck;
+	}
+	public String getDeltaValueTypeCheck() {
+		return deltaValueTypeCheck;
+	}
+	public void setDeltaValueTypeCheck(String deltaValueTypeCheck) {
+		this.deltaValueTypeCheck = deltaValueTypeCheck;
+	}
+	public Double getSecondaryMajorValue() {
+		return secondaryMajorValue;
+	}
+	public void setSecondaryMajorValue(Double secondaryMajorValue) {
+		this.secondaryMajorValue = secondaryMajorValue;
+	}
+
+
+	public Double getSecondaryCriticalValue() {
+		return secondaryCriticalValue;
+	}
+
+
+	public void setSecondaryCriticalValue(Double secondaryCriticalValue) {
+		this.secondaryCriticalValue = secondaryCriticalValue;
+	}
+
+
+	public Double getSecondaryMajorDeltaValue() {
+		return secondaryMajorDeltaValue;
+	}
+
+
+	public void setSecondaryMajorDeltaValue(Double secondaryMajorDeltaValue) {
+		this.secondaryMajorDeltaValue = secondaryMajorDeltaValue;
+	}
+
+
+	public Double getSecondaryCriticalDeltaValue() {
+		return secondaryCriticalDeltaValue;
+	}
+
+
+	public void setSecondaryCriticalDeltaValue(Double secondaryCriticalDeltaValue) {
+		this.secondaryCriticalDeltaValue = secondaryCriticalDeltaValue;
+	}
+
+
+	public Integer getSamplingPeriod() {
+		return samplingPeriod;
+	}
+	
+	public void setSamplingPeriod(Integer samplingPeriod) {
+		this.samplingPeriod = samplingPeriod;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getExtendedDescription() {
+		return extendedDescription;
+	}
+	public void setExtendedDescription(String extendedDescription) {
+		this.extendedDescription = extendedDescription;
+	}
+	public String getReference() {
+		return reference;
+	}
+
+
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+
+
+	public String getNodeFrom() {
+		return nodeFrom;
+	}
+	public void setNodeFrom(String nodeFrom) {
+		this.nodeFrom = nodeFrom;
+	}
+	public String getNodeTo() {
+		return nodeTo;
+	}
+
+	public void setNodeTo(String nodeTo) {
+		this.nodeTo = nodeTo;
+	}
+
+	public Boolean getIsTakingCharge() {
+		return isTakingCharge;
+	}
+	public void setIsTakingCharge(Boolean isTakingCharge) {
+		this.isTakingCharge = isTakingCharge;
+	}
+	public Integer getNetworkId() {
+		return networkId;
+	}
+	public void setNetworkId(Integer networkId) {
+		this.networkId = networkId;
+	}
+	public Integer getFunctionId() {
+		return functionId;
+	}
+	public void setFunctionId(Integer functionId) {
+		this.functionId = functionId;
+	}
+	public String getSources() {
+		return sources;
+	}
+	public void setSources(String sources) {
+		this.sources = sources;
+	}
+	public String getValueStatus() {
+		return valueStatus;
+	}
+	public void setValueStatus(String valueStatus) {
+		this.valueStatus = valueStatus;
+	}
+	public String getDeltaValueStatus() {
+		return deltaValueStatus;
+	}
+	public void setDeltaValueStatus(String deltaValueStatus) {
+		this.deltaValueStatus = deltaValueStatus;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Date getLastCheck() {
+		return lastCheck;
+	}
+	public void setLastCheck(Date lastCheck) {
+		this.lastCheck = lastCheck;
+	}
+	public Double getValue() {
+		return value;
+	}
+	public void setValue(Double value) {
+		this.value = value;
+	}
+	public Double getDeltaValue() {
+		return deltaValue;
+	}
+	public void setDeltaValue(Double deltaValue) {
+		this.deltaValue = deltaValue;
+	}
+	public Boolean getLogPresent() {
+		return logPresent;
+	}
+	public void setLogPresent(Boolean logPresent) {
+		this.logPresent = logPresent;
+	}
+
+	public String getNetworkName() {
+		return networkName;
+	}
+	public void setNetworkName(String networkName) {
+		this.networkName = networkName;
+	}
+
+	public String getFunctionName() {
+		return functionName;
+	}
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
+	
+}

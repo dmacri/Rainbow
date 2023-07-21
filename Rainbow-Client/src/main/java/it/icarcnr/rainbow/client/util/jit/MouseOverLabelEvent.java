@@ -1,0 +1,39 @@
+package it.icarcnr.rainbow.client.util.jit;
+
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.HasNativeEvent;
+import com.google.gwt.event.shared.GwtEvent;
+
+public class MouseOverLabelEvent extends GwtEvent<MouseOverLabelHandler> implements HasNativeEvent {
+
+    protected MouseOverLabelEvent(NativeEvent nativeevent) {
+	this.nativeevent = nativeevent;
+    }
+
+    public static Type getType() {
+	return TYPE;
+    }
+
+    public static void fire(HasMouseOverLabelHandlers source, NativeEvent nativeevent) {
+	source.fireEvent(new MouseOverLabelEvent(nativeevent));
+    }
+
+    @Override
+    protected void dispatch(MouseOverLabelHandler handler) {
+	handler.onMouseOverLabel(this);
+    }
+
+    @Override
+    public final Type getAssociatedType() {
+	return TYPE;
+    }
+
+    @Override
+    public NativeEvent getNativeEvent() {
+	return nativeevent;
+    }
+
+    private static Type<MouseOverLabelHandler> TYPE = new Type<MouseOverLabelHandler>();
+    private final NativeEvent nativeevent;
+
+}

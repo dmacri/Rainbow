@@ -1,0 +1,17 @@
+package it.telecom.vmc.client.util.i18n.dashboard;
+
+import com.google.gwt.i18n.client.Constants;
+
+public interface IPortal extends Constants {
+	/**
+	 * #portal.SummaryServiceStatus
+	 */
+	String SummaryServiceStatus_Critical();
+	String SummaryServiceStatus_Major();
+	String SummaryServiceStatus_Normal();
+	String SummaryServiceStatus_Suspended();
+	
+	String SummaryServiceStatus_View_Graph();
+	String SummaryServiceStatus_No_Alarmed_Item();
+	
+}

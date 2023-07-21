@@ -1,0 +1,11 @@
+package it.icarcnr.integration.dao.security.util;
+
+public interface IAreaConstants {
+	Integer SERVICES_AREA = 1;
+	Integer STATUS_CHANGE_HISTORY_AREA = 2;
+	Integer CHART_AREA = 3;
+	Integer UTILITY_AREA = 4;
+	Integer GRAPH_AREA = 5;
+	Integer MAPS_GEOLOCATION = 6;
+
+}

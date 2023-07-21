@@ -1,0 +1,9 @@
+package it.telecom.business.release.service;
+
+import it.telecom.integration.dao.generated.Release;
+
+public interface IServiceReleaseBL {
+	
+	public Release findById(Integer id) throws Exception ;
+
+}

@@ -1,0 +1,6 @@
+
+
+
+mvn install:install-file -Dfile=C:/Users/davide/Desktop/gwtextux-0.1.1.jar -DgroupId=com.gwtextux -DartifactId=gwtextux -Dversion=0.1.1 -Dpackaging=jar
+
+C:\CNR\workspace\WebApp-Rainbow\Rainbow-Client\src\main\resources\it\icarcnr\rainbow\public\images\custom

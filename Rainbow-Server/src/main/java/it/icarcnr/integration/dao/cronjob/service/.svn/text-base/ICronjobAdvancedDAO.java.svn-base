@@ -1,0 +1,13 @@
+package it.telecom.integration.dao.cronjob.service;
+
+import it.telecom.integration.dao.generated.Cronjob;
+
+import java.util.List;
+
+public interface ICronjobAdvancedDAO {
+	
+	public List<Cronjob> findByNullEndExecution ();
+	
+	public List<Cronjob> findByParentCronjob(List<Integer> enabledNetworkFunctionList, Integer utilityGroupId, Cronjob cronjob, String view);
+
+}

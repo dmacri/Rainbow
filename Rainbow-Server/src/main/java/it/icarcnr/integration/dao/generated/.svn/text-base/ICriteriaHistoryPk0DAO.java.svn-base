@@ -1,0 +1,129 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.List;
+
+/**
+ * Interface for CriteriaHistoryPk0DAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface ICriteriaHistoryPk0DAO {
+	/**
+	 * Perform an initial save of a previously unsaved CriteriaHistoryPk0
+	 * entity. All subsequent persist actions of this entity should use the
+	 * #update() method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaHistoryPk0DAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryPk0 entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(CriteriaHistoryPk0 entity);
+
+	/**
+	 * Delete a persistent CriteriaHistoryPk0 entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently deleted from the persistence store, i.e., database.
+	 * This method uses the
+	 * {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaHistoryPk0DAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryPk0 entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(CriteriaHistoryPk0 entity);
+
+	/**
+	 * Persist a previously saved CriteriaHistoryPk0 entity and return it or a
+	 * copy of it to the sender. A copy of the CriteriaHistoryPk0 entity
+	 * parameter is returned when the JPA persistence mechanism has not
+	 * previously been tracking the updated entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently saved to the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#merge(Object)
+	 * EntityManager#merge} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = ICriteriaHistoryPk0DAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryPk0 entity to update
+	 * @return CriteriaHistoryPk0 the persisted CriteriaHistoryPk0 entity
+	 *         instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public CriteriaHistoryPk0 update(CriteriaHistoryPk0 entity);
+
+	public CriteriaHistoryPk0 findById(CriteriaHistoryPk0Id id);
+
+	/**
+	 * Find all CriteriaHistoryPk0 entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the CriteriaHistoryPk0 property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<CriteriaHistoryPk0> found by query
+	 */
+	public List<CriteriaHistoryPk0> findByProperty(String propertyName,
+			Object value, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByStatus(Object status,
+			int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByValue(Object value,
+			int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByValueCheckMajor(
+			Object valueCheckMajor, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByValueCheckCritical(
+			Object valueCheckCritical, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByValueCheckSecondaryMajor(
+			Object valueCheckSecondaryMajor, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryPk0> findByValueCheckSecondaryCritical(
+			Object valueCheckSecondaryCritical, int... rowStartIdxAndCount);
+
+	/**
+	 * Find all CriteriaHistoryPk0 entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<CriteriaHistoryPk0> all CriteriaHistoryPk0 entities
+	 */
+	public List<CriteriaHistoryPk0> findAll(int... rowStartIdxAndCount);
+}

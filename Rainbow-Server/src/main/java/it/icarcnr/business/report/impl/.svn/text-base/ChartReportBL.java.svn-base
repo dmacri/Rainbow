@@ -1,0 +1,295 @@
+package it.telecom.business.report.impl;
+
+import it.telecom.business.charts.impl.ServiceChartBL;
+import it.telecom.business.charts.service.IServiceChartBL;
+import it.telecom.business.charts.util.IChartsConstants.ChartMode;
+import it.telecom.business.report.bean.ChartBean;
+import it.telecom.business.report.bean.ChartBean.ServiceValue;
+import it.telecom.business.report.service.IChartReportBL;
+import it.telecom.business.report.util.IChartsReportConstants;
+import it.telecom.util.IDateFormatUtil;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.geom.Ellipse2D;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.DateAxis;
+import org.jfree.chart.axis.DateTickMarkPosition;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.block.BlockFrame;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.title.LegendTitle;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleEdge;
+import org.jfree.ui.RectangleInsets;
+
+
+
+public class ChartReportBL implements IChartReportBL {
+
+	private static final Log log = LogFactory.getLog(ChartReportBL.class);
+	private static final long MAX_VISIBLE_DOT = 30;
+	private static final double Y_VALUE_TOLERANCE = 10;
+
+
+
+	public JFreeChart getJFreeChart(List<ChartBean> chartBeans, Date startDate, Date endDate, ChartMode chartMode) throws Exception{
+		boolean singleLine = chartBeans.size()==1;
+		XYSeriesCollection xyDataset = new XYSeriesCollection();
+
+		IServiceChartBL iServiceChartBL = new ServiceChartBL();
+
+		Double maxValue = null;
+		Double minValue = null;
+
+		int[] samplingPeriod = new int[chartBeans.size()];
+		boolean[] onlyOneSample = new boolean [chartBeans.size()];
+		int i = 0;
+		for (ChartBean chartBean : chartBeans) {
+
+			samplingPeriod[i]=chartBean.getSamplingPeriod();
+			onlyOneSample[i]=chartBean.getServiceValueList().size()==1;
+			i++;
+
+			if(maxValue==null || maxValue<chartBean.getMaxValue()){
+				maxValue = chartBean.getMaxValue();
+			}
+
+			if(minValue==null || minValue>chartBean.getMinValue()){
+				minValue = chartBean.getMinValue();
+			}
+
+			XYSeries xyMajor = null;
+			XYSeries xyCritical = null;
+
+			XYSeries xySecondaryMajor = null;
+			XYSeries xySecondaryCritical = null;
+
+			if(singleLine){
+				xyMajor = new XYSeries("Major");
+				xyCritical = new XYSeries("Critical");
+				xySecondaryMajor = new XYSeries("SecondaryMajor");
+				xySecondaryCritical = new XYSeries("SecondaryCritical");
+			}
+
+			StringBuilder seriesDescription = getSeriesDescription(chartBean,chartMode);
+
+			XYSeries series = new XYSeries(seriesDescription.toString());
+
+			for (ServiceValue serviceValue : chartBean.getServiceValueList()) {
+
+				if(singleLine){
+					xyMajor.add((serviceValue.getDate().getTime()), serviceValue.getValueCheckMajor());
+					xyCritical.add(serviceValue.getDate().getTime(), serviceValue.getValueCheckCritical());
+
+					xySecondaryMajor.add((serviceValue.getDate().getTime()), serviceValue.getValueCheckSecondaryMajor());
+					xySecondaryCritical.add(serviceValue.getDate().getTime(), serviceValue.getValueCheckSecondaryCritical());
+
+					Collection<Double> valuesCollection = iServiceChartBL.getCollectionValues(serviceValue);
+					if(!valuesCollection.isEmpty()){
+						Double max = Collections.max(valuesCollection);
+						Double min = Collections.min(valuesCollection);
+
+						if(maxValue<max){
+							maxValue = max;
+						}
+
+						if(minValue>min){
+							minValue = min; 
+						}
+					}
+
+				}
+				series.add(serviceValue.getDate().getTime(), serviceValue.getValue());
+			}
+			xyDataset.addSeries(series);
+			if(singleLine){
+				xyDataset.addSeries(xyCritical);
+				xyDataset.addSeries(xyMajor);
+				xyDataset.addSeries(xySecondaryCritical);
+				xyDataset.addSeries(xySecondaryMajor);
+			}
+		}
+
+		JFreeChart jFChart = ChartFactory.createTimeSeriesChart("", "X_AXIS", "Valore", xyDataset, true, true, false);
+		XYPlot plot = (XYPlot)jFChart.getPlot();
+		plot.setDomainGridlinePaint(Color.BLACK);
+		plot.setRangeGridlinePaint(Color.BLACK);
+		plot.setDomainGridlinesVisible(true);
+		plot.setDomainCrosshairVisible(true); 
+		plot.setBackgroundPaint(Color.WHITE);
+
+
+
+		long startDateInMinutes = startDate.getTime()/(60*1000);
+		long endDateInMinutes = endDate.getTime()/(60*1000);
+		long xRangeInMinutes = endDateInMinutes-startDateInMinutes;
+
+		if(singleLine){
+			plot.getRenderer().setSeriesPaint(0,IChartsReportConstants.CHART_LINE_COLOURS[0]);
+			plot.getRenderer().setSeriesStroke(0, new BasicStroke(2));
+			boolean showDot = (xRangeInMinutes/samplingPeriod[0])<=MAX_VISIBLE_DOT;
+			if(showDot){
+				plot.getRenderer().setSeriesShape(0, new Ellipse2D.Double(-4, -4, 8, 8));
+				plot.getRenderer().setSeriesShape(1, new Ellipse2D.Double(-4, -4, 8, 8));
+				plot.getRenderer().setSeriesShape(2, new Ellipse2D.Double(-4, -4, 8, 8));
+				plot.getRenderer().setSeriesShape(3, new Ellipse2D.Double(-4, -4, 8, 8));
+				plot.getRenderer().setSeriesShape(4, new Ellipse2D.Double(-4, -4, 8, 8));
+				XYItemRenderer r = plot.getRenderer();
+				if (r instanceof XYLineAndShapeRenderer) {
+					XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
+					//		            renderer.setBaseShapesVisible(true);
+					//		            renderer.setBaseShapesFilled(false);
+					renderer.setBaseShapesVisible(true);
+					//		            renderer.setSeriesShapesVisible(0, true);
+					//		            renderer.setSeriesShapesVisible(1, true);
+					//		            renderer.setSeriesShapesVisible(2, true);
+					renderer.setDrawOutlines(true);
+					renderer.setUseFillPaint(true);
+					renderer.setBaseFillPaint(Color.white);
+				}
+			}
+			plot.getRenderer().setSeriesPaint(1,IChartsReportConstants.CRITICAL_LINE_COLOR);
+			plot.getRenderer().setSeriesStroke(1, new BasicStroke(2));
+			plot.getRenderer().setSeriesPaint(2,IChartsReportConstants.MAJOR_LINE_COLOR);
+			plot.getRenderer().setSeriesStroke(2, new BasicStroke(2));
+
+			plot.getRenderer().setSeriesPaint(3,IChartsReportConstants.CRITICAL_LINE_COLOR);
+			plot.getRenderer().setSeriesStroke(3, new BasicStroke(2));
+			plot.getRenderer().setSeriesPaint(4,IChartsReportConstants.MAJOR_LINE_COLOR);
+			plot.getRenderer().setSeriesStroke(4, new BasicStroke(2));
+
+			plot.getRenderer().setSeriesVisibleInLegend(3,Boolean.FALSE);
+			plot.getRenderer().setSeriesVisibleInLegend(4,Boolean.FALSE);
+
+		}else{
+			int j = 0;
+			for (int index = 0; index < xyDataset.getSeriesCount(); index++) {
+				plot.getRenderer().setSeriesPaint(index,IChartsReportConstants.CHART_LINE_COLOURS[j]);
+				plot.getRenderer().setSeriesStroke(index, new BasicStroke(2));
+				boolean showDot = onlyOneSample[index]||(xRangeInMinutes/samplingPeriod[index])<=MAX_VISIBLE_DOT;
+				if(showDot){
+					plot.getRenderer().setSeriesShape(index, new Ellipse2D.Double(-4, -4, 8, 8));
+					XYItemRenderer r = plot.getRenderer();
+					if (r instanceof XYLineAndShapeRenderer) {
+						XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer) r;
+						//			            renderer.setBaseShapesVisible(true);
+						//			            renderer.setBaseShapesFilled(false);
+						renderer.setBaseShapesVisible(true);
+						renderer.setDrawOutlines(true);
+						renderer.setUseFillPaint(true);
+						renderer.setBaseFillPaint(Color.white);
+					}
+				}
+				j++;
+				if(j==IChartsReportConstants.CHART_LINE_COLOURS.length){
+					j=0;
+				}
+			}
+		}
+
+
+		setYAxis(jFChart, maxValue, minValue);
+		setXAxis(jFChart, startDate, endDate);
+
+		return jFChart;
+	}
+
+	private StringBuilder getSeriesDescription(ChartBean chartBean, ChartMode chartMode) {
+		StringBuilder seriesDescription = new StringBuilder();
+		if(ChartMode.CHART_BY_NODE.equals(chartMode)){
+			seriesDescription.append(chartBean.getService());
+			
+			if(chartBean.getNodeByIdNodeReceiver()!=null){
+//				seriesDescription.append(chartBean.getNodeByIdNode());
+				seriesDescription.append(" verso ");
+				seriesDescription.append(chartBean.getNodeByIdNodeReceiver());
+			}
+			if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+				seriesDescription.append("(");
+				seriesDescription.append(chartBean.getSource());
+				seriesDescription.append(")");
+			}
+		}else if(ChartMode.CHART_BY_SERVICE.equals(chartMode)){
+			seriesDescription.append(chartBean.getNodeByIdNode());
+			
+			if(chartBean.getNodeByIdNodeReceiver()!=null){
+//				seriesDescription.append(chartBean.getNodeByIdNode());
+				seriesDescription.append(" --> ");
+				seriesDescription.append(chartBean.getNodeByIdNodeReceiver());
+			}
+		}
+		return seriesDescription;
+	}
+
+	private void setYAxis(JFreeChart jFChart, Double max, Double min) {
+
+		if(max!=null && min !=null){
+
+			Double delta = (max-min)/Y_VALUE_TOLERANCE;
+			if(delta == 0){
+				delta = Y_VALUE_TOLERANCE;
+			}
+
+			Double minrange=min-delta;
+			Double maxrange=max+delta;
+
+			/** Set Y axis jFChart */
+
+			XYPlot p = jFChart.getXYPlot();
+			p.getRangeGridlinePaint();
+
+			ValueAxis ya = p.getRangeAxis();
+			ya.setRange(minrange, maxrange);
+		}
+	}
+
+	private void setXAxis(JFreeChart jFChart, Date startDate, Date endDate) {
+
+		XYPlot p = (XYPlot)jFChart.getXYPlot();
+
+		DateAxis domainAxis = (DateAxis) p.getDomainAxis();  
+
+		domainAxis.setDateFormatOverride(new SimpleDateFormat("dd/MM/yy HH:mm"));  
+		domainAxis.setTickMarksVisible(true);  
+		domainAxis.setVerticalTickLabels(true);
+
+		//				domainAxis.setLabelAngle(45);
+		domainAxis.setTickLabelsVisible(true);
+		domainAxis.getFixedDimension();
+		domainAxis.setTickMarkPosition(DateTickMarkPosition.MIDDLE);
+		domainAxis.setRange(startDate, endDate);
+
+		BlockFrame legendBorder = new BlockBorder(Color.BLACK); 
+
+		LegendTitle legend = jFChart.getLegend(); 
+		legend.setMargin(new RectangleInsets(1.0, 1.0, 1.0, 1.0)); 
+		legend.setFrame(legendBorder); 
+		legend.setBackgroundPaint(Color.white); 
+		legend.setPosition(RectangleEdge.TOP);
+		SimpleDateFormat dateTimeFormatShort = new SimpleDateFormat(IDateFormatUtil.DATE_TIME_FORMAT_SHORT);
+
+		String from = dateTimeFormatShort.format(startDate);
+		String to =  dateTimeFormatShort.format(endDate);
+
+		domainAxis.setLabel("Da " +from+" a "+to);
+
+	}
+
+
+}
+
+

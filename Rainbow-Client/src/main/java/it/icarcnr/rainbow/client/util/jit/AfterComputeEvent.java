@@ -1,0 +1,28 @@
+package it.icarcnr.rainbow.client.util.jit;
+
+import com.google.gwt.event.shared.GwtEvent;
+
+public class AfterComputeEvent extends GwtEvent<AfterComputeHandler> {
+
+	public static Type getType() {
+		return TYPE;
+	}
+
+	public static void fire(HasAfterComputeHandlers source) {
+		AfterComputeEvent event = new AfterComputeEvent();
+		source.fireEvent(event);
+	}
+
+	@Override
+	protected void dispatch(AfterComputeHandler handler) {
+		handler.onAfterCompute(this);
+	}
+
+	@Override
+	public final Type getAssociatedType() {
+		return TYPE;
+	}
+
+	private static Type<AfterComputeHandler> TYPE = new Type<AfterComputeHandler>();
+
+}

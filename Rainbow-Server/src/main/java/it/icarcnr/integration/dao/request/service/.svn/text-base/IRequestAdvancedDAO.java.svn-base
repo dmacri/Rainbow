@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package it.telecom.integration.dao.request.service;
+
+import it.telecom.integration.dao.generated.Request;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IRequestAdvancedDAO {
+	
+	public List<Request> findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, final int... rowStartIdxAndCount);
+
+
+}

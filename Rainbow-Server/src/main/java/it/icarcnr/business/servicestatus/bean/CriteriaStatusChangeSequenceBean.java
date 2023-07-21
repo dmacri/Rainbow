@@ -1,0 +1,39 @@
+package it.icarcnr.business.servicestatus.bean;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class CriteriaStatusChangeSequenceBean implements Serializable {
+	String description;
+	String target;
+	String operationType;
+	List<CriteriaStatusChangeBean> criteriaStatusChangeBeans;
+	
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public String getOperationType() {
+		return operationType;
+	}
+	public void setOperationType(String operationType) {
+		this.operationType = operationType;
+	}
+	public List<CriteriaStatusChangeBean> getCriteriaStatusChangeBeans() {
+		return criteriaStatusChangeBeans;
+	}
+	public void setCriteriaStatusChangeBeans(
+			List<CriteriaStatusChangeBean> criteriaStatusChangeBeans) {
+		this.criteriaStatusChangeBeans = criteriaStatusChangeBeans;
+	}
+	
+}

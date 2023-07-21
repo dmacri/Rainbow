@@ -1,0 +1,309 @@
+.logo-italtel {
+	background-image: url( images/custom/logo_rainbow.jpg ) !important;
+}
+
+.logo-telecom {
+	background-image: url( images/custom/logo_rainbow.jpg ) !important;
+}
+
+.user-comment-icon {
+	background-image: url( images/silk/user_comment.gif ) !important;
+}
+
+.logout-icon {
+	background-image: url( images/custom/icons/logout.gif ) !important;
+}
+.england-icon{
+	background-image:url(images/custom/icons/en_US.gif ) !important;
+	}
+.italian-icon{
+	background-image:url(images/custom/icons/ie.gif ) !important;
+	}
+.manual-icon {
+	background-image: url(  images/custom/icons/manual.gif) !important;
+	}
+
+.feed-add-icon {
+	background-image: url( images/custom/icons/feed_add.gif ) !important;
+	background-repeat: no-repeat;
+	background-position:center;
+}
+
+.feed-delete-icon {
+	background-image: url( images/custom/icons/feed_delete.gif ) !important;
+	background-repeat: no-repeat;
+	background-position:center;
+}
+
+.udb-icon {
+	background-image: url( images/custom/icons/database.gif ) !important;
+}
+
+.sip-server-icon {
+	background-image: url( images/custom/icons/server.gif) !important;
+}
+
+.services-tree-status-icon {  
+	background-image: url( images/custom/icons/clients.gif) !important;
+}
+
+.line-charts-icon {  
+	background-image: url( images/custom/icons/line-chart.gif) !important;
+}
+.maps-icon{  
+	background-image: url( images/custom/icons/maps-icon.gif) !important;
+}
+
+.utility-icon {  
+	background-image: url( images/custom/icons/gear.gif) !important;
+	
+}
+.close-icon{
+	background-image: url( images/silk/cross.gif) !important;
+}
+.comment-icon{
+	background-image: url( images/silk/comment.gif) !important;
+}
+.disable-threshold-icon{
+	background-image: url( images/silk/map.gif) !important;
+}
+	
+
+.service-status-icon {
+	background-image: url( images/custom/icons/general_service.gif ) !important;
+}
+
+.node-icon {  
+	background-image: url( images/custom/icons/node.gif) !important;
+}
+.window-ip-lock {
+	background-image: url( images/custom/icons/script_go.gif)  !important;
+}
+.sd-icon {
+	background-image: url( images/silk/arrow-down-up-green.gif ) !important;
+}
+
+.change-status-icon {
+	background-image: url( images/custom/icons/replace2.gif ) !important;
+}
+
+.last-change-status-icon {
+	background-image: url( images/custom/icons/last_change_status.gif ) !important;
+}
+.location-icon {
+	background-image: url( images/custom/icons/geo_location.gif ) !important;
+}
+
+.load-balancer-icon {
+	background-image: url( images/custom/icons/arrow_divide.gif ) !important;
+}
+
+.udb-italtel-icon {
+	background-image: url( images/italtel/iMSS_Universal_DB.gif ) !important;
+}
+
+.automatism-icon {
+	background-image: url( images/custom/icons/automatism.gif ) !important;
+}
+
+.district-icon {
+	background-image: url( images/silk/telephone.gif ) !important;
+}
+
+.internode-icon {
+	background-image: url( images/silk/shape_handles.gif ) !important;
+}
+
+.change-password-icon {
+	background-image: url( images/custom/icons/key.gif ) !important;
+}
+
+.value-icon {
+	background-image: url( images/custom/icons/value_icon.gif ) !important;
+}
+
+.delta-icon {
+	background-image: url( images/custom/icons/delta_icon.gif ) !important;
+}
+
+.event-icon {
+	background-image: url( images/custom/icons/bullet_black.gif ) !important;
+}
+
+.pop-icon {
+	background-image: url( images/custom/icons/building.gif ) !important;
+}
+
+.pk0-pop-icon {
+	background-image: url( images/custom/icons/building.gif ) !important;
+}
+
+.vec-icon {
+	background-image: url( images/custom/icons/building.gif ) !important;
+}
+
+.iudb-icon {
+	background-image: url( images/italtel/iMSS_Universal_DB.gif ) !important;
+}
+
+.options-menu-icon{
+	background-image:url(images/menu-show.gif ) !important;
+	}
+.languages-icon{
+	background-image:url(images/silk/world.gif)!important;
+}
+.wafer-icon {
+	background-image: url( images/custom/icons/up_down.gif ) !important;
+}
+.disaster-recovery{
+	background-image: url( images/custom/icons/disaster_recovery.gif ) !important
+}
+
+.pk-network-icon {
+	background-image: url( images/custom/icons/italtel_icon.gif ) !important;
+}
+.collabora-network-icon { 
+	background-image: url( images/custom/icons/collabora.gif ) !important;
+}
+.poste-network-icon {
+	background-image: url( images/custom/icons/poste_icon.gif ) !important;
+}
+
+.reset-form-icon {
+	background-image: url( images/custom/icons/form_blue.gif ) !important;
+}
+
+.export-report-icon {
+	background-image: url( images/custom/icons/export1.gif ) !important;
+}
+
+.graph-icon{
+	background-image: url( images/custom/icons/graph_icon.gif ) !important;
+}
+
+.voip-control-icon{
+	background-image: url( images/custom/icons/shield_red.png) !important;
+}
+
+.processor-icon{
+	background-image: url( images/custom/icons/processor_icon.gif ) !important;
+}
+.ram-icon{
+	background-image: url( images/custom/icons/ram_icon.gif ) !important;
+}
+.socket-icon{
+	background-image: url( images/custom/icons/socket_icon.gif ) !important;
+}
+.performance-icon{
+	background-image: url( images/custom/icons/system-icon.gif ) !important;
+}
+.ipcc-icon{
+	background-image: url( images/custom/icons/ipcc-icon.gif ) !important;
+}
+.mrf-icon{
+	background-image: url( images/custom/icons/mrf-icon.gif ) !important;
+}
+.dfip-icon{
+	background-image: url( images/custom/icons/dfip-icon.gif ) !important;
+}
+.db-icon{
+	background-image: url( images/custom/icons/db-icon.gif ) !important;
+}
+.real-server-icon{
+	background-image: url( images/custom/icons/realserver-icon.gif ) !important;
+}
+.user-icon{
+	background-image: url( images/custom/icons/user-icon.gif ) !important;
+	
+}
+.application-server-icon{
+	background-image: url( images/custom/icons/application-server-icon.gif ) !important;
+	}
+.ascc-icon{
+	background-image: url( images/custom/icons/ascc-icon.gif ) !important;
+}
+.system-icon{
+	background-image: url( images/custom/icons/system-icon.gif ) !important;
+}
+.mycronjob-yellow {
+	background-image: url( images/custom/icons/mycronjob-yellow.gif ) !important;
+}
+
+.mycronjob-green {
+	background-image: url( images/custom/icons/mycronjob-green.gif ) !important;
+}
+
+.mycronjob-grey {
+	background-image: url( images/custom/icons/mycronjob-grey.gif ) !important;
+}
+
+.refresh-icon {
+	background-image: url( images/custom/icons/refresh.gif ) !important;
+}
+
+.call-operator-icon {
+	background-image: url( images/custom/icons/call_operator.gif ) !important;
+}
+
+.cec-pac-icon {
+	background-image: url( images/custom/icons/cec_pac.gif ) !important;
+}
+
+.green-numbers-icon {
+	background-image: url( images/custom/icons/green_phone.gif ) !important;
+}
+
+.la-7-icon {
+	background-image: url( images/custom/icons/la7.gif ) !important;
+}
+
+.telecom-italia-icon {
+	background-image: url( images/custom/icons/telecom_icon.gif ) !important;
+}
+
+.dhl-icon {
+	background-image: url( images/custom/icons/dhl_icon.gif ) !important;
+}
+
+.opm-icon {
+	background-image: url( images/custom/icons/italtel_icon.gif ) !important;
+}
+
+.softswitch-icon {
+	background-image: url( images/custom/icons/italtel_icon.gif ) !important;
+}
+
+.udb-ipcc-icon {
+	background-image: url( images/italtel/iMSS_Universal_DB.gif ) !important;
+}
+
+.circle-red-icon {
+	background-image: url( images/custom/icons/circle_red.gif ) !important;
+}
+.circle-orange-icon {
+	background-image: url( images/custom/icons/circle_orange.gif ) !important;
+}
+.asl-cz-icon{
+	background-image: url( images/custom/icons/asl_cz.gif ) !important
+	}
+.operation-icon{
+	background-image: url( images/custom/icons/operation.gif ) !important
+	}
+
+.border-login-sx {
+	background-image: url(images/custom/borderloginsx.jpg); !important
+	background-repeat: repeat-y;
+	background-position: left top;
+}
+
+.border-login-dx {
+	background-image: url(images/custom/borderlogindx.jpg); !important
+	background-repeat: repeat-y;
+	background-position: right top;
+}
+
+.telecom-background-image {
+	background-image: url(images/custom/telecom_background.gif); !important
+	background-position: right top;
+	background-repeat: no-repeat;
+}

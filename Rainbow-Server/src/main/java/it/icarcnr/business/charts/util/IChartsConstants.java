@@ -1,0 +1,9 @@
+package it.icarcnr.business.charts.util;
+
+public interface IChartsConstants {
+
+	public enum ChartMode{CHART_BY_NODE, CHART_BY_SERVICE};
+
+}
+
+

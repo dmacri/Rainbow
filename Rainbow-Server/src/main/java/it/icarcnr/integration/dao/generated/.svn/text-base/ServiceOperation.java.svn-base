@@ -1,0 +1,33 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * ServiceOperation entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "service_operation" )
+public class ServiceOperation extends AbstractServiceOperation implements
+		java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public ServiceOperation() {
+	}
+
+	/** minimal constructor */
+	public ServiceOperation(Service service, Operation operation) {
+		super(service, operation);
+	}
+
+	/** full constructor */
+	public ServiceOperation(Service service, Operation operation,
+			Set<CriteriaChangeStatus> criteriaChangeStatuses,
+			Set<Criteria> criterias) {
+		super(service, operation, criteriaChangeStatuses, criterias);
+	}
+
+}

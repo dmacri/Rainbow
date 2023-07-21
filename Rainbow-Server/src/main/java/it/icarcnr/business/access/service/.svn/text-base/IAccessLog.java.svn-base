@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package it.telecom.business.access.service;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IAccessLog {
+	
+	public void log(Object message);
+
+}

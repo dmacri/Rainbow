@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package it.telecom.business.function.service;
+
+import it.telecom.integration.dao.generated.Function;
+
+import java.util.List;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IFunctionBL {
+	
+	public List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer networkId) throws Exception;
+	public Function findById(List<Integer> enabledNetworkFunctionList, Integer functionId) throws Exception;
+
+}

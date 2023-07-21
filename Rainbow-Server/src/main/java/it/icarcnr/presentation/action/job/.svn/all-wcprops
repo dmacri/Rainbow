@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job
+END
+ChangeCommentAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job/ChangeCommentAction.java
+END
+ListOpenJobAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job/ListOpenJobAction.java
+END
+AnomalyTakingCareAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job/AnomalyTakingCareAction.java
+END
+CloseJobAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job/CloseJobAction.java
+END
+DisableThresholdAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/job/DisableThresholdAction.java
+END

@@ -1,0 +1,24 @@
+package it.telecom.integration.dao.generated;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Prefix entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "prefix" )
+public class Prefix extends AbstractPrefix implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public Prefix() {
+	}
+
+	/** full constructor */
+	public Prefix(String prefix) {
+		super(prefix);
+	}
+
+}

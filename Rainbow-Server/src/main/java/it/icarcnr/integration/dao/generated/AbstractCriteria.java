@@ -1,0 +1,349 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ * AbstractCriteria entity provides the base persistence definition of the
+ * Criteria entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractCriteria implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private ServiceOperation serviceOperation;
+	private Double value;
+	private Boolean monday;
+	private Boolean tuesday;
+	private Boolean wednesday;
+	private Boolean thursday;
+	private Boolean friday;
+	private Boolean saturday;
+	private Boolean sunday;
+	private Time startTime;
+	private Time endTime;
+	private Double valueCheckMajor;
+	private String description;
+	private String status;
+	private Timestamp date;
+	private String typeCheck;
+	private Double valueCheckCritical;
+	private Boolean enabled;
+	private Date startDate;
+	private Date endDate;
+	private Double valueCheckSecondaryMajor;
+	private Double valueCheckSecondaryCritical;
+	private Boolean suspended;
+	private String calculation;
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractCriteria() {
+	}
+
+	/** minimal constructor */
+	public AbstractCriteria(ServiceOperation serviceOperation, Double value,
+			Boolean monday, Boolean tuesday, Boolean wednesday,
+			Boolean thursday, Boolean friday, Boolean saturday, Boolean sunday,
+			String description, String status, String typeCheck,
+			Boolean enabled, Boolean suspended, String calculation) {
+		this.serviceOperation = serviceOperation;
+		this.value = value;
+		this.monday = monday;
+		this.tuesday = tuesday;
+		this.wednesday = wednesday;
+		this.thursday = thursday;
+		this.friday = friday;
+		this.saturday = saturday;
+		this.sunday = sunday;
+		this.description = description;
+		this.status = status;
+		this.typeCheck = typeCheck;
+		this.enabled = enabled;
+		this.suspended = suspended;
+		this.calculation = calculation;
+	}
+
+	/** full constructor */
+	public AbstractCriteria(ServiceOperation serviceOperation, Double value,
+			Boolean monday, Boolean tuesday, Boolean wednesday,
+			Boolean thursday, Boolean friday, Boolean saturday, Boolean sunday,
+			Time startTime, Time endTime, Double valueCheckMajor,
+			String description, String status, Timestamp date,
+			String typeCheck, Double valueCheckCritical, Boolean enabled,
+			Date startDate, Date endDate, Double valueCheckSecondaryMajor,
+			Double valueCheckSecondaryCritical, Boolean suspended,
+			String calculation) {
+		this.serviceOperation = serviceOperation;
+		this.value = value;
+		this.monday = monday;
+		this.tuesday = tuesday;
+		this.wednesday = wednesday;
+		this.thursday = thursday;
+		this.friday = friday;
+		this.saturday = saturday;
+		this.sunday = sunday;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.valueCheckMajor = valueCheckMajor;
+		this.description = description;
+		this.status = status;
+		this.date = date;
+		this.typeCheck = typeCheck;
+		this.valueCheckCritical = valueCheckCritical;
+		this.enabled = enabled;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.valueCheckSecondaryMajor = valueCheckSecondaryMajor;
+		this.valueCheckSecondaryCritical = valueCheckSecondaryCritical;
+		this.suspended = suspended;
+		this.calculation = calculation;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_ServiceOperation", nullable = false)
+	public ServiceOperation getServiceOperation() {
+		return this.serviceOperation;
+	}
+
+	public void setServiceOperation(ServiceOperation serviceOperation) {
+		this.serviceOperation = serviceOperation;
+	}
+
+	@Column(name = "value", nullable = false, precision = 22, scale = 0)
+	public Double getValue() {
+		return this.value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	@Column(name = "monday", nullable = false)
+	public Boolean getMonday() {
+		return this.monday;
+	}
+
+	public void setMonday(Boolean monday) {
+		this.monday = monday;
+	}
+
+	@Column(name = "tuesday", nullable = false)
+	public Boolean getTuesday() {
+		return this.tuesday;
+	}
+
+	public void setTuesday(Boolean tuesday) {
+		this.tuesday = tuesday;
+	}
+
+	@Column(name = "wednesday", nullable = false)
+	public Boolean getWednesday() {
+		return this.wednesday;
+	}
+
+	public void setWednesday(Boolean wednesday) {
+		this.wednesday = wednesday;
+	}
+
+	@Column(name = "thursday", nullable = false)
+	public Boolean getThursday() {
+		return this.thursday;
+	}
+
+	public void setThursday(Boolean thursday) {
+		this.thursday = thursday;
+	}
+
+	@Column(name = "friday", nullable = false)
+	public Boolean getFriday() {
+		return this.friday;
+	}
+
+	public void setFriday(Boolean friday) {
+		this.friday = friday;
+	}
+
+	@Column(name = "saturday", nullable = false)
+	public Boolean getSaturday() {
+		return this.saturday;
+	}
+
+	public void setSaturday(Boolean saturday) {
+		this.saturday = saturday;
+	}
+
+	@Column(name = "sunday", nullable = false)
+	public Boolean getSunday() {
+		return this.sunday;
+	}
+
+	public void setSunday(Boolean sunday) {
+		this.sunday = sunday;
+	}
+
+	@Column(name = "start_time", length = 8)
+	public Time getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Time startTime) {
+		this.startTime = startTime;
+	}
+
+	@Column(name = "end_time", length = 8)
+	public Time getEndTime() {
+		return this.endTime;
+	}
+
+	public void setEndTime(Time endTime) {
+		this.endTime = endTime;
+	}
+
+	@Column(name = "value_check_major", precision = 22, scale = 0)
+	public Double getValueCheckMajor() {
+		return this.valueCheckMajor;
+	}
+
+	public void setValueCheckMajor(Double valueCheckMajor) {
+		this.valueCheckMajor = valueCheckMajor;
+	}
+
+	@Column(name = "description", unique = true, nullable = false)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "status", nullable = false, length = 10)
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Column(name = "date", length = 19)
+	public Timestamp getDate() {
+		return this.date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+
+	@Column(name = "type_check", nullable = false, length = 6)
+	public String getTypeCheck() {
+		return this.typeCheck;
+	}
+
+	public void setTypeCheck(String typeCheck) {
+		this.typeCheck = typeCheck;
+	}
+
+	@Column(name = "value_check_critical", precision = 22, scale = 0)
+	public Double getValueCheckCritical() {
+		return this.valueCheckCritical;
+	}
+
+	public void setValueCheckCritical(Double valueCheckCritical) {
+		this.valueCheckCritical = valueCheckCritical;
+	}
+
+	@Column(name = "enabled", nullable = false)
+	public Boolean getEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "start_date", length = 10)
+	public Date getStartDate() {
+		return this.startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "end_date", length = 10)
+	public Date getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@Column(name = "value_check_secondary_major", precision = 22, scale = 0)
+	public Double getValueCheckSecondaryMajor() {
+		return this.valueCheckSecondaryMajor;
+	}
+
+	public void setValueCheckSecondaryMajor(Double valueCheckSecondaryMajor) {
+		this.valueCheckSecondaryMajor = valueCheckSecondaryMajor;
+	}
+
+	@Column(name = "value_check_secondary_critical", precision = 22, scale = 0)
+	public Double getValueCheckSecondaryCritical() {
+		return this.valueCheckSecondaryCritical;
+	}
+
+	public void setValueCheckSecondaryCritical(
+			Double valueCheckSecondaryCritical) {
+		this.valueCheckSecondaryCritical = valueCheckSecondaryCritical;
+	}
+
+	@Column(name = "suspended", nullable = false)
+	public Boolean getSuspended() {
+		return this.suspended;
+	}
+
+	public void setSuspended(Boolean suspended) {
+		this.suspended = suspended;
+	}
+
+	@Column(name = "calculation", nullable = false, length = 11)
+	public String getCalculation() {
+		return this.calculation;
+	}
+
+	public void setCalculation(String calculation) {
+		this.calculation = calculation;
+	}
+
+}

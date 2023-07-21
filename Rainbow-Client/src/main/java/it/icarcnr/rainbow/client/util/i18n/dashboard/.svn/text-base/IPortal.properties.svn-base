@@ -1,0 +1,9 @@
+#portal.SummaryServiceStatus
+SummaryServiceStatus_Critical=Critical
+SummaryServiceStatus_Major=Major
+SummaryServiceStatus_Normal=Normal
+SummaryServiceStatus_Suspended=Suspended
+
+SummaryServiceStatus_View_Graph=Visualizza la rappresentazione grafica
+
+SummaryServiceStatus_No_Alarmed_Item=Nessun elemento allarmato

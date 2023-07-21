@@ -1,0 +1,34 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Action entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "action" )
+public class Action extends AbstractAction implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public Action() {
+	}
+
+	/** minimal constructor */
+	public Action(Area area, String path, String description) {
+		super(area, path, description);
+	}
+
+	/** full constructor */
+	public Action(Area area, UtilityGroup utilityGroup, Action action,
+			String path, String description,
+			Set<ActionNetworkFunction> actionNetworkFunctions,
+			Set<Action> actions) {
+		super(area, utilityGroup, action, path, description,
+				actionNetworkFunctions, actions);
+	}
+
+}

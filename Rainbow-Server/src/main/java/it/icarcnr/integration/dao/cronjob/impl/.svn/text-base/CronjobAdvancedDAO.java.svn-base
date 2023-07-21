@@ -1,0 +1,91 @@
+package it.telecom.integration.dao.cronjob.impl;
+
+import it.telecom.integration.dao.cronjob.service.ICronjobAdvancedDAO;
+import it.telecom.integration.dao.generated.Cronjob;
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.util.JPAUtil;
+
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+public class CronjobAdvancedDAO implements ICronjobAdvancedDAO {
+
+	public List<Cronjob> findByNullEndExecution(){
+		
+		EntityManagerHelper.log("findByNullEndExecution()", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT cronjob FROM "+Cronjob.class.getName()+" as cronjob WHERE cronjob.endExecution IS NULL");
+			
+			Query query = em.createQuery(queryString.toString());
+			
+			return query.getResultList();
+			
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findByNullEndExecution()",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	
+	public List<Cronjob> findByParentCronjob(List<Integer> enabledNetworkFunctionList, Integer utilityGroupId, Cronjob cronjob, String view) {
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT cronjob FROM "+Cronjob.class.getName()+" as cronjob");
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			
+			String condition = ""; 
+			Boolean firstWhereCondition = Boolean.TRUE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "cronjob.utility.", null, firstWhereCondition);
+			
+			if (cronjob != null) {
+				condition = "cronjob.cronjob = :cronjoblabel";
+			}
+			else {
+				condition = "cronjob.cronjob IS NULL";
+			}
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+
+			if (view != null) {
+				condition = "cronjob.status = :cronjobstatus";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+			}
+			
+			if (utilityGroupId != null) {
+				condition = "cronjob.utility.utilityGroup.id = :utilityGroupId";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+			}
+			
+			queryString.append(" ORDER BY cronjob.date DESC");
+			
+			Query query = em.createQuery(queryString.toString());
+			
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+			if (cronjob != null) {
+				query.setParameter("cronjoblabel", cronjob);
+			}
+			if (view != null) {
+				query.setParameter("cronjobstatus", view);
+			}
+			if (utilityGroupId != null) {
+				query.setParameter("utilityGroupId", utilityGroupId);
+			}
+			
+			return query.getResultList();
+			
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findByUserAndNullParentCronjob()",
+					Level.SEVERE, re);
+			throw re;
+		}
+		
+	}
+	
+
+}

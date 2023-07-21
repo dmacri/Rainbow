@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox
+END
+GeoAreaOnSelectOutputFileAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/GeoAreaOnSelectOutputFileAction.java
+END
+ChangeStatusComboBoxAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/ChangeStatusComboBoxAction.java
+END
+FuctionListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/FuctionListAction.java
+END
+NodeTypeListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/NodeTypeListAction.java
+END
+GeoAlignListOutputFilesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/GeoAlignListOutputFilesAction.java
+END
+GeoAreaDistrictListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/GeoAreaDistrictListAction.java
+END
+NetworkListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/NetworkListAction.java
+END
+NodeServiceTypeList.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/NodeServiceTypeList.java
+END
+GeoPrefixListOutputFilesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/GeoPrefixListOutputFilesAction.java
+END
+ServiceListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/ServiceListAction.java
+END
+ServiceOperationListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/ServiceOperationListAction.java
+END
+ServiceTypeListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/ServiceTypeListAction.java
+END
+UtilityListAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/combobox/UtilityListAction.java
+END

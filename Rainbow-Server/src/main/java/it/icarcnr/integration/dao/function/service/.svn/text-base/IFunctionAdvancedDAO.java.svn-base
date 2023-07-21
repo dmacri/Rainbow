@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+package it.telecom.integration.dao.function.service;
+
+import it.telecom.integration.dao.generated.Function;
+
+import java.util.List;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IFunctionAdvancedDAO {
+	
+	List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer areaId, Integer networkId);
+	
+	List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer networkId);
+	
+	Function findById(List<Integer> enabledNetworkFunctionList, Integer functionId);
+}

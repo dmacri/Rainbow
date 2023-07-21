@@ -1,0 +1,269 @@
+package it.telecom.business.servicestatus.impl;
+
+import it.telecom.business.job.util.IJobContants;
+import it.telecom.business.servicestatus.bean.ServiceStatusBean;
+import it.telecom.business.servicestatus.service.ICriteriaStatusBL;
+import it.telecom.business.servicestatus.service.IServiceBL;
+import it.telecom.integration.dao.generated.Criteria;
+import it.telecom.integration.dao.generated.IServiceDAO;
+import it.telecom.integration.dao.generated.Job;
+import it.telecom.integration.dao.generated.Node;
+import it.telecom.integration.dao.generated.Service;
+import it.telecom.integration.dao.generated.ServiceDAO;
+import it.telecom.integration.dao.generated.ServiceNodeSource;
+import it.telecom.integration.dao.servicestatus.impl.ServiceAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.service.IServiceAdvancedDAO;
+import it.telecom.integration.dao.util.IServiceConstants;
+import it.telecom.integration.dao.util.IServiceConstants.Status;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class ServiceBL implements IServiceBL {
+
+	private static final Log log = LogFactory.getLog(ServiceBL.class);
+
+	public List<Service> findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, Boolean orderByService, Boolean orderByNode, int... rowStartIdxAndCount)
+	throws Exception {
+		final String method = "findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, Boolean orderByService, Boolean orderByNode, int... rowStartIdxAndCount)";
+		log.info(method);
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.findAll(enabledNetworkFunctionList, currentDate, criteriaMap, orderByService, orderByNode, rowStartIdxAndCount);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+	public List<Node> findServiceReferenceNode(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, Boolean orderByService, Boolean orderByNode, int... rowStartIdxAndCount)
+	throws Exception {
+		final String method = "findServiceReferenceNode(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, Boolean orderByService, Boolean orderByNode, int... rowStartIdxAndCount)";
+		log.info(method);
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.findServiceReferenceNode(enabledNetworkFunctionList, currentDate, criteriaMap, orderByService, orderByNode, rowStartIdxAndCount);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	public Service findById(Integer id) throws Exception {
+		final String method = "findById(Integer id)";
+		log.info(method);
+		try{
+			IServiceDAO iServiceDAO = new ServiceDAO();
+			return iServiceDAO.findById(id);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	public List<ServiceStatusBean> getServiceStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, int... rowStartIdxAndCount) throws Exception {
+		final String method = "getServiceStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap, int... rowStartIdxAndCount)";
+		log.info(method);
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			ICriteriaStatusBL iCriteriaStatusBL = new CriteriaStatusBL();
+			IServiceDAO iServiceDAO = new ServiceDAO();
+			List<ServiceStatusBean> serviceStatusBeans = iServiceAdvancedDAO.getServicesStatus(enabledNetworkFunctionList, currentDate, criteriaMap, rowStartIdxAndCount);
+			for (ServiceStatusBean serviceStatusBean : serviceStatusBeans) {
+				Service service = iServiceDAO.findById(serviceStatusBean.getServiceId());				
+				// Description set by iServiceAdvancedDAO.getServicesStatus(enabledNetworkFunctionList, currentDate, criteriaMap, rowStartIdxAndCount);
+				serviceStatusBean.setRequestId(service.getRequest().getId());
+				serviceStatusBean.setRequestName(service.getRequest().getName());
+				serviceStatusBean.setNodeName(service.getNodeByIdNode().getName());
+				serviceStatusBean.setDescription(service.getRequest().getDescription());
+				serviceStatusBean.setNetworkName(service.getNodeByIdNode().getNetwork().getDescription());
+				serviceStatusBean.setFunctionName(service.getFunction().getName());
+				serviceStatusBean.setExtendedDescription(service.getRequest().getDescriptionExtended());
+				serviceStatusBean.setReference(service.getNodeByIdNode().getDescription());
+				if(service.getNodeByIdNode().getId()==service.getNodeByIdReceiver().getId()){
+					serviceStatusBean.setNodeFrom("<center>-</center>");
+					serviceStatusBean.setNodeTo("<center>-</center>");
+				}else{
+					serviceStatusBean.setNodeFrom(service.getNodeByIdNode().getDescription());
+					serviceStatusBean.setNodeTo(service.getNodeByIdReceiver().getDescription());
+				}
+				serviceStatusBean.setSources(getSources(service));
+				serviceStatusBean.setSamplingPeriod(service.getSamplingPeriod());
+				// Last check set by iServiceAdvancedDAO.getServicesStatus(enabledNetworkFunctionList, currentDate, criteriaMap, rowStartIdxAndCount);
+				//				serviceStatusBean.setLastCheck(service.getDate());
+				serviceStatusBean.setIsTakingCharge(isTakingCharge(service));
+				serviceStatusBean.setLogPresent(logPresent(service));
+				serviceStatusBean.setNetworkId(service.getNodeByIdNode().getNetwork().getId());
+				serviceStatusBean.setFunctionId(service.getFunction().getId());
+				List<Criteria> criterias = iCriteriaStatusBL.getActiveCriterias(currentDate,service.getId());
+				for (Criteria criteria : criterias) {
+					if(criteria.getServiceOperation().getOperation().getName().equals(IServiceConstants.ON_TIME)){
+						serviceStatusBean.setCriteriaIdValue(criteria.getId());
+						//workaround  threshold must be defined - to be: set to null and not to -1
+						Double majorValue = criteria.getValueCheckMajor();
+						if(majorValue!=null && majorValue == -1){
+							majorValue = null;
+						}
+						serviceStatusBean.setMajorValue(majorValue);
+						Double criticalValue = criteria.getValueCheckCritical();
+						if(criticalValue!=null && criticalValue == -1){
+							criticalValue = null;
+						}
+						serviceStatusBean.setCriticalValue(criticalValue);
+
+						serviceStatusBean.setValue(criteria.getValue());
+						serviceStatusBean.setValueStatus(criteria.getStatus());
+						serviceStatusBean.setValueTypeCheck(criteria.getTypeCheck());
+
+
+						Double secondaryMajorValue = criteria.getValueCheckSecondaryMajor();
+						if(secondaryMajorValue!=null && secondaryMajorValue == -1){
+							secondaryMajorValue = null;
+						}
+						serviceStatusBean.setSecondaryMajorValue(secondaryMajorValue);
+
+						Double secondaryCriticalValue = criteria.getValueCheckSecondaryCritical();
+						if(secondaryCriticalValue!=null && secondaryCriticalValue == -1){
+							secondaryCriticalValue = null;
+						}
+						serviceStatusBean.setSecondaryCriticalValue(secondaryCriticalValue);
+
+
+					}else if(criteria.getServiceOperation().getOperation().getName().equals(IServiceConstants.STEP_BY_STEP)){
+						serviceStatusBean.setCriteriaIdDeltaValue(criteria.getId());
+						serviceStatusBean.setMajorDeltaValue(criteria.getValueCheckMajor());
+						serviceStatusBean.setCriticalDeltaValue(criteria.getValueCheckCritical());
+						serviceStatusBean.setSecondaryMajorDeltaValue(criteria.getValueCheckSecondaryMajor());
+						serviceStatusBean.setSecondaryCriticalDeltaValue(criteria.getValueCheckSecondaryCritical());
+
+						serviceStatusBean.setDeltaValue(criteria.getValue());
+						serviceStatusBean.setDeltaValueStatus(criteria.getStatus());
+						serviceStatusBean.setDeltaValueTypeCheck(criteria.getTypeCheck());
+
+					}
+				}
+			}
+			return serviceStatusBeans;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+
+
+	public Long getTotalServiceStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap) throws Exception {
+		final String method = "getTotalServiceStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Map criteriaMap)";
+		log.info(method);
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.getTotalServiceStatus(enabledNetworkFunctionList, currentDate, criteriaMap);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	public String getSources(Service service) throws Exception{
+		final String method = "getSources(Service service)";
+		log.info(method);
+		try{
+			StringBuilder sources = new StringBuilder();
+			Set<ServiceNodeSource> nodeSources = service.getServiceNodeSources();
+			boolean moreSources = false;
+			for (ServiceNodeSource serviceNodeSource : nodeSources) {
+				if(moreSources){
+					sources.append(", ");
+				}
+				sources.append(serviceNodeSource.getNode().getDescription());
+				moreSources = true;
+			}
+			return sources.toString();
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	public Long getTotalServiceByStatus(List<Integer> enabledNetworkFunctionList, Integer networkId, Date currentDate, String status) throws Exception {
+		final String method = "getTotalServiceByStatus(List<Integer> enabledNetworkFunctionList, Integer networkId, Date currentDate, String status)";
+		log.info(method);
+		try{
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.getTotalServiceByStatus(enabledNetworkFunctionList, networkId, currentDate, status);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	public Boolean isTakingCharge(Service service) throws Exception {
+		final String method = "isTakingCharge(Service service)";
+		log.info(method);
+		try{
+			if(service!=null){
+				Set<Job> jobSet = service.getJobs();
+				for (Job job : jobSet) {
+					if(IJobContants.OPEN_STATUS.equals(job.getStatus())){
+						return true;
+					}
+				}
+			}
+			return false;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	public Boolean logPresent(Service service) throws Exception {
+		final String method = "logPresent(Service service)";
+		log.info(method);
+		try{
+			if(service.getLog()!=null){
+				return true;
+			}
+			return false;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	public List<Service> findByUtility(List<Integer> enabledNetworkFunctionList, Integer idUtility) throws Exception {
+		final String method = "findByUtility(Integer idUtility)";
+		log.info(method);
+		try {
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.findByUtility(enabledNetworkFunctionList, idUtility);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.servicestatus.service.IServiceBL#getCurrentStatus(java.util.List, java.lang.Integer)
+	 */
+	public Status getCurrentStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Integer serviceId)
+	throws Exception {
+		final String method = "getCurrentStatus(List<Integer> enabledNetworkFunctionList, Date currentDate, Integer serviceId)";
+		log.info(method);
+		try {
+			IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+			return iServiceAdvancedDAO.getCurrentStatus(enabledNetworkFunctionList, currentDate, serviceId);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+}

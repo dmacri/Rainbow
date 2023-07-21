@@ -1,0 +1,26 @@
+package it.telecom.integration.dao.generated;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * UtilityAnf entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "utility_anf" )
+public class UtilityAnf extends AbstractUtilityAnf implements
+		java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public UtilityAnf() {
+	}
+
+	/** full constructor */
+	public UtilityAnf(Utility utility,
+			ActionNetworkFunction actionNetworkFunction, Integer maxProcesses) {
+		super(utility, actionNetworkFunction, maxProcesses);
+	}
+
+}

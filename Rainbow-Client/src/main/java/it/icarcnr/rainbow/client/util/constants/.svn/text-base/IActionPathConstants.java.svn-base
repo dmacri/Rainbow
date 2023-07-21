@@ -1,0 +1,77 @@
+package it.telecom.vmc.client.util.constants;
+
+public interface IActionPathConstants {
+	String SERVICE_STATUS_ACTION_PATH = "../services/serviceStatus.do";
+	String JOB_STATUS_ACTION_PATH = "../job/listOpenJob.do";
+	String ACKNOLEDGMENT_ACTION_PATH = "../job/closeJob.do";
+	String LOG_VIEW_ACTION = "../services/logView.do";
+	String TAKE_CARE_ACTION = "../job/takeCare.do";
+	String DISABLE_THRESHOLD_ACTION = "../job/disableThreshold.do";
+	String CHANGE_COMMENT_ACTION = "../job/changeComment.do";
+	String SERVICE_STATUS_CHANGE_HISTORY_ACTION_PATH = "../services/statusChangeHistory.do";
+	String CRITERIA_SERVICE_ACTION_PATH = "../services/criteriaService.do";
+	
+	String DOWNLOAD_MANUAL = "../main/manual.do";
+	String DOWNLOAD_IPCC_MANUAL = "../main/ipccManual.do";
+	String CHART_REPORT_ACTION = "../reports/chartReport.do";
+	String CSV_REPORT_ACTION = "../reports/csvReport.do";
+	String ONLY_CHART_REPORT_ACTION = "../reports/onlyChartReport.do";
+	String SERVICE_CHART_ACTION_PATH = "../charts/serviceChart.do";
+	
+	String UTILITY_ACTION_PATH = "../utility/utilityAction.do";
+	String CHECKIPLOCK_ACTION_PATH = "../utility/checkIpLock.do";
+	String CHECKIPLOCK_EXECUTION_ACTION_PATH = "../utility/checkIpLockExecution.do";
+	String TIUMALIGNMENT_ACTION_PATH = "../utility/tiumAlignment.do";
+	String MYCRONJOB_ACTION_PATH = "../utility/myCronjobAction.do";
+	String MYCRONJOB_VIEWLOG_ACTION_PATH = "../utility/myCronjobViewLog.do";
+	String MYCRONJOB_VIEWLOG_TIMER_ACTION_PATH = "../utility/myCronjobViewLogTimer.do";
+	String RECOVERYSERVICE_AFFECTED_LIST_ACTION_PATH = "../utility/recoveryServiceAffectedList.do";
+	String RECOVERYSERVICE_ACTION_PATH = "../utility/recoveryService.do";
+	String INFOCLI_PK3_ACTION_PATH = "../utility/infoCliPK3.do";
+	String INFOCLI_PK0_ACTION_PATH = "../utility/InfoCliPK0.do";
+	String INFOCLI_MSAN_ACTION_PATH = "../utility/InfoCliMSAN.do";
+	String INFOCLI_POSTE_ACTION_PATH = "../utility/infoCliPoste.do";
+	String INFOCLI_CONTACT_CENTER_ACTION_PATH = "../utility/infoCliContactCenter.do";
+	String TIUMMANAGER_ACTION_PATH = "../utility/TiUMManager.do";
+	String TIUMSETDEFAULTPIN_ACTION_PATH = "../utility/TiUMSetPin.do";
+	String TIUMCHANGEPIN_ACTION_PATH = "../utility/TiUMChangePin.do";
+	String TIUMCREATEPROFILE_ACTION_PATH = "../utility/TiUMCreateProfile.do";
+	String TIUMDELETEPROFILE_ACTION_PATH = "../utility/TiUMDeleteProfile.do";
+	String TIUMENABLENOTIFY_ACTION_PATH = "../utility/TiUMEnableNotify.do";
+	String SEARCH_CLI_403FORB_REG_ACTION_PATH = "../utility/searchCLI403ForbReg.do";
+	String GEOAREAALIGNMENTPK3_ACTION_PATH = "../utility/GeoAreaPk3.do";
+	String GEOALIGNLISTOUTPUT_ACTION_PATH = "../combobox/GeoAreaListOutputFiles.do";
+	String GEOPREFIXLISTOUTPUT_ACTION_PATH = "../combobox/GeoPrefixListOutputFiles.do";
+	String GEOAREAONSELECTOUTPUTFILE_ACTION_PATH = "../combobox/GeoAreaOnSelectOutputFile.do";
+	String GEOAREADISTRICTLIST_ACTION_PATH = "../combobox/GeoAreaDistrictList.do";
+	String GEOAREARESULTUDB_ACTION_PATH = "../utility/GeoAreaResultUdb.do";
+	String GEOAREAALIGNMENTPK0_ACTION_PATH = "../utility/GeoAreaPk0.do";
+	String CHECKCNC_ACTION_PATH = "../utility/CheckCnc.do";
+	String CHECKCNC_EXECUTION_ACTION_PATH = "../utility/CheckCncExecution.do";
+	String GEOAREAPK3DISTRICT_ACTION_PATH = "../utility/GeoAreaPK3District.do";
+	String GEOAREAPK0DISTRICT_ACTION_PATH = "../utility/GeoAreaPK0District.do";
+	
+	String UTILITY_COMBO_BOX_ACTION_PATH = "../combobox/utilityList.do";
+	String RECOVERYSERVICE_COMBO_BOX_ACTION_PATH = "../combobox/networkListRecoveryService.do";
+	String NETWORK_COMBO_BOX_ACTION_PATH = "../combobox/networkList.do";
+	String FUNCTION_COMBO_BOX_ACTION_PATH = "../combobox/functionList.do";
+	String NODE_TYPE_COMBO_BOX_ACTION_PATH = "../combobox/nodeTypeList.do";
+	String SERVICE_COMBO_BOX_ACTION_PATH = "../combobox/serviceList.do";
+	String COMBO_BOX_NODE_SERVICE_ACTION_PATH = "../combobox/NodeServiceTypeList.do";
+	String SERVICE_TYPE_COMBO_BOX_ACTION_PATH = "../combobox/serviceTypeList.do";
+	String SERVICE_CHECK_BOX_TREE_ACTION_PATH = "../checkboxtree/ServiceCheckBoxTree.do";
+	String SERVICE_OPERATION_LIST_ACTION = "../combobox/serviceOperationList.do";
+	String COMBO_BOX_STATUS_CHANGE="../combobox/changeStatusComboBox.do";
+		
+	String CHECK_CHART_PERMISSION_ACTION = "../security/checkChartPermissionAction.do";
+	String CHECK_SERVICES_STATUS_PERMISSION_ACTION = "../security/checkServicesStatusPermissionAction.do";
+	String CHECK_JOB_STATUS_PERMISSION_ACTION = "../security/checkJobStatusPermissionAction.do";
+	String CHECK_PORTAL_SERVICE_STATUS_ACTION = "../security/checkPortalServiceStatus.do";
+	String CHECK_MAIN_PERMISSION = "../security/checkDownloadManualIpccPermission.do";
+	
+	String PORTAL_TAKE_CARE = "../portal/TakeChargePanel.do";
+	String PORTAL_SUMMARY_SERVICE_STATUS_ACTION_PATH = "../portal/summaryPanelServiceStatus.do";
+	String ALARMED_NODE_ACTION_PATH = "../graph/alarmedNode.do";
+	String VOIP_CONTROL_ACTION_PATH = "../voipcontrol/voipControl.do";
+
+}

@@ -1,0 +1,54 @@
+/**
+ * 
+ */
+package it.telecom.business.function.impl;
+
+import it.telecom.business.function.service.IFunctionBL;
+import it.telecom.integration.dao.function.impl.FunctionAdvancedDAO;
+import it.telecom.integration.dao.function.service.IFunctionAdvancedDAO;
+import it.telecom.integration.dao.generated.Function;
+
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * @author Graziano
+ *
+ */
+public class FunctionBL implements IFunctionBL {
+
+	private static final Log log = LogFactory.getLog(FunctionBL.class);
+
+	/* (non-Javadoc)
+	 * @see it.telecom.businesslogic.function.service.IFunctionBL#findById(java.lang.Integer)
+	 */
+	public Function findById(List<Integer> enabledNetworkFunctionList, Integer functionId) throws Exception {
+		final String method = "findById(List<Integer> enabledNetworkFunctionList, Integer functionId)";
+		log.info(method);
+		try{
+			IFunctionAdvancedDAO iFunctionAdvancedDAO = new FunctionAdvancedDAO();
+			return iFunctionAdvancedDAO.findById(enabledNetworkFunctionList, functionId);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see it.telecom.business.function.service.IFunctionBL#findAll(java.util.List, Integer networkId)
+	 */
+	public List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer networkId) throws Exception {
+		final String method = "findAll(List<Integer> enabledNetworkFunctionList, networkId)";
+		log.info(method);
+		try{
+			IFunctionAdvancedDAO iFunctionAdvancedDAO = new FunctionAdvancedDAO();
+			return iFunctionAdvancedDAO.findAll(enabledNetworkFunctionList, networkId);
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+}

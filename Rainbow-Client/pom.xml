@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- POM file generated with GWT webAppCreator -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>it.icarcnr.rainbow</groupId>
+	<artifactId>Rainbow-Client</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Rainbow-Client</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gwt.version>2.5.1</gwt.version>
+		<platform>windows</platform>
+		<maven.version>3.0.3</maven.version>
+		<webAppName>Rainbow</webAppName>
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<netbeans.hint.deploy.server>JBoss6</netbeans.hint.deploy.server>
+	</properties>
+	<repositories>
+		<repository>
+			<id>codehaus-maven-repo</id>
+			<name>Codehaus repo</name>
+			<url>http://repository.codehaus.org/org/codehaus/mojo/</url>
+		</repository>
+		<repository>
+			<id>gwt-ext</id>
+			<url>
+		http://gwt-ext.googlecode.com/svn/trunk/mavenrepo
+	</url>
+		</repository>
+		<repository>
+			<id>Java.Net</id>
+			<url>http://download.java.net/maven/2/</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>it.icarcnr.rainbow</groupId>
+			<artifactId>Rainbow-Server</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jstl</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- GWT deps (from central repo) -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>2.5.1</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>2.5.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<version>2.5.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.soboko.thirdparty</groupId>
+			<artifactId>gwt-ext</artifactId>
+			<version>2.0.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>ofcgwt</groupId>
+			<artifactId>ofcgwt</artifactId>
+			<version>2.0.1-beta</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+    <groupId>com.github.highcharts4gwt</groupId>
+    <artifactId>highcharts</artifactId>
+    <version>0.0.4</version>
+</dependency>
+
+		<dependency>
+			<groupId>com.gwtextux</groupId>
+			<artifactId>gwtextux</artifactId>
+			<version>0.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.rwl</groupId>
+			<artifactId>gwt-maps</artifactId>
+			<version>3.8.0-pre1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory> 
+
+		<plugins>
+		      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+              </plugin>
+			<!-- GWT Maven Plugin -->
+					<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+				  <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+					  <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml> 
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+						       <compileSourcesArtifacts>
+                            <artifact>com.github.highcharts4gwt:highcharts</artifact>
+                       </compileSourcesArtifacts>
+							<modules>
+								<module>it.icarcnr.rainbow.rainbowClient</module>
+							</modules>
+						 <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+	                     <warSourceExcludes>**/WEB-INF/web.xml</warSourceExcludes>
+                         <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml> 
+					</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<noServer>true</noServer>
+					<port>8080</port>
+					<runTarget>RainbowClient.html</runTarget>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+				</configuration>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+					documentation at codehaus.org -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
+				<configuration>
+					<stopPort>9966</stopPort>
+					<stopKey>${webAppName}</stopKey>
+					<!-- Redeploy every x seconds if changes are detected, 0 for no automatic 
+						redeployment -->
+					<scanIntervalSeconds>0</scanIntervalSeconds>
+					<!-- make sure Jetty also finds the widgetset -->
+
+					<webAppConfig>
+						<contextPath>/${webAppName}</contextPath>
+						<baseResource implementation="org.mortbay.resource.ResourceCollection">
+							<!-- Workaround for Maven/Jetty issue http://jira.codehaus.org/browse/JETTY-680 -->
+							<!-- <resources>src/main/webapp,${project.build.directory}/${project.build.finalName}</resources> -->
+							<resourcesAsCSV>src/main/webapp,${project.build.directory}\${project.build.finalName}</resourcesAsCSV>
+							-->
+						</baseResource>
+					</webAppConfig>
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

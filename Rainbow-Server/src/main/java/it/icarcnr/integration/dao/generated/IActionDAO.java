@@ -1,0 +1,105 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Interface for ActionDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IActionDAO {
+	/**
+	 * Perform an initial save of a previously unsaved Action entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IActionDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Action entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Action entity);
+
+	/**
+	 * Delete a persistent Action entity. This operation must be performed
+	 * within the a database transaction context for the entity's data to be
+	 * permanently deleted from the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IActionDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Action entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Action entity);
+
+	/**
+	 * Persist a previously saved Action entity and return it or a copy of it to
+	 * the sender. A copy of the Action entity parameter is returned when the
+	 * JPA persistence mechanism has not previously been tracking the updated
+	 * entity. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+	 * operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = IActionDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Action entity to update
+	 * @return Action the persisted Action entity instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Action update(Action entity);
+
+	public Action findById(Integer id);
+
+	/**
+	 * Find all Action entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Action property to query
+	 * @param value
+	 *            the property value to match
+	 * @return List<Action> found by query
+	 */
+	public List<Action> findByProperty(String propertyName, Object value);
+
+	public List<Action> findByPath(Object path);
+
+	public List<Action> findByDescription(Object description);
+
+	public List<Action> findByIdUtilityGroup(Object idUtilityGroup);
+
+	/**
+	 * Find all Action entities.
+	 * 
+	 * @return List<Action> all Action entities
+	 */
+	public List<Action> findAll();
+}

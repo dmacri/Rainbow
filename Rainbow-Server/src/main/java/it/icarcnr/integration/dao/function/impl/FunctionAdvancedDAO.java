@@ -1,0 +1,190 @@
+/**
+ * 
+ */
+package it.icarcnr.integration.dao.function.impl;
+
+import it.icarcnr.integration.dao.function.service.IFunctionAdvancedDAO;
+import it.icarcnr.integration.dao.generated.ActionNetworkFunction;
+import it.icarcnr.integration.dao.generated.EntityManagerHelper;
+import it.icarcnr.integration.dao.generated.Function;
+import it.icarcnr.integration.dao.generated.NetworkFunction;
+import it.icarcnr.integration.dao.generated.Sensore;
+import it.icarcnr.integration.dao.util.JPAUtil;
+
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+
+public class FunctionAdvancedDAO implements IFunctionAdvancedDAO {
+	
+	private static final Log log = LogFactory.getLog(FunctionAdvancedDAO.class);
+
+	/* (non-Javadoc)
+	 * @see it.icarcnr.persistence.function.service.IFunctionAdvancedDAO#findAll(java.lang.Integer, java.lang.Integer, java.util.List)
+	 */
+	public List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer areaId, Integer networkId) {
+		EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer areaId, Integer networkId)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT DISTINCT actionNetworkFunction.networkFunction.function ");
+			queryString.append("FROM ");
+			queryString.append(ActionNetworkFunction.class.getName()+" as actionNetworkFunction ");
+			
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			
+			queryString.append(" WHERE ");
+			queryString.append(" actionNetworkFunction.action.area.id = :areaId ");
+			
+			if(networkId!=null){
+				queryString.append(" AND actionNetworkFunction.networkFunction.network.id = :networkId ");
+			}
+			
+			Boolean firstWhereCondition = Boolean.FALSE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "actionNetworkFunction.networkFunction.", "actionNetworkFunction.networkFunction.", firstWhereCondition);
+
+			queryString.append(" ORDER BY  actionNetworkFunction.networkFunction.function.id ");
+			
+			Query query = em.createQuery(queryString.toString());
+			
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+			
+			if(networkId!=null){
+				query.setParameter("networkId", networkId);
+			}
+			
+			query.setParameter("areaId", areaId);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer areaId, Integer networkId)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see it.icarcnr.persistence.network.service.INetworkAdvancedDAO#findById(java.util.List, java.lang.Integer)
+	 */
+	public Function findById(List<Integer> enabledNetworkFunctionList, Integer functionId) {
+		EntityManagerHelper.log("findById(List<Integer> enabledNetworkFunctionList, Integer functionId)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append(" SELECT DISTINCT actionNetworkFunction.networkFunction.function ");
+			queryString.append("FROM ");
+			queryString.append(ActionNetworkFunction.class.getName()+" as actionNetworkFunction ");
+
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			Boolean firstWhereCondition = Boolean.TRUE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, null, "actionNetworkFunction.networkFunction.", firstWhereCondition);
+			
+			String condition = " actionNetworkFunction.networkFunction.function.id = :functionId ";
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+
+
+			Query query = em.createQuery(queryString.toString());
+
+			query.setParameter("functionId", functionId);
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			List<Function> list = query.getResultList();
+			if(list.size()==1){
+				return list.get(0);
+			}else if(list.size() > 1){
+				log.error("findById(List<Integer> enabledNetworkFunctionList, Integer functionId) returned more than one result.");
+			}
+			return null;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findById(List<Integer> enabledNetworkFunctionList, Integer functionId)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see it.icarcnr.integration.dao.function.service.IFunctionAdvancedDAO#findAll(List<Integer> enabledNetworkFunctionList, Integer networkId)
+	 */
+	public List<Function> findAll(List<Integer> enabledNetworkFunctionList, Integer networkId) {
+		EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer networkId)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT DISTINCT networkFunction.function ");
+			queryString.append("FROM ");
+			queryString.append(NetworkFunction.class.getName()+" as networkFunction ");
+			
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			
+			Boolean firstWhereCondition = Boolean.TRUE;
+			
+			if(networkId!=null){
+				String condition = " networkFunction.network.id = :networkId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}	
+
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "networkFunction.", "networkFunction.", firstWhereCondition);
+
+			queryString.append(" ORDER BY networkFunction.function.id ");
+			
+			Query query = em.createQuery(queryString.toString());
+			
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+			
+			if(networkId!=null){
+				query.setParameter("networkId", networkId);
+			}
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer networkId)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	
+	public List<Sensore> findBySensore(List<Integer> enabledNetworkFunctionList, Integer sensoreId) {
+		EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer sensoreId)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT DISTINCT sensore ");
+			queryString.append("FROM ");
+			queryString.append(Sensore.class.getName()+" as sensore ");
+			
+//			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			Boolean firstWhereCondition = Boolean.TRUE;
+				if(sensoreId!=null){
+				String condition = "sensore.nodeSen.id = :sensoreId ";
+				JPAUtil.addWhereCondition(queryString, firstWhereCondition, condition);
+//				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}	
+//			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "sensore.", "sensore.", firstWhereCondition);
+		
+				Query query = em.createQuery(queryString.toString());
+			
+//			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+			
+			if(sensoreId!=null){
+				query.setParameter("sensoreId", sensoreId);
+			}
+			return query.getResultList();
+			
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Integer sensoreId)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+
+}

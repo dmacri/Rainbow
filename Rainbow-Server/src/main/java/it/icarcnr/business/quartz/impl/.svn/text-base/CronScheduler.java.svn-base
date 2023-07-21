@@ -1,0 +1,138 @@
+package it.telecom.business.quartz.impl;
+
+import it.telecom.business.utility.impl.UtilityBL;
+import it.telecom.business.utility.service.IUtilityBL;
+import it.telecom.integration.dao.cronjob.impl.CronjobAdvancedDAO;
+import it.telecom.integration.dao.cronjob.service.ICronjobAdvancedDAO;
+import it.telecom.integration.dao.generated.Cronjob;
+import it.telecom.integration.dao.generated.Utility;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONArray;
+import org.quartz.JobDataMap;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.SimpleTrigger;
+import org.quartz.impl.StdSchedulerFactory;
+
+public class CronScheduler {
+	private static final Log log = LogFactory.getLog(CronScheduler.class);
+	public Scheduler scheduler;
+	
+    public CronScheduler() throws Exception {
+    	final String method = "CronScheduler() ...";
+		log.info(method);
+    	
+        SchedulerFactory sf = new StdSchedulerFactory();
+        scheduler = sf.getScheduler();
+        scheduler.start();
+        
+        try {
+	        ICronjobAdvancedDAO cronjobdao=new CronjobAdvancedDAO();
+	        List<Cronjob> listcronjob = cronjobdao.findByNullEndExecution();
+	        for (Cronjob cronjob : listcronjob) {
+				File file = new File(cronjob.getOutput());
+				if (!file.exists()) {
+					JSONArray commandArray = new JSONArray(cronjob.getCommand());
+					List<String> command = new ArrayList<String>(commandArray.length());
+					for (int i = 0; i < commandArray.length(); i++) {
+						command.add(commandArray.getString(i));
+					}
+					
+					JobDetail jDetail = createJobDetail(cronjob.getNamejob(), cronjob.getUser().getId(), cronjob.getUtility(), cronjob.getOutput(), command, cronjob.getDate(), Boolean.FALSE);
+					SimpleTrigger sTrigger = createTrigger(cronjob.getNametrigger(), cronjob.getDate());
+					schedule(jDetail,sTrigger,false,cronjob.getCronjob());
+				}
+			}
+        } catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+    }
+    
+    public JobDetail createJobDetail(String namejob, Integer idUser, Utility idGroupjob, String output, List<String> command, Date date, Boolean wait) throws Exception {
+    	final String method = "createJobDetail(...)";
+  
+    	log.info("command "+ command);
+    	try {
+	    	
+	    	String nametrigger=namejob;
+		   	JobDetail jDetail = new JobDetail(namejob, idGroupjob.getId().toString(), ProcessManager.class);
+		   	jDetail.getJobDataMap().put("idUser", idUser);
+		    jDetail.getJobDataMap().put("groupjob", idGroupjob);
+		    jDetail.getJobDataMap().put("output", output);
+		    jDetail.getJobDataMap().put("command", command);
+		    jDetail.getJobDataMap().put("date", date);
+		    jDetail.getJobDataMap().put("namejob", namejob);
+		    jDetail.getJobDataMap().put("nametrigger", nametrigger);
+		    jDetail.getJobDataMap().put("wait", wait);
+		    jDetail.getJobDataMap().put("result", new Object());
+		    return jDetail;
+		    
+    	}
+    	catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+    	
+    }
+    
+    public SimpleTrigger createTrigger (String nametrigger, Date date) {
+    	SimpleTrigger sTrigger=new SimpleTrigger(nametrigger, date);
+    	return sTrigger;
+    }
+    
+    public void schedule(JobDetail jDetail, SimpleTrigger sTrigger, Boolean stored, Cronjob parent) throws Exception {
+    	final String method = "schedule(...)";
+    	try {
+    		if (stored) {
+	    		JobDataMap dataMap = jDetail.getJobDataMap();
+	    		Utility groupjob = (Utility)dataMap.get("groupjob");
+				List<String> listcommand = (List<String>)dataMap.get("command");
+				IUtilityBL iUtilityBL = new UtilityBL();
+				iUtilityBL.setCronjob(dataMap.getInt("idUser"), dataMap.getString("namejob"), dataMap.getString("nametrigger"), (Date)dataMap.get("date"), groupjob, dataMap.getString("output"), listcommand, parent);
+    		}
+			scheduler.scheduleJob(jDetail, sTrigger);
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			log.error(method,e);
+			throw e;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error(method,e);
+			throw e;
+		}
+    }
+    
+    
+    public Integer countJobs(String id) {
+    	final String method = "countJobs(...)";
+    	String[] names = new String[0];
+		try {
+			names = scheduler.getJobNames(id);
+		} catch (Exception e) {
+			log.error(method,e);
+		}
+    	return names.length;
+    }
+    
+    public JobDetail getJobDetail(String namejob, String namegroup) {
+    	final String method = "getJobDetail(...)";
+    	JobDetail result = new JobDetail();
+    	try {
+    		result=scheduler.getJobDetail(namejob, namegroup);
+    	} catch (Exception e) {
+			log.error(method,e);
+		}
+    	return result;
+    }
+}
+

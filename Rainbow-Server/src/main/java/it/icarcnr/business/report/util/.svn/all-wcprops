@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/report/util
+END
+IReportConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/report/util/IReportConstants.java
+END
+IChartsReportConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/report/util/IChartsReportConstants.java
+END
+JasperExporter.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/report/util/JasperExporter.java
+END

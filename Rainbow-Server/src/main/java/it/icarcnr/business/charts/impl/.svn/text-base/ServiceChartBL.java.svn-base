@@ -1,0 +1,220 @@
+package it.telecom.business.charts.impl;
+
+import it.telecom.business.charts.service.IServiceChartBL;
+import it.telecom.business.charts.util.IChartsConstants.ChartMode;
+import it.telecom.business.report.bean.ChartBean;
+import it.telecom.integration.dao.generated.IServiceDAO;
+import it.telecom.integration.dao.generated.Service;
+import it.telecom.integration.dao.generated.ServiceDAO;
+import it.telecom.integration.dao.generated.ServiceNodeSource;
+import it.telecom.integration.dao.serviceoperation.impl.ServiceOperationAdvancedDAO;
+import it.telecom.integration.dao.serviceoperation.service.IServiceOperationAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.bean.CriteriaHistoryBean;
+import it.telecom.integration.dao.servicestatus.impl.CriteriaHistoryAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.service.ICriteriaHistoryAdvancedDAO;
+import it.telecom.integration.dao.util.IServiceConstants;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class ServiceChartBL implements IServiceChartBL {
+
+	private static final Log log = LogFactory.getLog(ServiceChartBL.class);
+
+	public List<ChartBean> getChartDataBean(List<Integer> enabledNetworkFunctionList, List<Integer> serviceIdList, Date startDate, Date endDate, Integer networkId,ChartMode chartMode) throws Exception {
+		final String method = "getChartData(List<Integer> enabledNetworkFunctionList, List<Integer> serviceIdList, Date startDate, Date endDate, Integer networkId)";
+		log.info(method);
+		try{
+
+			List<ChartBean> chartDataList = new ArrayList<ChartBean>();
+			ICriteriaHistoryAdvancedDAO iCriteriaHistoryAdvancedDAO = new CriteriaHistoryAdvancedDAO();
+			IServiceOperationAdvancedDAO iServiceOperationAdvancedDAO = new ServiceOperationAdvancedDAO();
+			IServiceDAO iServiceDAO = new ServiceDAO();
+
+
+			for (Integer serviceId : serviceIdList) {
+
+				ChartBean chartBean = new ChartBean();
+
+				Service service = iServiceDAO.findById(serviceId);
+
+
+				chartBean.setService(service.getRequest().getDescription());
+				chartBean.setSamplingPeriod(service.getSamplingPeriod());
+				chartBean.setNodeByIdNode(service.getNodeByIdNode().getDescription());
+				if(service.getNodeByIdNode()==service.getNodeByIdReceiver()){
+					chartBean.setNodeByIdNodeReceiver(null);
+
+				}else{
+					chartBean.setNodeByIdNodeReceiver(service.getNodeByIdReceiver().getDescription());
+
+				}
+
+				chartBean.setSource(getServiceNodeSource(service));	
+
+				chartBean.setMaxValue(null);
+				chartBean.setMinValue(null);
+
+				List<ChartBean.ServiceValue> serviceValueList = new ArrayList<ChartBean.ServiceValue>();
+				chartBean.setServiceValueList(serviceValueList);
+
+				Integer serviceOperationId = iServiceOperationAdvancedDAO.getServiceOperationId(enabledNetworkFunctionList,serviceId, IServiceConstants.ON_TIME);
+				List<CriteriaHistoryBean> criteriaHistories = iCriteriaHistoryAdvancedDAO.getServiceHistory(serviceOperationId, startDate, endDate, networkId);
+				if( !criteriaHistories.isEmpty()){
+					for (CriteriaHistoryBean criteriaHistory : criteriaHistories) {
+						insertValue(chartBean, criteriaHistory,chartMode);
+					}
+
+					chartDataList.add(chartBean);
+
+				}
+
+			}
+			return chartDataList;
+
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	private Date insertValue(ChartBean chartBean, CriteriaHistoryBean criteriaHistory,ChartMode chartMode ) throws Exception{
+		final String method = "insertValue(ChartBean chartBean, CriteriaHistory criteriaHistory)";
+		log.info(method);
+		try{
+			ChartBean.ServiceValue serviceValue = chartBean.new ServiceValue();
+			serviceValue.setDate(criteriaHistory.getDate());
+			//			if(criteriaHistory.getValue().intValue()== criteriaHistory.getValue().doubleValue()){
+			//				serviceValue.setValue(criteriaHistory.getValue().intValue());	
+			//			}else{
+			//				serviceValue.setValue(criteriaHistory.getValue());
+			//			}
+			serviceValue.setValue(criteriaHistory.getValue());
+
+			//			serviceValue.setNode(chartBean.getNode());
+			//			serviceValue.setSourceNode(chartBean.getSource());
+			StringBuilder title = null;
+			if(ChartMode.CHART_BY_NODE.equals(chartMode)){
+				
+				if(chartBean.getNodeByIdNodeReceiver()!=null){
+					title= new StringBuilder(chartBean.getService());
+					title.append(" verso ");
+					title.append(chartBean.getNodeByIdNodeReceiver());
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						title.append(" (");
+						title.append(chartBean.getSource());
+						title.append(")");
+					}
+					serviceValue.setName(title.toString());
+				}else{
+					title= new StringBuilder(chartBean.getService());
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						title.append(" (");
+						title.append(chartBean.getSource());
+						title.append(")");
+						}
+					serviceValue.setName(title.toString());
+				}
+
+
+
+			}else if(ChartMode.CHART_BY_SERVICE.equals(chartMode)){
+				
+				if(chartBean.getNodeByIdNodeReceiver() != null){
+					title = new StringBuilder(chartBean.getNodeByIdNode());
+					title.append(" --> ");
+					title.append(chartBean.getNodeByIdNodeReceiver());
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						title.append(" (");
+						title.append(chartBean.getSource());
+						title.append(")");
+					}
+					
+					serviceValue.setName(title.toString());
+				}else{
+					title = new StringBuilder(chartBean.getNodeByIdNode());
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						title.append(" (");
+						title.append(chartBean.getSource());
+						title.append(")");
+					}
+					serviceValue.setName(title.toString() );
+					
+				}
+
+			}
+
+			serviceValue.setValueCheckCritical(criteriaHistory.getValueCheckCritical());
+			serviceValue.setValueCheckMajor(criteriaHistory.getValueCheckMajor());
+			serviceValue.setValueCheckSecondaryCritical(criteriaHistory.getValueCheckSecondaryCritical());
+			serviceValue.setValueCheckSecondaryMajor(criteriaHistory.getValueCheckSecondaryMajor());
+			chartBean.getServiceValueList().add(serviceValue);
+
+			if(chartBean.getMaxValue() == null || chartBean.getMaxValue() < criteriaHistory.getValue()){
+				chartBean.setMaxValue(criteriaHistory.getValue());
+			}
+			if(chartBean.getMinValue() == null || chartBean.getMinValue()> criteriaHistory.getValue()){
+				chartBean.setMinValue(criteriaHistory.getValue());
+			}
+
+
+			return criteriaHistory.getDate();
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+
+	}
+
+	/**
+	 * @param serviceValue
+	 * @return
+	 */
+	public Collection<Double> getCollectionValues(ChartBean.ServiceValue serviceValue) {
+		Collection<Double> collection = new ArrayList<Double>();
+		collection.add(serviceValue.getValue());
+		if(serviceValue.getValueCheckCritical()!=null){
+			collection.add(serviceValue.getValueCheckCritical());
+		}
+		if(serviceValue.getValueCheckMajor()!=null){
+			collection.add(serviceValue.getValueCheckMajor());
+		}
+		if(serviceValue.getValueCheckSecondaryCritical()!=null){
+			collection.add(serviceValue.getValueCheckSecondaryCritical());
+		}
+		if(serviceValue.getValueCheckSecondaryMajor()!=null){
+			collection.add(serviceValue.getValueCheckSecondaryMajor());
+		}
+		return collection;
+	}
+
+
+	private String getServiceNodeSource(Service service) throws Exception{
+		final String method = "getServiceNodeSource(Service service)";
+		log.info(method);
+		try{
+			StringBuilder sources = new StringBuilder();
+			Set<ServiceNodeSource> nodeSources = service.getServiceNodeSources();
+			boolean moreSources = false;
+			for (ServiceNodeSource serviceNodeSource : nodeSources) {
+				if(moreSources){
+					sources.append(", ");
+				}
+				sources.append(serviceNodeSource.getNode().getDescription());
+				moreSources = true;
+			}
+			return sources.toString();
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+
+	}
+
+}

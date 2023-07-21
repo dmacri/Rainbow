@@ -1,0 +1,205 @@
+
+Confirm=Confirm
+Error=Error
+Execution_Job=Job Execution
+Insert_valid_number=Insert valid number
+Loading=Loading ...
+Maximum_number_of_processes_reached=Maximum number of processes reached 
+No=No
+No_Results=No results\!
+Output_execution=Output execution
+Please_try_again_later=Please, try later
+Process_is_queued_but_not_have_output=Utility is not executed. Please, try later.
+Start=Start
+System_busy_Please_try_later=System busy. Please, try later.
+Telephone_Number=Telephone number
+Telephone_number_not_Found=Telephone number not found
+Warning=Attenzione
+Yes=S&igrave;
+Search_CLI=Find CLI;
+CLI_not_Found=CLI not found
+
+#Util.InfoCLI
+InfoCLI=Info CLI
+InfoCLIPoste=Info CLI Poste
+
+#Utility.TiUMManager
+TiUMManager_OK=Verify
+Enable_Notify=Enable notify
+Disable_Notify=Disable notify
+Create_Profile=Create Profile
+Are_You_Sure= Are You Sure ?
+Set_Default_Pin=Set Default PIN
+Change_Pin=Change Pin
+Delete_Create_Button=Delete/Create Profile
+Delete_Button=Delete Profile
+Confirm_Set_Default_Pin=Confirms Default PIN
+Exit_Button=Exit
+Insert_New_Pin=Insert a new PIN
+Pin=PIN (4 digit)
+Are_You_Sure_Change_Pin=Are you sure you want to change ?
+Confirm_Change_Pin=Confirm Change PIN
+Confirm_Enable_Notify=Confirm enable/disable notify
+Are_You_Sure_Enable_Notify=Are you sure you want to enable or disable the notify 
+Are_You_Sure_Delete_Profile=Are you sure you want to delete the voice mail ?
+Confirm_Delete_Profile=Confirm delete profile
+Confirm_Delete_Create_Profile=Confirm Delete and Create
+Are_You_Sure_Delete_Create_Profile=Are you sure you want to delete and create the voice mail ?
+TiUMManager_Insert_valid_number=Enter a four-digit
+TiUMManager_Warning=Attention
+
+#Util.GeoArea
+GeoArea_Start=Start
+GeoArea_Start_Alignment=Start verification
+GeoArea_Start_Time=Start Time
+GeoAra_Incorrect_Day_for_GeoArea_Alignment=Incorrect Day for GeoArea
+GeoArea_Incorrect_set_of_Date_Time_for_GeoArea_Alignment=Incorrect set of Date/Time for GeoArea
+GeoAlignment_For_this_time_UDBGeo_Alignment_is_already_scheduled_by_VASMONCAT=For this date GeoArea is already scheduled
+GeoAlignment_Maximum_number_of_processes_reached=Maximum number of processes reached\:
+GeoAlignment_Please_try_again_later=. Please try again later.
+GeoAlignment_Confirm=Confirm
+GeoAlignment_The_Process_is_queued_successfully=The Process is queued successfully.
+GeoArea_Popoup_Windows_Title=GEO AREA Output Files
+GeoArea_Nome_File=Name File
+GeoArea_Open_Cli_Udb=Misalignment on UDB
+GeoArea_File_Name=File name
+GeoArea_FileDescription_ResultCliUdbPubblic=Cli on UDB
+GeoArea_Misallignment_SSW=Misallignment SSW
+GeoArea_Output=Output
+GeoArea_AccordingPanel_Title=Misallignment
+GeoArea_Panel1Title=Geo Area mismatches on the Units of the Central
+GeoArea_MultiField_Date_Title=Scheduling
+
+GeoArea_Misallignment_For_District=GEO Area Misallignment for district
+GeoArea_District=Districts
+
+#Util.CheckIpLock
+CheckIpLock_Changes_saved_successfully=Changes saved successfully
+CheckIpLock_CheckIP_Lock_for_PK3_network=Check IP Lock for PK3 network
+CheckIpLock_Confirm=Confirm
+CheckIpLock_Do_you_want_to_delete_record_on_UDB=<center><b>Do you want to delete record on UDB?</center></b><br>
+CheckIpLock_Error=Error
+CheckIpLock_Execution_Job=Execution Job
+CheckIpLock_Insert_valid_number=Insert valid number
+CheckIpLock_Loading=Loading ...
+CheckIpLock_Maximum_number_of_processes_reached=Maximum number of processes reached\: 
+CheckIpLock_No=No
+CheckIpLock_No_Results=No Results\!
+CheckIpLock_Output_execution=<b>Output execution:</b>
+CheckIpLock_Please_try_again_later=. Please try again later.
+CheckIpLock_Process_is_queued_but_not_have_output=Process is queued but not have output\!
+CheckIpLock_Start=Start
+CheckIpLock_System_busy_Please_try_later=System busy. Please, try later.
+CheckIpLock_Telephone_Number=Telephone Number
+CheckIpLock_Telephone_number_not_Found=Telephone number not Found
+CheckIpLock_Warning=Warning
+CheckIpLock_Yes=Yes
+CheckIpLock_OK=OK
+
+
+#Util.CheckCnc
+CheckCnc_Changes_saved_successfully=Changes saved successfully
+CheckCnc_for_Ipcc_network=Check Cnc for Ipcc network
+CheckCnc_Confirm=Confirm
+CheckCnc_Do_you_want_to_delete_record_on_UDB_Sip_Server=<center><b>Do you want to delete record on Sip Server UDB ?</center></b><br>
+CheckCnc_Error=Error
+CheckCnc_Execution_Job=Execution Job
+CheckCnc_Insert_valid_number=Insert valid number
+CheckCnc_Loading=Loading ...
+CheckCnc_Maximum_number_of_processes_reached=Maximum number of processes reached\: 
+CheckCnc_No_Results=No Results\!
+CheckCnc_Output_execution=<b>Output execution:</b>
+CheckCnc_Please_try_again_later=. Please try again later.
+CheckCnc_Process_is_queued_but_not_have_output=Process is queued but not have output\!
+CheckCnc_Start=Start
+CheckCnc_System_busy_Please_try_later=System busy. Please, try later.
+CheckCnc_Telephone_Number=Telephone Number
+CheckCnc_Telephone_number_not_Found=Telephone number not Found
+CheckCnc_Warning=Warning
+CheckCnc_Yes=Yes
+CheckCnc_No=No
+CheckCnc_OK=OK
+CheckCnc_Numbering_Info=Numbering Info
+CheckCnc_cnc=cnc
+CheckCnc_db=db
+
+
+
+#Util.MyCronjob
+MyCronjob_all=all
+MyCronjob_All=All
+MyCronjob_All_Jobs=All Jobs
+MyCronjob_Date=Date
+MyCronjob_Executed=Executed
+MyCronjob_Job_Executed=Job Executed
+MyCronjob_Job_Running=Job Running
+MyCronjob_Job_Scheduled=Job Scheduled
+MyCronjob_Loading=Loading
+MyCronjob_Log_Execution_Utility=Log Execution Utility
+MyCronjob_Refresh=Refresh
+MyCronjob_Refresh_Data=Refresh Data
+MyCronjob_Running=Running
+MyCronjob_Scheduled=Scheduled
+MyCronjob_Task=Task
+MyCronjob_Tasks=Tasks
+MyCronjob_This_job_have_no_logs_because_is_scheduled_at=This job have no logs because is scheduled at 
+MyCronjob_Utility_Status=Utility Status
+MyCronjob_You_dont_have_permission_to_see_log_pending_the_job_is_running=You don't have permission to see log pending the job is running
+
+#Utility.MyCronjobViewLogPanel
+MyCronjobViewLogPanel_Automatic_Refresh=Automatic Refresh
+MyCronjobViewLogPanel_End_Execution=End Execution
+MyCronjobViewLogPanel_Load_Window_Fail=Load Window Fail
+MyCronjobViewLogPanel_Off=Off
+MyCronjobViewLogPanel_On=On
+MyCronjobViewLogPanel_Please_wait_Ensure_that_Button_On_are_pressed=Please wait... Ensure that Button 'On' are pressed.
+MyCronjobViewLogPanel_Refresh_OFF=Refresh OFF
+MyCronjobViewLogPanel_Refresh_ON=Refresh ON
+MyCronjobViewLogPanel_Scheduled=Start execution
+MyCronjobViewLogPanel_Utility=Utility 
+
+#utility.TiumAlignment
+TiumAlignment_Confirm=Confirm
+TiumAlignment_For_this_time_UDBTiUM_Alignment_is_already_scheduled_by_VASMONCAT=For this time UDB-TiUM Alignment is already scheduled by VASMONCAT
+TiumAlignment_Incorrect_Day_for_TiUM_Alignment=Incorrect Day for TiUM Alignment
+TiumAlignment_Incorrect_set_of_Date_Time_for_TiUM_Alignment=Incorrect set of Date/Time for TiUM Alignment
+TiumAlignment_Loading=Loading ...
+TiumAlignment_Maximum_number_of_processes_reached=Maximum number of processes reached\: 
+TiumAlignment_Please_try_again_later=. Please try again later.
+TiumAlignment_Start=Start
+TiumAlignment_Start_Alignment=Start Alignment
+TiumAlignment_Start_Time=Start Time
+TiumAlignment_The_Process_is_queued_successfully=The Process is queued successfully.
+TiumAlignment_UDBTiUM_Alignment_for_PK3_network=UDB-TiUM Alignment for PK3 network
+TiumAlignment_Warning=Warning
+TiumAlignment_You_must_set_Date_Time_correctly_for_TiUM_Alignment=You must set Date/Time correctly for TiUM Alignment
+
+#  utility.RecoveryService
+RecoveryService_Affected_Services_List=Affected Service List
+RecoveryService_Confirm=Confirm
+RecoveryService_Description=Description
+RecoveryService_End_Recovery=End Recovery
+RecoveryService_Incorrect_Date_for_End_Recovery=Incorrect Date for End Recovery
+RecoveryService_Incorrect_Date_for_Schedule_Recovery=Incorrect Date for Schedule Recovery
+RecoveryService_Incorrect_Date_for_Start_Recovery=Incorrect Date for Start Recovery 
+RecoveryService_Incorrect_set_of_Date_Time_for_End_Recovery=Incorrect set of Date Time for End Recovery  
+RecoveryService_Incorrect_set_of_Date_Time_for_Schedule_Recovery=Incorrect set of Date Time for Schedule Recovery
+RecoveryService_Incorrect_set_of_Date_Time_for_Start_Recovery=Incorrect set of Date Time for Start Recovery
+RecoveryService_Loading=Loading...
+RecoveryService_Maximum_number_of_processes_reached=Maximum number of processes reached\: 
+RecoveryService_Network=Network
+RecoveryService_Network_and_Utility=Network and Utility
+RecoveryService_Please_try_again_later=. Please try again later
+RecoveryService_Range_of_Recovery=Range of Recovery
+RecoveryService_Schedule_Recovery=Schedule Recovery
+RecoveryService_Schedule_Recovery_Process=Schedule Recovery Process
+RecoveryService_Select_a_Network=Select a Network
+RecoveryService_Select_an_Utility=Select an Utility
+RecoveryService_Source_Nodes=Source Nodes
+RecoveryService_Start=Start
+RecoveryService_Start_Recovery=Start Recovery
+RecoveryService_Start_Recovery_must_have_Date_Time_before_to_End_Recovery=Start Recovery must have Date Time before to End Recovery 
+RecoveryService_The_Recovery_Process_is_queued_successfully=The Recovery Process is queued successfully
+RecoveryService_Utility=Utility
+RecoveryService_Warning=Warning
+RecoveryService_You_must_set_all_field_correctly=You must set all field correctly\!

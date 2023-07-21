@@ -1,0 +1,100 @@
+package it.icarcnr.integration.dao.generated;
+
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractGroupAnf entity provides the base persistence definition of the
+ * GroupAnf entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractGroupAnf implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private ActionNetworkFunction actionNetworkFunction;
+	private Group group;
+	private Boolean read;
+	private Boolean write;
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractGroupAnf() {
+	}
+
+	/** minimal constructor */
+	public AbstractGroupAnf(Group group, Boolean read, Boolean write) {
+		this.group = group;
+		this.read = read;
+		this.write = write;
+	}
+
+	/** full constructor */
+	public AbstractGroupAnf(ActionNetworkFunction actionNetworkFunction,
+			Group group, Boolean read, Boolean write) {
+		this.actionNetworkFunction = actionNetworkFunction;
+		this.group = group;
+		this.read = read;
+		this.write = write;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_ANF")
+	public ActionNetworkFunction getActionNetworkFunction() {
+		return this.actionNetworkFunction;
+	}
+
+	public void setActionNetworkFunction(
+			ActionNetworkFunction actionNetworkFunction) {
+		this.actionNetworkFunction = actionNetworkFunction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Group", nullable = false)
+	public Group getGroup() {
+		return this.group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	@Column(name = "read", nullable = false)
+	public Boolean getRead() {
+		return this.read;
+	}
+
+	public void setRead(Boolean read) {
+		this.read = read;
+	}
+
+	@Column(name = "write", nullable = false)
+	public Boolean getWrite() {
+		return this.write;
+	}
+
+	public void setWrite(Boolean write) {
+		this.write = write;
+	}
+
+}

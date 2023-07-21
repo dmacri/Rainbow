@@ -1,0 +1,11 @@
+#Graph.NetworkGraph
+NetworkGraph_Drawing_nodes=Drawing nodes ...
+NetworkGraph_Graphical_View=Graphical View
+NetworkGraph_Loading=Loading ...
+NetworkGraph_Monitoring=Monitoring
+NetworkGraph_firstTooltipMessage=Left-Click for explode the node
+NetworkGraph_secondTooltipMessage =Right-click to display the status of services
+NetworkGraph_NoServiceForThisNetworkItem=No service for this network item
+
+NetworkGraphAlarmedNode_NoAlarmedNode=No node is alarmed
+NetworkGraphAlarmedNode_AlarmedNodes=Alarmed nodes

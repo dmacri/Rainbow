@@ -1,0 +1,13 @@
+/**
+ * 
+ */
+package it.telecom.business.release.util;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IReleaseConstants {
+
+	int CURRENT_VERSION_ID = 1;
+}

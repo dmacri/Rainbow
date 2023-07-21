@@ -1,0 +1,235 @@
+package it.telecom.business.job.impl;
+
+import it.telecom.business.job.bean.TakingChargeBean;
+import it.telecom.business.job.service.IJobBL;
+import it.telecom.business.job.util.IJobContants;
+import it.telecom.business.servicestatus.bean.ServiceSuspendedInfoBean;
+import it.telecom.business.servicestatus.impl.ServiceBL;
+import it.telecom.business.servicestatus.impl.ServiceOperationListBL;
+import it.telecom.business.servicestatus.service.IServiceBL;
+import it.telecom.business.servicestatus.service.IServiceOperationListBL;
+import it.telecom.integration.dao.generated.Criteria;
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.generated.IJobDAO;
+import it.telecom.integration.dao.generated.IUserDAO;
+import it.telecom.integration.dao.generated.Job;
+import it.telecom.integration.dao.generated.JobDAO;
+import it.telecom.integration.dao.generated.Service;
+import it.telecom.integration.dao.generated.User;
+import it.telecom.integration.dao.generated.UserDAO;
+import it.telecom.integration.dao.job.impl.JobAdvancedDAO;
+import it.telecom.integration.dao.job.service.IJobAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.impl.CriteriaAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.impl.ServiceAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.service.ICriteriaAdvancedDAO;
+import it.telecom.integration.dao.servicestatus.service.IServiceAdvancedDAO;
+import it.telecom.integration.dao.util.IServiceConstants;
+import it.telecom.integration.dao.util.IServiceConstants.Status;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class JobBL implements IJobBL {
+
+	private static final Log log = LogFactory.getLog(JobBL.class);
+
+	public Job takeCare(List<Integer> enabledNetworkFunctionList, Integer serviceId, Integer userId, String comment) throws Exception {
+		final String method = "takeCare(List<Integer> enabledNetworkFunctionList, Integer serviceId, Integer userId, String comment)";
+		IServiceAdvancedDAO iServiceAdvancedDAO = new ServiceAdvancedDAO();
+		IServiceBL iServiceBL = new ServiceBL();
+		IUserDAO iUserDAO = new UserDAO();
+		Job job = null;		
+		try {
+			User user = iUserDAO.findById(userId);
+			if(user!=null){
+				EntityManagerHelper.beginTransaction();
+				Service service = iServiceAdvancedDAO.findById(enabledNetworkFunctionList, serviceId);
+				if(service != null && !iServiceBL.isTakingCharge(service)){
+					job = createJob(service,user,comment);
+				}
+				EntityManagerHelper.commit();
+			}
+			return job;
+		} catch (Exception e) {
+			if ( EntityManagerHelper.getEntityManager().getTransaction().isActive() ){
+				EntityManagerHelper.rollback();
+			}
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+
+	private Job createJob(Service service, User user, String comment)	throws Exception {
+
+		Calendar calendar = Calendar.getInstance();
+		Timestamp currentDate = new Timestamp(calendar.getTimeInMillis());
+
+		Job job = new Job();
+		job.setComment(comment);
+		job.setService(service);
+		job.setDateService(service.getDate());
+		job.setEndDate(null);
+		job.setStartDate(currentDate);
+		job.setStatus(IJobContants.OPEN_STATUS);
+		job.setUser(user);
+		IServiceBL iServiceBL = new ServiceBL();
+		String currentServiceStatus = null;
+		Status status = iServiceBL.getCurrentStatus(null, currentDate, service.getId());
+		if(status!=null){
+			currentServiceStatus = status.toString();
+		}
+		job.setServiceStatus(currentServiceStatus);
+		StringBuilder reason = new StringBuilder();
+		ICriteriaAdvancedDAO iCriteriaAdvancedDAO = new CriteriaAdvancedDAO();
+		List<Criteria> activeCriterias = iCriteriaAdvancedDAO.getActiveCriterias(currentDate, service.getId());
+		boolean firstItem = true;
+		for (Criteria criteria : activeCriterias) {
+			if(criteria.getStatus().equalsIgnoreCase(IServiceConstants.CRITICAL) || criteria.getStatus().equalsIgnoreCase(IServiceConstants.MAJOR)){
+				if(!firstItem){
+					reason.append(" - ");
+				}
+				if(criteria.getServiceOperation().getOperation().getName().equals(IServiceConstants.ON_TIME)){
+					reason.append("Value:");
+				}else if(criteria.getServiceOperation().getOperation().getName().equals(IServiceConstants.STEP_BY_STEP)){
+					reason.append("&#916Value:");
+				}
+				if(criteria.getValue() == null){
+					reason.append("");
+				}else if(criteria.getValue().intValue() == criteria.getValue().doubleValue() ){
+					reason.append(criteria.getValue().intValue());
+				}else{
+					reason.append(criteria.getValue().doubleValue());
+				}
+				firstItem = false;
+			}
+
+		}
+		job.setReason(reason.toString());
+		IJobDAO iJobDAO = new JobDAO();
+		return iJobDAO.update(job);
+	}
+
+	public Boolean close(List<Integer> enabledNetworkFunctionList, Integer userId, Integer jobId) throws Exception {
+		final String method = "close(List<Integer> enabledNetworkFunctionList, Integer userId, Integer jobId)";
+		Boolean success = false;
+		Calendar calendar = Calendar.getInstance();
+		Timestamp currentDate = new Timestamp(calendar.getTimeInMillis());
+		IJobAdvancedDAO iJobAdvancedDAO = new JobAdvancedDAO();
+		Job job = null;
+		try {			
+			EntityManagerHelper.beginTransaction();
+			job = iJobAdvancedDAO.findById(enabledNetworkFunctionList,jobId);
+			if(job != null){
+				if(job.getUser().getId().equals(userId)){
+					job.setStatus(IJobContants.CLOSED_STATUS);
+					job.setEndDate(currentDate);
+					success = true;
+				}
+			}
+			EntityManagerHelper.commit();
+			return success;
+		} catch (Exception e) {
+			if ( EntityManagerHelper.getEntityManager().getTransaction().isActive()){
+				EntityManagerHelper.rollback();
+			}
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	
+	private Boolean isSuspendedOperation(List<ServiceSuspendedInfoBean>  serviceSuspendedInfoBeans){
+		Boolean isSuspendedOperation=false;
+		for (ServiceSuspendedInfoBean serviceSuspendedInfoBean : serviceSuspendedInfoBeans) {
+			if(serviceSuspendedInfoBean.getCriteriaSuspended()){
+				return true;
+			}
+		}
+	 return isSuspendedOperation;	
+	}
+	
+	public List<TakingChargeBean> getTakingChargeBeans(List<Integer> enabledNetworkFunctionList, String status, int... rowStartIdxAndCount)
+	throws Exception {
+		final String method = "getTakingChargeBeans(List<Integer> enabledNetworkFunctionList, String status, int... rowStartIdxAndCount)";
+		log.info(method);
+		try{
+			IServiceOperationListBL iServiceOperationListBL = new ServiceOperationListBL();
+			
+			List<TakingChargeBean> takingChargeBeans = new ArrayList<TakingChargeBean>();
+			IJobAdvancedDAO iJobAdvancedDAO = new JobAdvancedDAO();
+			IServiceBL iServiceBL = new ServiceBL();
+			List<Job> jobs = iJobAdvancedDAO.getJob(enabledNetworkFunctionList, status, rowStartIdxAndCount);
+			for (Job job : jobs) {
+				TakingChargeBean takingChargeBean = new TakingChargeBean();
+				takingChargeBean.setComment(job.getComment());
+				takingChargeBean.setJobId(job.getId());
+				takingChargeBean.setNetworkId(job.getService().getNodeByIdNode().getNetwork().getId());
+				takingChargeBean.setUserId(job.getUser().getId());
+				takingChargeBean.setFunctionId(job.getService().getFunction().getId());
+				takingChargeBean.setJobStartDate(job.getStartDate());
+				takingChargeBean.setNetworkName(job.getService().getNodeByIdNode().getNetwork().getDescription());
+				takingChargeBean.setFunctionName(job.getService().getFunction().getName());
+				takingChargeBean.setLastCheck(job.getDateService());
+				takingChargeBean.setUser(job.getUser().getName()+" "+job.getUser().getSurname());
+				Service service = job.getService();
+				
+				List<ServiceSuspendedInfoBean>  serviceSuspendedInfoBeans = iServiceOperationListBL.getServiceSuspendedInfo(enabledNetworkFunctionList, service.getId());
+				takingChargeBean.setSuspendThreshold(isSuspendedOperation(serviceSuspendedInfoBeans));
+				
+				StringBuilder serviceDescription = new StringBuilder();
+				takingChargeBean.setReference(service.getNodeByIdNode().getDescription());
+				if(service.getNodeByIdNode()==service.getNodeByIdReceiver()){
+					takingChargeBean.setNodeFrom("<center>-</center>");
+					takingChargeBean.setNodeTo("<center>-</center>");
+				}else{
+					takingChargeBean.setNodeFrom(service.getNodeByIdNode().getDescription());
+					takingChargeBean.setNodeTo(service.getNodeByIdReceiver().getDescription());
+					
+				}
+				
+				takingChargeBean.setDescription(service.getRequest().getDescription());
+				serviceDescription.append(service.getRequest().getDescription());
+				String reason = job.getReason();
+				if(reason!=null && reason.length()>0){
+					serviceDescription.append(" - "+reason);
+				}
+				
+				takingChargeBean.setServiceStatus(job.getServiceStatus());
+				//				Service ID
+				takingChargeBean.setServiceId(service.getId());
+
+				takingChargeBean.setServiceDescription(serviceDescription.toString());
+				takingChargeBean.setServiceStatus(job.getServiceStatus());
+				takingChargeBean.setSources(iServiceBL.getSources(service));
+				takingChargeBeans.add(takingChargeBean);
+			}
+			return takingChargeBeans;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+	public void changeCommentJob(List<Integer> enabledNetworkFunctionList,Integer jobId, String comment)	throws Exception {
+
+		final String method = "changeCommentJob(List<Integer> enabledNetworkFunctionList,Integer jobId, String comment)";
+		IJobAdvancedDAO iJobAdvancedDAO = new JobAdvancedDAO();
+		try {			
+			EntityManagerHelper.beginTransaction();
+			Job job = iJobAdvancedDAO.findById(enabledNetworkFunctionList,jobId);
+			job.setComment(comment);
+			EntityManagerHelper.commit();
+		} catch (Exception e) {
+			if ( EntityManagerHelper.getEntityManager().getTransaction().isActive() ){
+				EntityManagerHelper.rollback();
+			}
+			log.error(method,e);
+			throw e;
+		}
+	}
+}

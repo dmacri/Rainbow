@@ -1,0 +1,148 @@
+package it.icarcnr.business.job.bean;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class TakingChargeBean implements Serializable {
+	
+	private Integer jobId;
+	Integer networkId;
+	Integer userId;
+	Integer functionId;
+	Integer ServiceId;
+	private String serviceStatus;
+	private Date lastCheck;
+	private String description;
+	private String reference;
+	private String nodeFrom;
+	private String nodeTo;
+	private String user;
+	private String comment;
+	private String sources;
+	private Date jobStartDate;
+	private Boolean suspendThreshold;
+
+	private String networkName; 
+	private String functionName; 
+	private String serviceDescription;
+	
+	public Integer getJobId() {
+		return jobId;
+	}
+	public void setJobId(Integer jobId) {
+		this.jobId = jobId;
+	}
+	public Integer getNetworkId() {
+		return networkId;
+	}
+	public void setNetworkId(Integer networkId) {
+		this.networkId = networkId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Integer getFunctionId() {
+		return functionId;
+	}
+	public void setFunctionId(Integer functionId) {
+		this.functionId = functionId;
+	}
+	public Integer getServiceId() {
+		return ServiceId;
+	}
+	public void setServiceId(Integer serviceId) {
+		ServiceId = serviceId;
+	}
+	public String getServiceStatus() {
+		return serviceStatus;
+	}
+	public void setServiceStatus(String serviceStatus) {
+		this.serviceStatus = serviceStatus;
+	}
+	public Date getLastCheck() {
+		return lastCheck;
+	}
+	public void setLastCheck(Date lastCheck) {
+		this.lastCheck = lastCheck;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+	public String getNodeFrom() {
+		return nodeFrom;
+	}
+	public void setNodeFrom(String nodeFrom) {
+		this.nodeFrom = nodeFrom;
+	}
+	public String getNodeTo() {
+		return nodeTo;
+	}
+	public void setNodeTo(String nodeTo) {
+		this.nodeTo = nodeTo;
+	}
+	public String getUser() {
+		return user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public String getSources() {
+		return sources;
+	}
+	public void setSources(String sources) {
+		this.sources = sources;
+	}
+	public Date getJobStartDate() {
+		return jobStartDate;
+	}
+	public void setJobStartDate(Date jobStartDate) {
+		this.jobStartDate = jobStartDate;
+	}
+
+	public String getNetworkName() {
+		return networkName;
+	}
+	public String getServiceDescription() {
+		return serviceDescription;
+	}
+	public void setServiceDescription(String serviceDescription) {
+		this.serviceDescription = serviceDescription;
+	}
+	public void setNetworkName(String networkName) {
+		this.networkName = networkName;
+	}
+	public String getFunctionName() {
+		return functionName;
+	}
+	public void setFunctionName(String functionName) {
+		this.functionName = functionName;
+	}
+	public Boolean getSuspendThreshold() {
+		return suspendThreshold;
+	}
+	public void setSuspendThreshold(Boolean suspendThreshold) {
+		this.suspendThreshold = suspendThreshold;
+	}
+	
+
+}

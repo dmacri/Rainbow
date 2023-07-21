@@ -1,0 +1,6 @@
+package it.telecom.vmc.client.util.constants;
+
+public interface IGlobalConstants {
+	int DELAY_REFRESH = 90000;
+
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+
+  <!-- Inherit the core Web Toolkit stuff.                        -->
+
+  <inherits name='com.google.gwt.user.User'/>
+   <inherits name="com.google.maps.gwt.GoogleMaps" />
+   <inherits name="com.google.gwt.ajaxloader.AjaxLoader" />
+    <!-- Api for google Maps 
+  <inherits name='com.google.api.gwt.services.Urlshortener' />
+  <inherits name='com.google.api.gwt.services.Plus' />
+-->
+ 	<!-- 
+	<stylesheet src="aero-glass.css"/>	
+	 -->
+	<stylesheet src="images.css" />
+	<stylesheet src="rainbow-client.css" />
+	
+
+
+	<!-- ext js script 	-->
+	<script src="js/ext/adapter/ext/ext-base.js" />
+	<script src="js/ext/ext-all.js" />
+
+
+	<!-- graph jit js script 	-->
+	<script src="js/jit/jit.js" />
+	<script src="js/jit/Extras/excanvas.js" />
+
+	<!--
+		<script src="js/ext/ext-ux-all-min.js"/> <script
+		src="js/ext/plug-ing/grid/ext-grid-rowexpander.js"/>
+	-->
+
+
+	<!-- Inherit the GWTExt Toolkit library configuration.	  -->
+
+	<inherits name="com.gwtext.GwtExt" />
+	<inherits name="com.gwtextux.GwtExtUx" />
+	<inherits name="com.google.gwt.core.Core" />
+	<inherits name="com.google.gwt.user.History" />
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name="com.gwtext.Pagebus" />
+	<inherits name="com.gwtext.SyntaxHighlighter" />
+
+	<!-- 	Inherit the Internationalization Italian language, independent of country-->
+		<inherits	name="com.google.gwt.i18n.CldrLocales"/> 
+		
+	<!-- 	 	
+	<set-property-fallback name="locale" value="it" />
+	<extend-property name="locale" values="it" /> -->
+	<set-configuration-property name="document.compatMode" value="BackCompat"/>
+	<extend-property name="locale" values="en" />
+
+	<inherits name='com.github.highcharts4gwt.highcharts' />
+<!-- 	 <inherits name="com.gwtext.Charts"/>-->
+
+
+
+	<inherits name="com.rednels.ofcgwt.OFCGWT" />
+
+  <!-- Specify the app entry point class.                         -->
+	<entry-point class='it.icarcnr.rainbow.client.RainbowClient' />
+
+
+  <!-- Specify the paths for translatable code      -->             
+  <source path='client'/>
+  <!-- <add-linker name="xsiframe"/>
+<set-configuration-property name="devModeRedirectEnabled" value="true"/>
+<set-property name="compiler.useSourceMaps" value="true"/>
+
+    <set-configuration-property name='xsiframe.failIfScriptTag' value='FALSE'/> -->
+</module>

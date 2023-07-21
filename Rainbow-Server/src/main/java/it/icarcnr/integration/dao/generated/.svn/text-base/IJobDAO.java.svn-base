@@ -1,0 +1,119 @@
+package it.telecom.integration.dao.generated;
+
+import java.sql.Timestamp;
+import java.util.List;
+
+/**
+ * Interface for JobDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IJobDAO {
+	/**
+	 * Perform an initial save of a previously unsaved Job entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IJobDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Job entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Job entity);
+
+	/**
+	 * Delete a persistent Job entity. This operation must be performed within
+	 * the a database transaction context for the entity's data to be
+	 * permanently deleted from the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IJobDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Job entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Job entity);
+
+	/**
+	 * Persist a previously saved Job entity and return it or a copy of it to
+	 * the sender. A copy of the Job entity parameter is returned when the JPA
+	 * persistence mechanism has not previously been tracking the updated
+	 * entity. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+	 * operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = IJobDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Job entity to update
+	 * @return Job the persisted Job entity instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Job update(Job entity);
+
+	public Job findById(Integer id);
+
+	/**
+	 * Find all Job entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Job property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Job> found by query
+	 */
+	public List<Job> findByProperty(String propertyName, Object value,
+			int... rowStartIdxAndCount);
+
+	public List<Job> findByStatus(Object status, int... rowStartIdxAndCount);
+
+	public List<Job> findByComment(Object comment, int... rowStartIdxAndCount);
+
+	public List<Job> findByServiceStatus(Object serviceStatus,
+			int... rowStartIdxAndCount);
+
+	public List<Job> findByReason(Object reason, int... rowStartIdxAndCount);
+
+	/**
+	 * Find all Job entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Job> all Job entities
+	 */
+	public List<Job> findAll(int... rowStartIdxAndCount);
+}

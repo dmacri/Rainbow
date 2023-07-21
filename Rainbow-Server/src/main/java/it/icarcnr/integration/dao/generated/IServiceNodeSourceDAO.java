@@ -1,0 +1,101 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.util.List;
+
+/**
+ * Interface for ServiceNodeSourceDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface IServiceNodeSourceDAO {
+	/**
+	 * Perform an initial save of a previously unsaved ServiceNodeSource entity.
+	 * All subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IServiceNodeSourceDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            ServiceNodeSource entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(ServiceNodeSource entity);
+
+	/**
+	 * Delete a persistent ServiceNodeSource entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently deleted from the persistence store, i.e., database.
+	 * This method uses the
+	 * {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * IServiceNodeSourceDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            ServiceNodeSource entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(ServiceNodeSource entity);
+
+	/**
+	 * Persist a previously saved ServiceNodeSource entity and return it or a
+	 * copy of it to the sender. A copy of the ServiceNodeSource entity
+	 * parameter is returned when the JPA persistence mechanism has not
+	 * previously been tracking the updated entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently saved to the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#merge(Object)
+	 * EntityManager#merge} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = IServiceNodeSourceDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            ServiceNodeSource entity to update
+	 * @return ServiceNodeSource the persisted ServiceNodeSource entity
+	 *         instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public ServiceNodeSource update(ServiceNodeSource entity);
+
+	public ServiceNodeSource findById(Integer id);
+
+	/**
+	 * Find all ServiceNodeSource entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the ServiceNodeSource property to query
+	 * @param value
+	 *            the property value to match
+	 * @return List<ServiceNodeSource> found by query
+	 */
+	public List<ServiceNodeSource> findByProperty(String propertyName,
+			Object value);
+
+	/**
+	 * Find all ServiceNodeSource entities.
+	 * 
+	 * @return List<ServiceNodeSource> all ServiceNodeSource entities
+	 */
+	public List<ServiceNodeSource> findAll();
+}

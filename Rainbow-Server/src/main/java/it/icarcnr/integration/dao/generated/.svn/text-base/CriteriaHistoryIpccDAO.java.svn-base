@@ -1,0 +1,265 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * CriteriaHistoryIpcc entities. Transaction control of the save(), update() and
+ * delete() operations must be handled externally by senders of these methods or
+ * must be manually added to each of these methods for data to be persisted to
+ * the JPA datastore.
+ * 
+ * @see it.telecom.integration.dao.generated.CriteriaHistoryIpcc
+ * @author MyEclipse Persistence Tools
+ */
+
+public class CriteriaHistoryIpccDAO implements ICriteriaHistoryIpccDAO {
+	// property constants
+	public static final String STATUS = "status";
+	public static final String VALUE = "value";
+	public static final String VALUE_CHECK_MAJOR = "valueCheckMajor";
+	public static final String VALUE_CHECK_CRITICAL = "valueCheckCritical";
+	public static final String VALUE_CHECK_SECONDARY_MAJOR = "valueCheckSecondaryMajor";
+	public static final String VALUE_CHECK_SECONDARY_CRITICAL = "valueCheckSecondaryCritical";
+
+	private EntityManager getEntityManager() {
+		return EntityManagerHelper.getEntityManager();
+	}
+
+	/**
+	 * Perform an initial save of a previously unsaved CriteriaHistoryIpcc
+	 * entity. All subsequent persist actions of this entity should use the
+	 * #update() method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * CriteriaHistoryIpccDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryIpcc entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(CriteriaHistoryIpcc entity) {
+		EntityManagerHelper.log("saving CriteriaHistoryIpcc instance",
+				Level.INFO, null);
+		try {
+			getEntityManager().persist(entity);
+			EntityManagerHelper.log("save successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("save failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Delete a persistent CriteriaHistoryIpcc entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently deleted from the persistence store, i.e., database.
+	 * This method uses the
+	 * {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * CriteriaHistoryIpccDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryIpcc entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(CriteriaHistoryIpcc entity) {
+		EntityManagerHelper.log("deleting CriteriaHistoryIpcc instance",
+				Level.INFO, null);
+		try {
+			entity = getEntityManager().getReference(CriteriaHistoryIpcc.class,
+					entity.getId());
+			getEntityManager().remove(entity);
+			EntityManagerHelper.log("delete successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Persist a previously saved CriteriaHistoryIpcc entity and return it or a
+	 * copy of it to the sender. A copy of the CriteriaHistoryIpcc entity
+	 * parameter is returned when the JPA persistence mechanism has not
+	 * previously been tracking the updated entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently saved to the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#merge(Object)
+	 * EntityManager#merge} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = CriteriaHistoryIpccDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryIpcc entity to update
+	 * @return CriteriaHistoryIpcc the persisted CriteriaHistoryIpcc entity
+	 *         instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public CriteriaHistoryIpcc update(CriteriaHistoryIpcc entity) {
+		EntityManagerHelper.log("updating CriteriaHistoryIpcc instance",
+				Level.INFO, null);
+		try {
+			CriteriaHistoryIpcc result = getEntityManager().merge(entity);
+			EntityManagerHelper.log("update successful", Level.INFO, null);
+			return result;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("update failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public CriteriaHistoryIpcc findById(CriteriaHistoryIpccId id) {
+		EntityManagerHelper.log(
+				"finding CriteriaHistoryIpcc instance with id: " + id,
+				Level.INFO, null);
+		try {
+			CriteriaHistoryIpcc instance = getEntityManager().find(
+					CriteriaHistoryIpcc.class, id);
+			return instance;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Find all CriteriaHistoryIpcc entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the CriteriaHistoryIpcc property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            number of results to return.
+	 * @return List<CriteriaHistoryIpcc> found by query
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CriteriaHistoryIpcc> findByProperty(String propertyName,
+			final Object value, final int... rowStartIdxAndCount) {
+		EntityManagerHelper.log(
+				"finding CriteriaHistoryIpcc instance with property: "
+						+ propertyName + ", value: " + value, Level.INFO, null);
+		try {
+			final String queryString = "select model from CriteriaHistoryIpcc model where model."
+					+ propertyName + "= :propertyValue";
+			Query query = getEntityManager().createQuery(queryString);
+			query.setParameter("propertyValue", value);
+			if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+				int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+				if (rowStartIdx > 0) {
+					query.setFirstResult(rowStartIdx);
+				}
+
+				if (rowStartIdxAndCount.length > 1) {
+					int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+					if (rowCount > 0) {
+						query.setMaxResults(rowCount);
+					}
+				}
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<CriteriaHistoryIpcc> findByStatus(Object status,
+			int... rowStartIdxAndCount) {
+		return findByProperty(STATUS, status, rowStartIdxAndCount);
+	}
+
+	public List<CriteriaHistoryIpcc> findByValue(Object value,
+			int... rowStartIdxAndCount) {
+		return findByProperty(VALUE, value, rowStartIdxAndCount);
+	}
+
+	public List<CriteriaHistoryIpcc> findByValueCheckMajor(
+			Object valueCheckMajor, int... rowStartIdxAndCount) {
+		return findByProperty(VALUE_CHECK_MAJOR, valueCheckMajor,
+				rowStartIdxAndCount);
+	}
+
+	public List<CriteriaHistoryIpcc> findByValueCheckCritical(
+			Object valueCheckCritical, int... rowStartIdxAndCount) {
+		return findByProperty(VALUE_CHECK_CRITICAL, valueCheckCritical,
+				rowStartIdxAndCount);
+	}
+
+	public List<CriteriaHistoryIpcc> findByValueCheckSecondaryMajor(
+			Object valueCheckSecondaryMajor, int... rowStartIdxAndCount) {
+		return findByProperty(VALUE_CHECK_SECONDARY_MAJOR,
+				valueCheckSecondaryMajor, rowStartIdxAndCount);
+	}
+
+	public List<CriteriaHistoryIpcc> findByValueCheckSecondaryCritical(
+			Object valueCheckSecondaryCritical, int... rowStartIdxAndCount) {
+		return findByProperty(VALUE_CHECK_SECONDARY_CRITICAL,
+				valueCheckSecondaryCritical, rowStartIdxAndCount);
+	}
+
+	/**
+	 * Find all CriteriaHistoryIpcc entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<CriteriaHistoryIpcc> all CriteriaHistoryIpcc entities
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CriteriaHistoryIpcc> findAll(final int... rowStartIdxAndCount) {
+		EntityManagerHelper.log("finding all CriteriaHistoryIpcc instances",
+				Level.INFO, null);
+		try {
+			final String queryString = "select model from CriteriaHistoryIpcc model";
+			Query query = getEntityManager().createQuery(queryString);
+			if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+				int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+				if (rowStartIdx > 0) {
+					query.setFirstResult(rowStartIdx);
+				}
+
+				if (rowStartIdxAndCount.length > 1) {
+					int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+					if (rowCount > 0) {
+						query.setMaxResults(rowCount);
+					}
+				}
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+}

@@ -1,0 +1,10 @@
+package it.telecom.business.menutree.util;
+
+public interface IClassNameUIConstants {
+	
+	String SERVICES = "it.telecom.vmc.client.services.ServicesContainer";
+	String CHART = "it.telecom.vmc.client.charts.ChartsContainer";
+	String CHANGE_STATUS = "it.telecom.vmc.client.services.StatusChangeHistoryContainer";
+	String NO_CLASS = "";
+
+}

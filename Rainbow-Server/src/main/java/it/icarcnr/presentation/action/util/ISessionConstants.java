@@ -1,0 +1,10 @@
+package it.icarcnr.presentation.action.util;
+
+public interface ISessionConstants {
+	
+	String USER_SESSION = "userSession";
+	String JSESSIONID = "JSESSIONID";
+	String ACCESS_ATTEMPTS = "accessAttempts";
+	String ALIVE = "alive";
+
+}

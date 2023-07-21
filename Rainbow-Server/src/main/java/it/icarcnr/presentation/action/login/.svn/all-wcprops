@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login
+END
+UserLoginInfoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login/UserLoginInfoAction.java
+END
+ChangePasswordAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login/ChangePasswordAction.java
+END
+LoginAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login/LoginAction.java
+END
+LogoutAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login/LogoutAction.java
+END
+CheckLoggedUserAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/login/CheckLoggedUserAction.java
+END

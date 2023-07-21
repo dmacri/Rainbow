@@ -1,0 +1,110 @@
+package it.telecom.integration.dao.login.impl;
+
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.integration.dao.generated.User;
+import it.telecom.integration.dao.generated.UserPassword;
+import it.telecom.integration.dao.login.service.IUserAdvancedDAO;
+
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class UserAdvancedDAO implements IUserAdvancedDAO {
+	
+	private static final Log log = LogFactory.getLog(IUserAdvancedDAO.class);
+
+
+	public User login(String name, String password) {
+		EntityManagerHelper.log("login user", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT user ");
+			queryString.append("FROM ");
+			queryString.append(User.class.getName()+" as user ");
+			queryString.append("WHERE ");
+			queryString.append("user.username = :username ");
+			queryString.append("AND ");
+			queryString.append("user.password = :password ");
+			queryString.append("AND ");
+			queryString.append("user.enabled = :trueValue ");
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("username", name);
+			query.setParameter("password", password);
+			query.setParameter("trueValue", Boolean.TRUE);
+			List<User> users = query.getResultList();
+			User user = null;
+			if(users.size()== 1){
+				user = users.get(0);
+			}else if(users.size() > 1){
+				log.error("login(String name, String password) returned more than one result.");
+			}
+			return user;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("login failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	
+	public UserPassword oldestPSW(Integer id) {
+		EntityManagerHelper.log("oldestPSW", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT userP ");
+			queryString.append("FROM ");
+			queryString.append(UserPassword.class.getName()+" as userP ");
+		    queryString.append("WHERE ");
+			queryString.append("userP.date = (");
+			queryString.append("SELECT min(userPSW.date) ");
+			queryString.append("FROM ");
+			queryString.append(UserPassword.class.getName()+" as userPsw ");
+			queryString.append("WHERE userPsw.user.id = :idUser )");
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idUser", id);
+			
+			List<UserPassword> usersPSW = query.getResultList();
+			UserPassword userPSW  = null;
+			if(usersPSW.size()== 1){
+				userPSW = usersPSW.get(0);
+			}else if(usersPSW.size() > 1){
+				log.error("Problem with query");
+			}
+			return userPSW;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("oldestPSW error",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+
+ 	public Long findCountUserPasswordByID(Integer id) {
+		EntityManagerHelper.log("findCountUserPasswordByID", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT count(userP) ");
+			queryString.append("FROM ");
+			queryString.append(UserPassword.class.getName()+" as userP ");
+		    queryString.append("WHERE userP.user.id = :idUser" );
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idUser", id);
+			Long count=(Long)query.getSingleResult();
+			return count;
+			
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log(" findCountUserPasswordByID error",
+					Level.SEVERE, re);
+			throw re;
+		} 
+    }
+ 	
+ }

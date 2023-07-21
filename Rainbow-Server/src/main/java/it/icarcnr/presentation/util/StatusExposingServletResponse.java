@@ -1,0 +1,57 @@
+/**
+ * 
+ */
+package it.icarcnr.presentation.util;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
+
+
+public class StatusExposingServletResponse extends HttpServletResponseWrapper {
+	
+	private int httpStatusCode;
+	private String httpStatusMessage;
+
+	/**
+	 * @param response
+	 */
+	public StatusExposingServletResponse(HttpServletResponse response) {
+		super(response);
+		httpStatusCode = 200;
+		httpStatusMessage = "200 OK";
+	}
+	
+    @Override
+    public void sendError(int sc) throws IOException {
+		httpStatusCode = sc;
+		httpStatusMessage = "";
+        super.sendError(sc);
+    }
+
+    @Override
+    public void sendError(int sc, String msg) throws IOException {
+		httpStatusCode = sc;
+		httpStatusMessage = msg;
+        super.sendError(sc, msg);
+    }
+
+
+    @Override
+    public void setStatus(int sc) {
+		httpStatusCode = sc;
+		httpStatusMessage = "";
+        super.setStatus(sc);
+    }
+
+    public int getStatusCode() {
+        return httpStatusCode;
+    }
+    
+    public String getStatusMessage() {
+        return httpStatusMessage;
+    }
+
+
+}

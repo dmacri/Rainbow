@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit
+END
+AfterComputeEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/AfterComputeEvent.java
+END
+HasMouseOverLabelHandlers.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/HasMouseOverLabelHandlers.java
+END
+BeforeComputeEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/BeforeComputeEvent.java
+END
+HasClickLabelHandlers.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/HasClickLabelHandlers.java
+END
+HasAfterComputeHandlers.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/HasAfterComputeHandlers.java
+END
+SpaceTree.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/SpaceTree.java
+END
+HasBeforeComputeHandlers.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/HasBeforeComputeHandlers.java
+END
+MouseOutLabelHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/MouseOutLabelHandler.java
+END
+MouseOverLabelHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/MouseOverLabelHandler.java
+END
+MouseOutLabelEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/MouseOutLabelEvent.java
+END
+ClickLabelHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/ClickLabelHandler.java
+END
+MouseOverLabelEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/MouseOverLabelEvent.java
+END
+ClickLabelEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/ClickLabelEvent.java
+END
+JitWidget.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/JitWidget.java
+END
+AfterComputeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/AfterComputeHandler.java
+END
+HasMouseOutLabelHandlers.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/HasMouseOutLabelHandlers.java
+END
+BeforeComputeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/jit/BeforeComputeHandler.java
+END

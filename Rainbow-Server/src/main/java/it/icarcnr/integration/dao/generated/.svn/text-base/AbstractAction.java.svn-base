@@ -1,0 +1,141 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractAction entity provides the base persistence definition of the Action
+ * entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractAction implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Area area;
+	private UtilityGroup utilityGroup;
+	private Action action;
+	private String path;
+	private String description;
+	private Set<ActionNetworkFunction> actionNetworkFunctions = new HashSet<ActionNetworkFunction>(
+			0);
+	private Set<Action> actions = new HashSet<Action>(0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractAction() {
+	}
+
+	/** minimal constructor */
+	public AbstractAction(Area area, String path, String description) {
+		this.area = area;
+		this.path = path;
+		this.description = description;
+	}
+
+	/** full constructor */
+	public AbstractAction(Area area, UtilityGroup utilityGroup, Action action,
+			String path, String description,
+			Set<ActionNetworkFunction> actionNetworkFunctions,
+			Set<Action> actions) {
+		this.area = area;
+		this.utilityGroup = utilityGroup;
+		this.action = action;
+		this.path = path;
+		this.description = description;
+		this.actionNetworkFunctions = actionNetworkFunctions;
+		this.actions = actions;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Area", nullable = false)
+	public Area getArea() {
+		return this.area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_UtilityGroup")
+	public UtilityGroup getUtilityGroup() {
+		return this.utilityGroup;
+	}
+
+	public void setUtilityGroup(UtilityGroup utilityGroup) {
+		this.utilityGroup = utilityGroup;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_ActionParent")
+	public Action getAction() {
+		return this.action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
+	}
+
+	@Column(name = "path", unique = true, nullable = false)
+	public String getPath() {
+		return this.path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	@Column(name = "description", nullable = false, length = 45)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "action")
+	public Set<ActionNetworkFunction> getActionNetworkFunctions() {
+		return this.actionNetworkFunctions;
+	}
+
+	public void setActionNetworkFunctions(
+			Set<ActionNetworkFunction> actionNetworkFunctions) {
+		this.actionNetworkFunctions = actionNetworkFunctions;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "action")
+	public Set<Action> getActions() {
+		return this.actions;
+	}
+
+	public void setActions(Set<Action> actions) {
+		this.actions = actions;
+	}
+
+}

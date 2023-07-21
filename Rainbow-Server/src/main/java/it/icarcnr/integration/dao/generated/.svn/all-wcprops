@@ -1,0 +1,893 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated
+END
+Operation.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Operation.java
+END
+ICriteriaHistoryCollaboraDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryCollaboraDAO.java
+END
+CriteriaHistoryVasmoncat.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryVasmoncat.java
+END
+Utility.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Utility.java
+END
+ServiceOperationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ServiceOperationDAO.java
+END
+NodeDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NodeDAO.java
+END
+AbstractUtilityAnf.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractUtilityAnf.java
+END
+IReleaseDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IReleaseDAO.java
+END
+Release.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Release.java
+END
+ICriteriaHistoryIpccDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryIpccDAO.java
+END
+AbstractService.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractService.java
+END
+ServiceDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ServiceDAO.java
+END
+IUtilityAnfDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IUtilityAnfDAO.java
+END
+AbstractUserPassword.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractUserPassword.java
+END
+AbstractCriteriaHistoryCollabora.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryCollabora.java
+END
+Cronjob.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Cronjob.java
+END
+ICriteriaHistoryVasmoncatDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryVasmoncatDAO.java
+END
+IUtilityDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IUtilityDAO.java
+END
+ICriteriaHistoryMsanDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryMsanDAO.java
+END
+ActionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ActionDAO.java
+END
+AbstractUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractUser.java
+END
+UtilityGroupDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UtilityGroupDAO.java
+END
+AbstractServiceOperation.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractServiceOperation.java
+END
+IJobDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IJobDAO.java
+END
+Location.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Location.java
+END
+Area.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Area.java
+END
+FunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/FunctionDAO.java
+END
+IActionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IActionDAO.java
+END
+CriteriaHistoryPosteId.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPosteId.java
+END
+NetworkDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NetworkDAO.java
+END
+CriteriaHistoryVasmoncatId.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryVasmoncatId.java
+END
+ITypeDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ITypeDAO.java
+END
+INodeRelationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/INodeRelationDAO.java
+END
+AbstractGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractGroup.java
+END
+Type.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Type.java
+END
+AbstractCriteria.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteria.java
+END
+Prefix.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Prefix.java
+END
+IServiceDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IServiceDAO.java
+END
+IOperationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IOperationDAO.java
+END
+CriteriaHistoryPoste.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPoste.java
+END
+Service.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Service.java
+END
+CriteriaHistoryPk3.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk3.java
+END
+ILocationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ILocationDAO.java
+END
+AbstractCriteriaHistoryIpcc.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryIpcc.java
+END
+CriteriaHistoryPk0Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk0Id.java
+END
+IServiceOperationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IServiceOperationDAO.java
+END
+UtilityGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UtilityGroup.java
+END
+NetworkFunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NetworkFunctionDAO.java
+END
+AbstractCriteriaHistoryVasmoncat.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryVasmoncat.java
+END
+Node.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Node.java
+END
+INetworkDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/INetworkDAO.java
+END
+AbstractCriteriaHistoryMsan.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryMsan.java
+END
+ICriteriaHistoryPk0DAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryPk0DAO.java
+END
+Group.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Group.java
+END
+ICriteriaHistoryPk3DAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryPk3DAO.java
+END
+CriteriaHistoryPk0.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk0.java
+END
+CriteriaHistoryIpccId.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryIpccId.java
+END
+TypeDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/TypeDAO.java
+END
+NodeRelationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NodeRelationDAO.java
+END
+CriteriaHistoryIpccDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryIpccDAO.java
+END
+ServiceNodeSourceDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ServiceNodeSourceDAO.java
+END
+CriteriaChangeStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaChangeStatus.java
+END
+Action.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Action.java
+END
+CronjobDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CronjobDAO.java
+END
+CriteriaHistoryMsanId.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryMsanId.java
+END
+GroupAnf.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/GroupAnf.java
+END
+IFunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IFunctionDAO.java
+END
+NodeRelation.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NodeRelation.java
+END
+CriteriaHistoryIpcc.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryIpcc.java
+END
+Function.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Function.java
+END
+CriteriaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaDAO.java
+END
+CriteriaHistoryMsanDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryMsanDAO.java
+END
+INetworkFunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/INetworkFunctionDAO.java
+END
+ICriteriaHistoryPosteDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaHistoryPosteDAO.java
+END
+AbstractLocation.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractLocation.java
+END
+AbstractArea.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractArea.java
+END
+JobDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/JobDAO.java
+END
+CriteriaHistoryMsan.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryMsan.java
+END
+AbstractType.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractType.java
+END
+ICriteriaChangeStatusDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaChangeStatusDAO.java
+END
+AbstractRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractRequest.java
+END
+RequestDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/RequestDAO.java
+END
+UtilityAnfDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UtilityAnfDAO.java
+END
+AbstractPrefix.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractPrefix.java
+END
+AbstractCriteriaHistoryPoste.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryPoste.java
+END
+AbstractCriteriaHistoryPk3.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryPk3.java
+END
+IGroupDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IGroupDAO.java
+END
+ICronjobDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICronjobDAO.java
+END
+IActionNetworkFunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IActionNetworkFunctionDAO.java
+END
+AbstractUtilityGroup.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractUtilityGroup.java
+END
+GroupAnfDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/GroupAnfDAO.java
+END
+EntityManagerHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/EntityManagerHelper.java
+END
+AbstractNode.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractNode.java
+END
+IUserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IUserDAO.java
+END
+GroupDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/GroupDAO.java
+END
+CriteriaHistoryCollaboraId.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryCollaboraId.java
+END
+ActionNetworkFunctionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ActionNetworkFunctionDAO.java
+END
+AbstractNetworkFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractNetworkFunction.java
+END
+AbstractCriteriaHistoryPk0.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaHistoryPk0.java
+END
+CriteriaHistoryPosteDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPosteDAO.java
+END
+IRequestDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IRequestDAO.java
+END
+CriteriaHistoryCollaboraDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryCollaboraDAO.java
+END
+Request.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Request.java
+END
+UtilityAnf.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UtilityAnf.java
+END
+IUserPasswordDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IUserPasswordDAO.java
+END
+AbstractJob.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractJob.java
+END
+ICriteriaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ICriteriaDAO.java
+END
+AbstractCriteriaChangeStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCriteriaChangeStatus.java
+END
+CriteriaChangeStatusDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaChangeStatusDAO.java
+END
+AbstractAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractAction.java
+END
+UserPassword.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UserPassword.java
+END
+CriteriaHistoryCollabora.java
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryCollabora.java
+END
+IAreaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IAreaDAO.java
+END
+AbstractGroupAnf.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractGroupAnf.java
+END
+AbstractNodeRelation.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractNodeRelation.java
+END
+AbstractFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractFunction.java
+END
+AbstractServiceNodeSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractServiceNodeSource.java
+END
+AbstractNetwork.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractNetwork.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/User.java
+END
+AbstractActionNetworkFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractActionNetworkFunction.java
+END
+ServiceOperation.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ServiceOperation.java
+END
+INodeDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/INodeDAO.java
+END
+CriteriaHistoryPk0DAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk0DAO.java
+END
+OperationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/OperationDAO.java
+END
+IServiceNodeSourceDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IServiceNodeSourceDAO.java
+END
+CriteriaHistoryVasmoncatDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryVasmoncatDAO.java
+END
+AbstractOperation.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractOperation.java
+END
+CriteriaHistoryPk3DAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk3DAO.java
+END
+AbstractUtility.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractUtility.java
+END
+NetworkFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/NetworkFunction.java
+END
+Criteria.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Criteria.java
+END
+UserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UserDAO.java
+END
+ReleaseDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ReleaseDAO.java
+END
+AbstractRelease.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractRelease.java
+END
+Job.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Job.java
+END
+IUtilityGroupDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IUtilityGroupDAO.java
+END
+IGroupAnfDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IGroupAnfDAO.java
+END
+CriteriaHistoryPk3Id.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/CriteriaHistoryPk3Id.java
+END
+AbstractCronjob.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AbstractCronjob.java
+END
+PrefixDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/PrefixDAO.java
+END
+UserPasswordDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UserPasswordDAO.java
+END
+ServiceNodeSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ServiceNodeSource.java
+END
+UtilityDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/UtilityDAO.java
+END
+Network.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/Network.java
+END
+IPrefixDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/IPrefixDAO.java
+END
+LocationDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/LocationDAO.java
+END
+AreaDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/AreaDAO.java
+END
+ActionNetworkFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/generated/ActionNetworkFunction.java
+END

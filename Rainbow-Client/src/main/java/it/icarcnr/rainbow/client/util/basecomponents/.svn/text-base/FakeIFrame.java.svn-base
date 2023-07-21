@@ -1,0 +1,34 @@
+package it.telecom.vmc.client.util.basecomponents;
+
+import it.telecom.vmc.client.util.UrlParamsUtil;
+
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.gwtext.client.core.UrlParam;
+
+public class FakeIFrame extends Frame {
+	public FakeIFrame(String url, UrlParam[] params) {
+		super();
+		setSize("0px", "0px");
+		setVisible(false);
+		sinkEvents(Event.ONLOAD);
+		RootPanel.get().add(this);
+		String urlParams = UrlParamsUtil.toUrlString(params);
+		if(urlParams!=null && urlParams.length()>0 ){
+			url= url+"?"+urlParams;
+		}
+		setUrl(url);
+	}
+
+	public void onBrowserEvent(Event event) {
+		if (DOM.eventGetType(event) == Event.ONLOAD) {
+			unsinkEvents(Event.ONLOAD);
+			DOM.eventCancelBubble(event, true);
+			RootPanel.get().remove(this);
+		} else {
+			super.onBrowserEvent(event);
+		}
+	}
+}

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util
+END
+INetworkConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/INetworkConstants.java
+END
+IServiceConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/IServiceConstants.java
+END
+IServiceOperationConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/IServiceOperationConstants.java
+END
+ICriteriaConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/ICriteriaConstants.java
+END
+JPAUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/JPAUtil.java
+END
+IUtilityConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/IUtilityConstants.java
+END
+DateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/DateUtil.java
+END
+IFunctionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/IFunctionConstants.java
+END
+INodeTypeConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/integration/dao/util/INodeTypeConstants.java
+END

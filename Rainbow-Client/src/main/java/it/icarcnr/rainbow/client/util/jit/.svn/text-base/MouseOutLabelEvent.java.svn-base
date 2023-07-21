@@ -1,0 +1,41 @@
+package it.telecom.vmc.client.util.jit;
+
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.HasNativeEvent;
+import com.google.gwt.event.shared.GwtEvent;
+
+public class MouseOutLabelEvent extends GwtEvent<MouseOutLabelHandler>
+		implements HasNativeEvent {
+
+    protected MouseOutLabelEvent(NativeEvent nativeevent) {
+    	this.nativeevent = nativeevent;
+        }
+
+        public static Type getType() {
+    	return TYPE;
+        }
+
+        public static void fire(HasMouseOutLabelHandlers source, NativeEvent nativeevent) {
+    	source.fireEvent(new MouseOutLabelEvent(nativeevent));
+        }
+
+        @Override
+        protected void dispatch(MouseOutLabelHandler handler) {
+    	handler.onMouseOutLabel(this);
+        }
+
+        @Override
+        public final Type getAssociatedType() {
+    	return TYPE;
+        }
+
+        @Override
+        public NativeEvent getNativeEvent() {
+    	return nativeevent;
+        }
+
+        private static Type<MouseOutLabelHandler> TYPE = new Type<MouseOutLabelHandler>();
+        private final NativeEvent nativeevent;
+
+
+}

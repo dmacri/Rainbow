@@ -1,0 +1,28 @@
+#Chart.ChartParameter.java
+ChartParameter_Clear=Reset
+ChartParameter_Complete_Pdf=Pdf completo
+ChartParameter_Criteria=Criteri
+ChartParameter_Data_in_Csv=Dati in csv
+ChartParameter_Draw_chart=Disegna Grafico
+ChartParameter_End_Date=Data Fine  
+ChartParameter_End_Time=Fine Ora
+ChartParameter_Export=Esporta
+ChartParameter_Only_Chart_Pdf=Pdf solo grafico
+ChartParameter_Start_Date=Data Inizio
+ChartParameter_Start_date_i_equal_to_end_date_so_start_time_must_come_before_end_time=Data Inizio \u00E9 uguale a Data Fine, Ora Inizio deve precedere Ora Fine
+ChartParameter_Start_date_must_come_before_end_date= Data Inizio deve precedere Data Fine
+ChartParameter_Start_Time=Ora Inizio
+ChartParameter_Warning=Attenzione!
+ChartParameter_You_must_select_at_least_one_node=E' necessario selezionare almeno un nodo
+ChartParameter_You_must_select_at_least_one_service=E' necessario selezionare almeno un servizio
+ChartParameter_Range_of_more_than_31_days= Per intervallo superiore a 31 giorni \u00E9 possibile solamente esportare il grafico
+#Chart.ServiceChart.java
+ServiceChart_Critical=Critical
+ServiceChart_Drawing_chart=Sto disegnando ...
+ServiceChart_Error=Errore
+ServiceChart_Loading_data=Caricamento in corso ...
+ServiceChart_Major=Major
+ServiceChart_No_data_to_draw=Nessun dato da graficare
+ServiceChart_No_graphic=Nessun Grafico
+ServiceChart_System_busy_Please_try_later=Sistema occupato, riprovare pi\u00F9 tardi
+ServiceChart_Value=Valore

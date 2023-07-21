@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/utility/util
+END
+IUtilityConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/utility/util/IUtilityConstants.java
+END
+IUtilityParameterConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/utility/util/IUtilityParameterConstants.java
+END
+FilesManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/business/utility/util/FilesManager.java
+END

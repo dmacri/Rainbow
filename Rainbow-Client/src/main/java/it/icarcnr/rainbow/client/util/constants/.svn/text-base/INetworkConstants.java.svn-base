@@ -1,0 +1,14 @@
+package it.telecom.vmc.client.util.constants;
+
+
+public interface INetworkConstants {	
+		
+	Integer PK3 = 1;
+	Integer PK0 = 2;
+	Integer POSTE = 3;
+	Integer IPCC = 4;
+	Integer VASMONCAT = 5;
+	Integer COLLABORA = 6;
+	Integer MSAN = 7;
+	
+}

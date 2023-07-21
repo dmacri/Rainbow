@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/i18n/global
+END
+Ii18nGlobalConstants.properties
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/i18n/global/Ii18nGlobalConstants.properties
+END
+Ii18nGlobalConstants_en.properties
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/i18n/global/Ii18nGlobalConstants_en.properties
+END
+Ii18nGlobalConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/i18n/global/Ii18nGlobalConstants.java
+END

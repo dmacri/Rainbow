@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security
+END
+CheckJobStatusPermissionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/CheckJobStatusPermissionAction.java
+END
+CheckChartPermissionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/CheckChartPermissionAction.java
+END
+CheckDownloadManualIpccPermissionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/CheckDownloadManualIpccPermissionAction.java
+END
+CheckPortalServiceStatusPermissionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/CheckPortalServiceStatusPermissionAction.java
+END
+CheckServicesStatusPermissionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/CheckServicesStatusPermissionAction.java
+END
+VmcRequestProcessor.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/security/VmcRequestProcessor.java
+END

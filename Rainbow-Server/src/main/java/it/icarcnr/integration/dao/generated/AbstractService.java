@@ -1,0 +1,236 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractService entity provides the base persistence definition of the
+ * Service entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractService implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Node nodeByIdReceiver;
+	private Function function;
+	private Request request;
+	private Node nodeByIdNode;
+	private String name;
+	private String description;
+	private String file;
+	private Double value;
+	private Timestamp date;
+	private Integer samplingPeriod;
+	private String log;
+	private Integer idUtility;
+	private Short startMinute;
+	private Set<ServiceOperation> serviceOperations = new HashSet<ServiceOperation>(
+			0);
+	private Set<ServiceNodeSource> serviceNodeSources = new HashSet<ServiceNodeSource>(
+			0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractService() {
+	}
+
+	/** minimal constructor */
+	public AbstractService(String name, String description, String file,
+			Double value, Integer samplingPeriod) {
+		this.name = name;
+		this.description = description;
+		this.file = file;
+		this.value = value;
+		this.samplingPeriod = samplingPeriod;
+	}
+
+	/** full constructor */
+	public AbstractService(Node nodeByIdReceiver, Function function,
+			Request request, Node nodeByIdNode, String name,
+			String description, String file, Double value, Timestamp date,
+			Integer samplingPeriod, String log, Integer idUtility,
+			Short startMinute, Set<ServiceOperation> serviceOperations,
+			Set<ServiceNodeSource> serviceNodeSources) {
+		this.nodeByIdReceiver = nodeByIdReceiver;
+		this.function = function;
+		this.request = request;
+		this.nodeByIdNode = nodeByIdNode;
+		this.name = name;
+		this.description = description;
+		this.file = file;
+		this.value = value;
+		this.date = date;
+		this.samplingPeriod = samplingPeriod;
+		this.log = log;
+		this.idUtility = idUtility;
+		this.startMinute = startMinute;
+		this.serviceOperations = serviceOperations;
+		this.serviceNodeSources = serviceNodeSources;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Receiver")
+	public Node getNodeByIdReceiver() {
+		return this.nodeByIdReceiver;
+	}
+
+	public void setNodeByIdReceiver(Node nodeByIdReceiver) {
+		this.nodeByIdReceiver = nodeByIdReceiver;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Function")
+	public Function getFunction() {
+		return this.function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Request")
+	public Request getRequest() {
+		return this.request;
+	}
+
+	public void setRequest(Request request) {
+		this.request = request;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Node")
+	public Node getNodeByIdNode() {
+		return this.nodeByIdNode;
+	}
+
+	public void setNodeByIdNode(Node nodeByIdNode) {
+		this.nodeByIdNode = nodeByIdNode;
+	}
+
+	@Column(name = "name", nullable = false)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "description", unique = true, nullable = false)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "file", nullable = false)
+	public String getFile() {
+		return this.file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	@Column(name = "value", nullable = false, precision = 22, scale = 0)
+	public Double getValue() {
+		return this.value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
+
+	@Column(name = "date", length = 19)
+	public Timestamp getDate() {
+		return this.date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+
+	@Column(name = "sampling_period", nullable = false)
+	public Integer getSamplingPeriod() {
+		return this.samplingPeriod;
+	}
+
+	public void setSamplingPeriod(Integer samplingPeriod) {
+		this.samplingPeriod = samplingPeriod;
+	}
+
+	@Column(name = "log")
+	public String getLog() {
+		return this.log;
+	}
+
+	public void setLog(String log) {
+		this.log = log;
+	}
+
+	@Column(name = "ID_Utility")
+	public Integer getIdUtility() {
+		return this.idUtility;
+	}
+
+	public void setIdUtility(Integer idUtility) {
+		this.idUtility = idUtility;
+	}
+
+	@Column(name = "start_minute")
+	public Short getStartMinute() {
+		return this.startMinute;
+	}
+
+	public void setStartMinute(Short startMinute) {
+		this.startMinute = startMinute;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "service")
+	public Set<ServiceOperation> getServiceOperations() {
+		return this.serviceOperations;
+	}
+
+	public void setServiceOperations(Set<ServiceOperation> serviceOperations) {
+		this.serviceOperations = serviceOperations;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "service")
+	public Set<ServiceNodeSource> getServiceNodeSources() {
+		return this.serviceNodeSources;
+	}
+
+	public void setServiceNodeSources(Set<ServiceNodeSource> serviceNodeSources) {
+		this.serviceNodeSources = serviceNodeSources;
+	}
+
+}

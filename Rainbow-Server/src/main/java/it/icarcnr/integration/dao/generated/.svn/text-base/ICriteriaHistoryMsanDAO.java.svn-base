@@ -1,0 +1,129 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.List;
+
+/**
+ * Interface for CriteriaHistoryMsanDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface ICriteriaHistoryMsanDAO {
+	/**
+	 * Perform an initial save of a previously unsaved CriteriaHistoryMsan
+	 * entity. All subsequent persist actions of this entity should use the
+	 * #update() method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaHistoryMsanDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryMsan entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(CriteriaHistoryMsan entity);
+
+	/**
+	 * Delete a persistent CriteriaHistoryMsan entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently deleted from the persistence store, i.e., database.
+	 * This method uses the
+	 * {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaHistoryMsanDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryMsan entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(CriteriaHistoryMsan entity);
+
+	/**
+	 * Persist a previously saved CriteriaHistoryMsan entity and return it or a
+	 * copy of it to the sender. A copy of the CriteriaHistoryMsan entity
+	 * parameter is returned when the JPA persistence mechanism has not
+	 * previously been tracking the updated entity. This operation must be
+	 * performed within the a database transaction context for the entity's data
+	 * to be permanently saved to the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#merge(Object)
+	 * EntityManager#merge} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = ICriteriaHistoryMsanDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            CriteriaHistoryMsan entity to update
+	 * @return CriteriaHistoryMsan the persisted CriteriaHistoryMsan entity
+	 *         instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public CriteriaHistoryMsan update(CriteriaHistoryMsan entity);
+
+	public CriteriaHistoryMsan findById(CriteriaHistoryMsanId id);
+
+	/**
+	 * Find all CriteriaHistoryMsan entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the CriteriaHistoryMsan property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<CriteriaHistoryMsan> found by query
+	 */
+	public List<CriteriaHistoryMsan> findByProperty(String propertyName,
+			Object value, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByStatus(Object status,
+			int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByValue(Object value,
+			int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByValueCheckMajor(
+			Object valueCheckMajor, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByValueCheckCritical(
+			Object valueCheckCritical, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByValueCheckSecondaryMajor(
+			Object valueCheckSecondaryMajor, int... rowStartIdxAndCount);
+
+	public List<CriteriaHistoryMsan> findByValueCheckSecondaryCritical(
+			Object valueCheckSecondaryCritical, int... rowStartIdxAndCount);
+
+	/**
+	 * Find all CriteriaHistoryMsan entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<CriteriaHistoryMsan> all CriteriaHistoryMsan entities
+	 */
+	public List<CriteriaHistoryMsan> findAll(int... rowStartIdxAndCount);
+}

@@ -1,0 +1,18 @@
+package it.telecom.business.charts.service;
+
+import it.telecom.business.charts.util.IChartsConstants.ChartMode;
+import it.telecom.business.report.bean.ChartBean;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+public interface IServiceChartBL {
+		
+	public List<ChartBean> getChartDataBean(List<Integer> enabledNetworkFunctionList,List<Integer> serviceIdList, Date startDate,Date endDate, Integer networkId, ChartMode chartMode) throws Exception;
+	
+	public Collection<Double> getCollectionValues(ChartBean.ServiceValue serviceValue) throws Exception;
+	
+	
+	
+}

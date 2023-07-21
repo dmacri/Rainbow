@@ -1,0 +1,262 @@
+package it.icarcnr.integration.dao.node.impl;
+
+import it.icarcnr.integration.dao.generated.Criteria;
+import it.icarcnr.integration.dao.generated.EntityManagerHelper;
+import it.icarcnr.integration.dao.generated.Node;
+import it.icarcnr.integration.dao.generated.NodeRelation;
+import it.icarcnr.integration.dao.generated.Type;
+import it.icarcnr.integration.dao.node.service.INodeAdvancedDAO;
+import it.icarcnr.integration.dao.util.DateUtil;
+import it.icarcnr.integration.dao.util.JPAUtil;
+
+import java.sql.Time;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+public class NodeAdvancedDAO implements INodeAdvancedDAO {
+
+	public List<Node> findByTypeAndLocation(Integer idType, Integer idLocation) {
+		EntityManagerHelper.log("find nodes by type and location", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT node ");
+			queryString.append("FROM ");
+			queryString.append(Node.class.getName()+" as node ");
+			queryString.append("WHERE ");
+			queryString.append("node.type.id = :idType ");
+			queryString.append("AND ");
+			queryString.append("node.location.id = :idLocation ");
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idType", idType);
+			query.setParameter("idLocation", idLocation);
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find nodes by type and location failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<NodeRelation> findByParentAndLocation(Integer idParent,
+			Integer idLocation) {
+		EntityManagerHelper.log("find nodes by parent and location", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT nodeRelation ");
+			queryString.append("FROM ");
+			queryString.append(NodeRelation.class.getName()+" as nodeRelation ");
+			queryString.append("WHERE ");
+			queryString.append("nodeRelation.nodeByIdParent.id = :idParent ");
+			queryString.append("AND ");
+			queryString.append("nodeRelation.nodeByIdChild.location.id = :idLocation ");
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idParent", idParent);
+			query.setParameter("idLocation", idLocation);
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find nodes by type and location failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Type> findNodeTypeByIdNetwork(Integer idNetwork) {
+		EntityManagerHelper.log("findNodeTypeByIdNetwork(Integer idNetwork)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT nodeType ");
+			queryString.append("FROM ");
+			queryString.append(Type.class.getName()+" as nodeType ");
+			queryString.append("WHERE ");
+			queryString.append("nodeType.network.id = :idNetwork ");
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idNetwork", idNetwork);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findNodeTypeByIdNetwork(Integer idNetwork)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Type> findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Integer networkId, Integer functionId, int... rowStartIdxAndCount) {
+		EntityManagerHelper.log("List<Integer> enabledNetworkFunctionList, Integer networkId, Date currentDate, Integer functionId, int... rowStartIdxAndCount)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			
+			// verify if associated criteria is active
+			Time currentTime = new Time(currentDate.getTime());
+			String dayOfWeekString = DateUtil.getDayOfWeek(currentDate);
+			java.sql.Date currentSqlDate = new java.sql.Date(currentTime.getTime());
+			
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT DISTINCT criteria.serviceOperation.service.nodeByIdNode.type ");
+			queryString.append("FROM ");
+			queryString.append(Criteria.class.getName()+" as criteria ");
+			
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			
+			Boolean firstWhereCondition = Boolean.TRUE;
+			
+			// condition in order to verify if associated criteria is active
+			StringBuilder activeCriteriaConditition = new StringBuilder();
+			activeCriteriaConditition.append(" criteria.startDate <= :currentSqlDate AND criteria.endDate>= :currentSqlDate ");
+			activeCriteriaConditition.append(" AND criteria.startTime <= :currentTime AND criteria.endTime>= :currentTime ");
+			if(dayOfWeekString!=null){
+				activeCriteriaConditition.append(" AND criteria."+dayOfWeekString+" = :trueValue ");
+			}
+			activeCriteriaConditition.append("AND criteria.enabled = :trueValue ");
+			
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, activeCriteriaConditition.toString());
+			// end condition in order to verify if associated criteria is active
+			
+			if(networkId!=null){
+				String condition = " criteria.serviceOperation.service.nodeByIdNode.network.id = :networkId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}
+			
+			if(functionId!=null){
+				String condition = " criteria.serviceOperation.service.function.id = :functionId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}	
+
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteria.serviceOperation.service.nodeByIdNode.", "criteria.serviceOperation.service.", firstWhereCondition);
+
+			queryString.append(" ORDER BY  criteria.serviceOperation.service.nodeByIdNode.type.description ASC ");
+			
+			Query query = em.createQuery(queryString.toString());
+			
+			// set condition parameters in order to verify if associated criteria is active
+			query.setParameter("currentSqlDate", currentSqlDate);
+			query.setParameter("currentTime", currentTime);
+			query.setParameter("trueValue", Boolean.TRUE);
+			// end set condition parameters in order to verify if associated criteria is active
+			
+			if(networkId!=null){
+				query.setParameter("networkId", networkId);
+			}
+			if(functionId!=null){
+				query.setParameter("functionId", functionId);
+			}
+			
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("findAll(List<Integer> enabledNetworkFunctionList, Date currentDate, Integer networkId, Integer functionId, int... rowStartIdxAndCount)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Node> getRootNodes(List<Integer> enabledNetworkFunctionList, Integer idNetwork) {
+		EntityManagerHelper.log("getRootNodes(List<Integer> enabledNetworkFunctionList, Integer idNetwork)", Level.INFO, null);
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+			StringBuilder queryString = new StringBuilder();
+			queryString.append("SELECT node ");
+			queryString.append("FROM ");
+			queryString.append(Node.class.getName()+" as node ");
+			
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+			Boolean firstWhereCondition = Boolean.TRUE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "node.", null, firstWhereCondition);
+			
+			
+			String condition = " node.network.id = :idNetwork ";
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			
+			condition = " node.type.network.id = :idNetwork ";
+			firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);			
+
+
+			queryString.append(" ORDER BY  node.type.description ASC ");
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("idNetwork", idNetwork);
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getRootNodes(List<Integer> enabledNetworkFunctionList, Integer idNetwork)",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	
+	public String getStatus(List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Integer nodeId, Date currentDate) {
+		EntityManagerHelper.log("getStatus(List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Integer nodeId, Date currentDate)", Level.INFO, null);
+		Time currentTime = new Time(currentDate.getTime());
+		String dayOfWeekString = DateUtil.getDayOfWeek(currentDate);
+		java.sql.Date currentSqlDate = new java.sql.Date(currentTime.getTime());
+		try {
+			EntityManager em = EntityManagerHelper.getEntityManager();
+
+			StringBuilder queryString = new StringBuilder();
+
+			queryString.append("SELECT MIN(criteria.status)FROM "+Criteria.class.getName()+" as criteria ");
+
+			JPAUtil.addSecurityFrom(enabledNetworkFunctionList, queryString);
+
+			queryString.append("WHERE criteria.startDate <= :currentSqlDate AND criteria.endDate>= :currentSqlDate ");
+			queryString.append("AND criteria.startTime <= :currentTime AND criteria.endTime>= :currentTime ");
+			if(dayOfWeekString!=null){
+				queryString.append("AND criteria."+dayOfWeekString+" = :trueValue ");
+			}
+			queryString.append("AND criteria.enabled = :trueValue ");
+
+			Boolean firstWhereCondition = Boolean.FALSE;
+			firstWhereCondition = JPAUtil.addSecurityCondition(enabledNetworkFunctionList, queryString, "criteria.serviceOperation.service.nodeByIdNode.", "criteria.serviceOperation.service.", firstWhereCondition);
+
+			if(networkId!=null){
+				String condition = " criteria.serviceOperation.service.nodeByIdNode.network.id = :networkId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}
+			if(functionId!=null){
+				String condition = " criteria.serviceOperation.service.function.id = :functionId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}
+
+			if(nodeId!=null){
+				String condition = " criteria.serviceOperation.service.nodeByIdNode.id = :nodeId ";
+				firstWhereCondition = JPAUtil.addWhereCondition(queryString,firstWhereCondition, condition);
+			}
+
+			Query query = em.createQuery(queryString.toString());
+			query.setParameter("currentSqlDate", currentSqlDate);
+			query.setParameter("currentTime", currentTime);
+			query.setParameter("trueValue", Boolean.TRUE);
+
+	
+			if(networkId!=null){
+				query.setParameter("networkId", networkId);
+			}
+			if(functionId!=null){
+				query.setParameter("functionId", functionId);
+			}
+			if(nodeId!=null){
+				query.setParameter("nodeId", nodeId);
+			}
+
+
+			JPAUtil.addSecurityParameter(enabledNetworkFunctionList, query);
+
+
+			return (String)query.getSingleResult();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("getStatus(List<Integer> enabledNetworkFunctionList, Integer networkId, Integer functionId, Integer nodeId, Date currentDate)", Level.SEVERE, re);
+			throw re;
+		}
+
+	}
+	
+}

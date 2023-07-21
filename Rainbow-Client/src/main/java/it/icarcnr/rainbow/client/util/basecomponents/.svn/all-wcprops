@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/!svn/ver/659/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/basecomponents
+END
+BaseMenu.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/basecomponents/BaseMenu.java
+END
+ScreenPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/basecomponents/ScreenPanel.java
+END
+BasePanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/659/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/basecomponents/BasePanel.java
+END
+FakeIFrame.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/basecomponents/FakeIFrame.java
+END

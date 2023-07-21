@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util
+END
+ILabelFilesGeoArea.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/ILabelFilesGeoArea.java
+END
+HttpServletResponseUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/HttpServletResponseUtil.java
+END
+IParameterHttpServletRequestContants.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IParameterHttpServletRequestContants.java
+END
+IActionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IActionConstants.java
+END
+IErrorMessageConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IErrorMessageConstants.java
+END
+SecurityUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/SecurityUtil.java
+END
+IUtilityActionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IUtilityActionConstants.java
+END
+INumberFormatUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/INumberFormatUtil.java
+END
+ISessionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/ISessionConstants.java
+END
+UserAgentUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/UserAgentUtil.java
+END
+IComboboxActionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IComboboxActionConstants.java
+END
+IRequestConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/1566/vmc/Vasmoncat-WebApp-1/vmcWebApp-Server/src/main/java/it/telecom/presentation/action/util/IRequestConstants.java
+END

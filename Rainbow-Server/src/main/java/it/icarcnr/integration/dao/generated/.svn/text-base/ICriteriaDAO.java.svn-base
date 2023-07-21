@@ -1,0 +1,166 @@
+package it.telecom.integration.dao.generated;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Interface for CriteriaDAO.
+ * 
+ * @author MyEclipse Persistence Tools
+ */
+
+public interface ICriteriaDAO {
+	/**
+	 * Perform an initial save of a previously unsaved Criteria entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Criteria entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Criteria entity);
+
+	/**
+	 * Delete a persistent Criteria entity. This operation must be performed
+	 * within the a database transaction context for the entity's data to be
+	 * permanently deleted from the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * ICriteriaDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Criteria entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Criteria entity);
+
+	/**
+	 * Persist a previously saved Criteria entity and return it or a copy of it
+	 * to the sender. A copy of the Criteria entity parameter is returned when
+	 * the JPA persistence mechanism has not previously been tracking the
+	 * updated entity. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+	 * operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = ICriteriaDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Criteria entity to update
+	 * @return Criteria the persisted Criteria entity instance, may not be the
+	 *         same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Criteria update(Criteria entity);
+
+	public Criteria findById(Integer id);
+
+	/**
+	 * Find all Criteria entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Criteria property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Criteria> found by query
+	 */
+	public List<Criteria> findByProperty(String propertyName, Object value,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByValue(Object value, int... rowStartIdxAndCount);
+
+	public List<Criteria> findByMonday(Object monday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByTuesday(Object tuesday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByWednesday(Object wednesday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByThursday(Object thursday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByFriday(Object friday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findBySaturday(Object saturday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findBySunday(Object sunday,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByValueCheckMajor(Object valueCheckMajor,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByDescription(Object description,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByStatus(Object status,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByTypeCheck(Object typeCheck,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByValueCheckCritical(Object valueCheckCritical,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByEnabled(Object enabled,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByValueCheckSecondaryMajor(
+			Object valueCheckSecondaryMajor, int... rowStartIdxAndCount);
+
+	public List<Criteria> findByValueCheckSecondaryCritical(
+			Object valueCheckSecondaryCritical, int... rowStartIdxAndCount);
+
+	public List<Criteria> findBySuspended(Object suspended,
+			int... rowStartIdxAndCount);
+
+	public List<Criteria> findByCalculation(Object calculation,
+			int... rowStartIdxAndCount);
+
+	/**
+	 * Find all Criteria entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Criteria> all Criteria entities
+	 */
+	public List<Criteria> findAll(int... rowStartIdxAndCount);
+}

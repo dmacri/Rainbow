@@ -1,0 +1,109 @@
+package it.telecom.business.quartz.impl;
+
+import it.telecom.business.cronjob.impl.CronJobBL;
+import it.telecom.business.cronjob.service.ICronJobBL;
+import it.telecom.integration.dao.generated.Cronjob;
+import it.telecom.integration.dao.generated.CronjobDAO;
+import it.telecom.integration.dao.generated.ICronjobDAO;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.quartz.Job;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class ProcessManager implements Job {
+
+	private static final Log log = LogFactory.getLog(ProcessManager.class);
+
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		final String method = "execute";
+		try {
+			ICronJobBL iCronJobBL = new CronJobBL();
+			ICronjobDAO iCronjobDAO = new CronjobDAO();
+			
+			JobDataMap dataMap=context.getJobDetail().getJobDataMap();
+
+			Cronjob cronjob = findJobByName(iCronjobDAO, dataMap);
+			
+			cronjob.setStatus("running");
+
+			iCronJobBL.update(cronjob);
+
+			List<String> command=(List<String>)dataMap.get("command");
+			
+			ProcessBuilder pb = new ProcessBuilder(command);
+
+			log.info("Start Process manager command: "+command);
+			Process p = pb.start();
+			
+//			int exitValue = p.waitFor();
+			
+			waitEndProcessAndCreateLogFile(dataMap, p);
+
+//			log.info("End Process manager exit value: "+exitValue);
+			log.info("End Process manager command: "+command);
+
+			cronjob.setEndExecution(new Timestamp(new Date().getTime()));
+			cronjob.setStatus("executed");
+
+			iCronJobBL.update(cronjob);
+			
+			log.info("End synchronized Process manager command: "+command);
+
+		} catch (Exception e) {
+			log.error(method,e);
+			throw new JobExecutionException(e);
+		}finally{
+			synchronized (context.getJobDetail().getJobDataMap().get("result")) {
+				context.getJobDetail().getJobDataMap().get("result").notify();
+			}
+		}
+	}
+
+	/**
+	 * @param dataMap
+	 * @param process
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	private void waitEndProcessAndCreateLogFile(JobDataMap dataMap, Process process)
+			throws FileNotFoundException, IOException {
+		InputStream inputStream = process.getInputStream();
+		String fileName = dataMap.getString("output");
+		File f=new File(fileName);
+		OutputStream outputStream=new FileOutputStream(f);
+		byte buf[]=new byte[1024];
+		int len;
+		while((len=inputStream.read(buf))>0){
+			outputStream.write(buf,0,len);
+		}
+
+		outputStream.close();
+		inputStream.close();
+
+		log.info("Created file: "+fileName);
+	}
+
+	/**
+	 * @param iCronjobDAO
+	 * @param dataMap
+	 * @return
+	 */
+	private Cronjob findJobByName(ICronjobDAO iCronjobDAO, JobDataMap dataMap) {
+		List<Cronjob> lcronjob = iCronjobDAO.findByNamejob(dataMap.getString("namejob"));
+		Cronjob cronjob = lcronjob.get(0);
+		return cronjob;
+	}
+}

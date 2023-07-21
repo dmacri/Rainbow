@@ -1,0 +1,239 @@
+/**
+ * 
+ */
+package it.icarcnr.rainbow.client.util.i18n.utility;
+
+import com.google.gwt.i18n.client.Constants;
+
+
+public interface IUtility extends Constants{
+	
+	
+	String Confirm();
+	String Error();
+	String Execution_Job();
+	String Insert_valid_number();
+	String Loading();
+	String Maximum_number_of_processes_reached();
+	String No();
+	String No_Results();
+	String Output_execution();
+	String Please_try_again_later();
+	String Process_is_queued_but_not_have_output();
+	String Start();
+	String System_busy_Please_try_later();
+	String Telephone_Number();
+	String Telephone_number_not_Found();
+	String CLI_not_Found();
+	String Warning();
+	String Yes();
+	
+	
+	/**
+	 * #Utility.CheckIpLock
+	 */
+	String CheckIpLock_Changes_saved_successfully();
+	String CheckIpLock_CheckIP_Lock_for_PK3_network();
+	String CheckIpLock_Confirm();
+	String CheckIpLock_Do_you_want_to_delete_record_on_UDB();
+	String CheckIpLock_Error();
+	String CheckIpLock_Execution_Job();
+	String CheckIpLock_Insert_valid_number();
+	String CheckIpLock_Loading();
+	String CheckIpLock_Maximum_number_of_processes_reached(); 
+	String CheckIpLock_No();
+	String CheckIpLock_No_Results();
+	String CheckIpLock_Output_execution();
+	String CheckIpLock_Please_try_again_later();
+	String CheckIpLock_Process_is_queued_but_not_have_output();
+	String CheckIpLock_Start();
+	String CheckIpLock_System_busy_Please_try_later();
+	String CheckIpLock_Telephone_Number();
+	String CheckIpLock_Telephone_number_not_Found();
+	String CheckIpLock_Warning();
+	String CheckIpLock_Yes();
+	String CheckIpLock_OK();
+	
+	
+	/**
+	 * #Utility.CheckCnc
+	*/
+	String CheckCnc_Changes_saved_successfully();
+	String CheckCnc_for_Ipcc_network();
+	String CheckCnc_Confirm();
+	String CheckCnc_Do_you_want_to_delete_record_on_UDB_Sip_Server();
+	String CheckCnc_Error();
+	String CheckCnc_Execution_Job();
+	String CheckCnc_Insert_valid_number();
+	String CheckCnc_Loading();
+	String CheckCnc_Maximum_number_of_processes_reached(); 
+	String CheckCnc_No();
+	String CheckCnc_No_Results();
+	String CheckCnc_Output_execution();
+	String CheckCnc_Please_try_again_later();
+	String CheckCnc_Process_is_queued_but_not_have_output();
+	String CheckCnc_Start();
+	String CheckCnc_System_busy_Please_try_later();
+	String CheckCnc_Telephone_Number();
+	String CheckCnc_Telephone_number_not_Found();
+	String CheckCnc_Warning();
+	String CheckCnc_Yes();
+	String CheckCnc_OK();
+	String CheckCnc_Numbering_Info();
+	String CheckCnc_cnc();
+	String CheckCnc_db();
+
+	
+	/**
+	 * #Utility.TiUMManager
+	 */
+	String TiUMManager_OK();
+	String Enable_Notify();
+	String Disable_Notify();
+	String Create_Profile();
+	String Are_You_Sure_set_Default_Pin();
+	String Are_You_Sure_Create_Profile();
+	String Set_Default_Pin();
+	String Change_Pin();
+	String Delete_Create_Button();
+    String Delete_Button();
+    String Exit_Button();
+    String Confirm_Enable_Notify();
+    String Confirm_Create_Profile();
+    String Confirm_Set_Default_Pin();
+    String Confirm_Change_Pin();
+    String Confirm_Delete_Profile();
+    String Confirm_Delete_Create_Profile();
+    String Insert_New_Pin();
+    String Pin();
+    String Are_You_Sure_Change_Pin();
+    String Are_You_Sure_Delete_Profile();
+    String Are_You_Sure_Delete_Create_Profile();
+    String Are_You_Sure_Enable_Notify();
+    String TiUMManager_Insert_valid_number();
+    String TiUMManager_Warning();
+    String Search_CLI();
+   
+    /**
+	 * #Utility.GeoAra
+	 */
+    String GeoArea_Start();
+    String GeoArea_Start_Alignment();
+    String GeoArea_Start_Time();
+    String GeoArea_Incorrect_Day_for_GeoArea_Alignment();
+	String GeoArea_Incorrect_set_of_Date_Time_for_GeoArea_Alignment();
+	String GeoAlignment_For_this_time_UDBGeo_Alignment_is_already_scheduled_by_VASMONCAT();
+	String GeoAlignment_Warning();
+	String GeoAlignment_You_must_set_Date_Time_correctly_for_Geo_Alignment();
+	String GeoAlignment_Maximum_number_of_processes_reached();
+	String GeoAlignment_Please_try_again_later();
+	String GeoAlignment_Confirm();
+	String GeoAlignment_The_Process_is_queued_successfully();
+	String GeoArea_Popoup_Windows_Title();
+	String GeoArea_File_Name();
+	String GeoArea_Open_Cli_Udb();
+	String GeoArea_FileDescription_ResultCliUdbPubblic();
+	String GeoArea_Misallignment_SSW();
+	String GeoArea_Output();
+	String GeoArea_AccordingPanel_Title();
+	String GeoArea_Panel1Title();
+	String GeoArea_MultiField_Date_Title();
+	
+	String GeoArea_Misallignment_For_District();
+    String GeoArea_District();
+	
+	/**
+	 * #Utility.InfoCLI
+	 */
+	String InfoCLI_Start();
+	String InfoCLI();
+	String InfoCLIPoste();
+	String InfoCLIContactCenter();
+	
+	/**
+	 * #Utility.MyCronjob
+	 */
+	String MyCronjob_all();
+	String MyCronjob_All();
+	String MyCronjob_All_Jobs();
+	String MyCronjob_Date();
+	String MyCronjob_Executed();
+	String MyCronjob_Job_Executed();
+	String MyCronjob_Job_Running();
+	String MyCronjob_Job_Scheduled();
+	String MyCronjob_Loading();
+	String MyCronjob_Log_Execution_Utility();
+	String MyCronjob_Refresh();
+	String MyCronjob_Refresh_Data();
+	String MyCronjob_Running();
+	String MyCronjob_Scheduled();
+	String MyCronjob_Task();
+	String MyCronjob_Tasks();
+	String MyCronjob_This_job_have_no_logs_because_is_scheduled_at(); 
+	String MyCronjob_Utility_Status();
+	String MyCronjob_You_dont_have_permission_to_see_log_pending_the_job_is_running();
+	
+	/**
+	 * #MyCronjobViewLogPanel
+	 */
+	String MyCronjobViewLogPanel_Automatic_Refresh();
+	String MyCronjobViewLogPanel_End_Execution(); 
+	String MyCronjobViewLogPanel_Load_Window_Fail();
+	String MyCronjobViewLogPanel_Off();
+	String MyCronjobViewLogPanel_On();
+	String MyCronjobViewLogPanel_Please_wait_Ensure_that_Button_On_are_pressed();
+	String MyCronjobViewLogPanel_Refresh_OFF();
+	String MyCronjobViewLogPanel_Refresh_ON();
+	String MyCronjobViewLogPanel_Scheduled(); 
+	String MyCronjobViewLogPanel_Utility(); 
+ 
+	/**
+	 * RecoveryService.java
+	 */
+	String RecoveryService_Affected_Services_List();
+	String RecoveryService_Confirm();
+	String RecoveryService_Description();
+	String RecoveryService_End_Recovery();
+	String RecoveryService_Incorrect_Date_for_End_Recovery();
+	String RecoveryService_Incorrect_Date_for_Schedule_Recovery();
+	String RecoveryService_Incorrect_Date_for_Start_Recovery();
+	String RecoveryService_Incorrect_set_of_Date_Time_for_End_Recovery();
+	String RecoveryService_Incorrect_set_of_Date_Time_for_Schedule_Recovery();
+	String RecoveryService_Incorrect_set_of_Date_Time_for_Start_Recovery();
+	String RecoveryService_Loading();
+	String RecoveryService_Maximum_number_of_processes_reached(); 
+	String RecoveryService_Network();
+	String RecoveryService_Network_and_Utility();
+	String RecoveryService_Please_try_again_later();
+	String RecoveryService_Range_of_Recovery();
+	String RecoveryService_Schedule_Recovery();
+	String RecoveryService_Schedule_Recovery_Process();
+	String RecoveryService_Select_a_Network();
+	String RecoveryService_Select_an_Utility();
+	String RecoveryService_Source_Nodes();
+	String RecoveryService_Start();
+	String RecoveryService_Start_Recovery();
+	String RecoveryService_Start_Recovery_must_have_Date_Time_before_to_End_Recovery();
+	String RecoveryService_The_Recovery_Process_is_queued_successfully();
+	String RecoveryService_Utility();
+	String RecoveryService_Warning();
+	String RecoveryService_You_must_set_all_field_correctly();
+	/**
+	 * TiumAlignmant
+	*/
+	String TiumAlignment_Confirm();
+	String TiumAlignment_For_this_time_UDBTiUM_Alignment_is_already_scheduled_by_VASMONCAT();
+	String TiumAlignment_Incorrect_Day_for_TiUM_Alignment();
+	String TiumAlignment_Incorrect_set_of_Date_Time_for_TiUM_Alignment();
+	String TiumAlignment_Loading();
+	String TiumAlignment_Maximum_number_of_processes_reached();
+	String TiumAlignment_Please_try_again_later();
+	String TiumAlignment_Start();
+	String TiumAlignment_Start_Alignment();
+	String TiumAlignment_Start_Time();
+	String TiumAlignment_The_Process_is_queued_successfully();
+	String TiumAlignment_UDBTiUM_Alignment_for_PK3_network();
+	String TiumAlignment_Warning();
+	String TiumAlignment_You_must_set_Date_Time_correctly_for_TiUM_Alignment();
+
+}

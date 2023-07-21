@@ -1,0 +1,31 @@
+package it.telecom.business.util;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class EncoderUtil {
+
+	private static final Log log = LogFactory.getLog(EncoderUtil.class);
+	
+	public static String getMD5EncodedString(String toEncoder) throws Exception{
+		final String method = "getMD5EncodedString(String toEncoder)";
+		log.info(method);
+		try {
+			MessageDigest md5 = MessageDigest.getInstance("MD5");
+			md5.update(toEncoder.getBytes());
+			BigInteger hash = new BigInteger(1, md5.digest());
+			String hashText = hash.toString(16);
+			// Now we need to zero pad it in order to full 32 chars.
+			while(hashText.length() < 32 ){
+				hashText = "0"+hashText;
+			}
+			return hashText;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+}

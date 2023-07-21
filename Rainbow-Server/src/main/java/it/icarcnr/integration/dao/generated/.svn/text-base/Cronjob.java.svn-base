@@ -1,0 +1,37 @@
+package it.telecom.integration.dao.generated;
+
+import java.sql.Timestamp;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Cronjob entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "cronjob" )
+public class Cronjob extends AbstractCronjob implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public Cronjob() {
+	}
+
+	/** minimal constructor */
+	public Cronjob(User user, Utility utility, String namejob,
+			String nametrigger, Timestamp date, String output, String command,
+			String status) {
+		super(user, utility, namejob, nametrigger, date, output, command,
+				status);
+	}
+
+	/** full constructor */
+	public Cronjob(Cronjob cronjob, User user, Utility utility, String namejob,
+			String nametrigger, Timestamp date, String output, String command,
+			Timestamp endExecution, String status, Set<Cronjob> cronjobs) {
+		super(cronjob, user, utility, namejob, nametrigger, date, output,
+				command, endExecution, status, cronjobs);
+	}
+
+}

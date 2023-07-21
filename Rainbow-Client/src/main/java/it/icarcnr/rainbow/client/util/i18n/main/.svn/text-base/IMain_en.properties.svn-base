@@ -1,0 +1,27 @@
+#Main.VmcMain.java
+VmcMain_Are_you_sure_you_want_to_do_that=Are you sure you want to do that?
+VmcMain_Change_Password=Change Password
+VmcMain_Change_Status_Detected=Change Status Detected
+VmcMain_Change_Status_All_Platforms=Change Status - All Platforms
+VmcMain_Close_Other_Tabs=Close Other Tabs
+VmcMain_Close_Tab=Close Tab
+VmcMain_Confirm=Confirm
+VmcMain_Critical=Critical
+VmcMain_Error=Error
+VmcMain_Logout_failed=Logout failed\!
+VmcMain_Main_Content=Main Content
+VmcMain_Major=Major
+VmcMain_Normal=Normal
+VmcMain_Suspended=Suspended
+VmcMain_Overview=Overview
+VmcMain_Service_Management=Service Management
+VmcMain_Summary=Summary:
+VmcMain_User=User\:
+VmcMain_Change_password=Change Password
+VmcMain_Options=Options
+VmcMain_Manual=Manual
+VmcMain_Manual_Vasmoncat=Vasmoncat
+VmcMain_Manual_Ipcc=Contact Center
+VmcMain_English=English
+VmcMain_Italian=Italian
+VmcMain_Languages=Languages

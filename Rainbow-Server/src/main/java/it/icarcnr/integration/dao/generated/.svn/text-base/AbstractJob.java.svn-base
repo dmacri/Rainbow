@@ -1,0 +1,160 @@
+package it.telecom.integration.dao.generated;
+
+import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * AbstractJob entity provides the base persistence definition of the Job
+ * entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractJob implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Service service;
+	private User user;
+	private Timestamp dateService;
+	private Timestamp startDate;
+	private Timestamp endDate;
+	private String status;
+	private String comment;
+	private String serviceStatus;
+	private String reason;
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractJob() {
+	}
+
+	/** minimal constructor */
+	public AbstractJob(Service service, User user, String status,
+			String comment, String serviceStatus, String reason) {
+		this.service = service;
+		this.user = user;
+		this.status = status;
+		this.comment = comment;
+		this.serviceStatus = serviceStatus;
+		this.reason = reason;
+	}
+
+	/** full constructor */
+	public AbstractJob(Service service, User user, Timestamp dateService,
+			Timestamp startDate, Timestamp endDate, String status,
+			String comment, String serviceStatus, String reason) {
+		this.service = service;
+		this.user = user;
+		this.dateService = dateService;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.comment = comment;
+		this.serviceStatus = serviceStatus;
+		this.reason = reason;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Service", nullable = false)
+	public Service getService() {
+		return this.service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_User", nullable = false)
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Column(name = "date_service", length = 19)
+	public Timestamp getDateService() {
+		return this.dateService;
+	}
+
+	public void setDateService(Timestamp dateService) {
+		this.dateService = dateService;
+	}
+
+	@Column(name = "start_date", length = 19)
+	public Timestamp getStartDate() {
+		return this.startDate;
+	}
+
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
+	@Column(name = "end_date", length = 19)
+	public Timestamp getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(Timestamp endDate) {
+		this.endDate = endDate;
+	}
+
+	@Column(name = "status", nullable = false, length = 8)
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Column(name = "comment", nullable = false, length = 65535)
+	public String getComment() {
+		return this.comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	@Column(name = "service_status", nullable = false, length = 10)
+	public String getServiceStatus() {
+		return this.serviceStatus;
+	}
+
+	public void setServiceStatus(String serviceStatus) {
+		this.serviceStatus = serviceStatus;
+	}
+
+	@Column(name = "reason", nullable = false, length = 65535)
+	public String getReason() {
+		return this.reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+}

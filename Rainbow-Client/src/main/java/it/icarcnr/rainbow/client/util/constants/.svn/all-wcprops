@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repos/!svn/ver/726/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants
+END
+INetworkConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/INetworkConstants.java
+END
+IActionPathConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/!svn/ver/726/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IActionPathConstants.java
+END
+IErrorMessageConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IErrorMessageConstants.java
+END
+IUserInterfaceConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/repos/!svn/ver/475/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IUserInterfaceConstants.java
+END
+IServiceConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/!svn/ver/56/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IServiceConstants.java
+END
+IOperationConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IOperationConstants.java
+END
+IGlobalConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IGlobalConstants.java
+END
+IUtilityActionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/repos/!svn/ver/333/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IUtilityActionConstants.java
+END
+ICriteriaConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/ICriteriaConstants.java
+END
+IUtilityConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/556/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IUtilityConstants.java
+END
+IAreaConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IAreaConstants.java
+END
+IParameterHttpServletRequestContants.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/!svn/ver/281/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IParameterHttpServletRequestContants.java
+END
+IUtilityMatchingConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/repos/!svn/ver/106/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IUtilityMatchingConstants.java
+END
+IMenuTreeConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IMenuTreeConstants.java
+END
+IFunctionConstants.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/!svn/ver/26/vmc/vmcWebApp-Client/src/main/java/it/telecom/vmc/client/util/constants/IFunctionConstants.java
+END

@@ -1,0 +1,449 @@
+package it.telecom.business.menutree.impl;
+
+import it.telecom.business.menutree.service.IMenuTreeBL;
+import it.telecom.business.menutree.util.IClassNameUIConstants;
+import it.telecom.business.menutree.util.IMenuTreeConstants;
+import it.telecom.business.menutree.util.UserInterfaceUtil;
+import it.telecom.business.node.impl.NodeBL;
+import it.telecom.business.node.service.INodeBL;
+import it.telecom.business.security.impl.SecurityBL;
+import it.telecom.business.security.service.ISecurityBL;
+import it.telecom.integration.dao.function.impl.FunctionAdvancedDAO;
+import it.telecom.integration.dao.function.service.IFunctionAdvancedDAO;
+import it.telecom.integration.dao.generated.Action;
+import it.telecom.integration.dao.generated.Area;
+import it.telecom.integration.dao.generated.Function;
+import it.telecom.integration.dao.generated.ILocationDAO;
+import it.telecom.integration.dao.generated.Location;
+import it.telecom.integration.dao.generated.LocationDAO;
+import it.telecom.integration.dao.generated.Network;
+import it.telecom.integration.dao.generated.Node;
+import it.telecom.integration.dao.generated.NodeRelation;
+import it.telecom.integration.dao.generated.Type;
+import it.telecom.integration.dao.network.impl.NetworkAdvancedDAO;
+import it.telecom.integration.dao.network.service.INetworkAdvancedDAO;
+import it.telecom.integration.dao.node.impl.NodeAdvancedDAO;
+import it.telecom.integration.dao.node.service.INodeAdvancedDAO;
+import it.telecom.integration.dao.security.impl.AreaAdvancedDAO;
+import it.telecom.integration.dao.security.service.IAreaAdvancedDAO;
+import it.telecom.integration.dao.security.util.IAreaConstants;
+import it.telecom.integration.dao.util.INodeTypeConstants;
+import it.telecom.integration.dao.utility.impl.UtilityAdvancedDAO;
+import it.telecom.integration.dao.utility.service.IUtilityAdvancedDAO;
+import it.telecom.presentation.action.util.IParameterHttpServletRequestContants;
+import it.telecom.util.JSONUtil;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.commons.beanutils.BeanComparator;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+public class MenuTreeBL implements IMenuTreeBL {
+
+	private static final Log log = LogFactory.getLog(MenuTreeBL.class);
+
+	public Document getXmlMenuTree(Integer userId) throws Exception {
+		final String method = "getXmlMenuTree(Integer userId)";
+		log.info(method);
+		try{
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = factory.newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+
+			Element root = doc.createElement("menuTree");
+			doc.appendChild(root);
+			
+			Calendar calendar = Calendar.getInstance();
+			Date currentDate = calendar.getTime();
+
+			appendMenuTree(currentDate, userId,doc,root);
+
+			return doc;
+		}catch (Exception e) {
+			log.error(method,e);
+			throw e;
+		}
+	}
+
+	private void appendMenuTree(Date currentDate, Integer userId, Document doc, Element root) throws Exception {
+		IAreaAdvancedDAO iAreaAdvancedDao = new AreaAdvancedDAO();
+		List<Area> areaList = iAreaAdvancedDao.findAll(null);
+		ISecurityBL iSecurityBL = new SecurityBL();
+		for (Area area : areaList) {
+			if(iSecurityBL.hasPermission(userId, area.getId(), null, null)){
+				Map<String, Object> parameterMap = new HashMap<String, Object>();
+//				parameterMap.put("title",area.getDescription());
+//				String areaIconCls = area.getIcon();
+//				parameterMap.put("iconCls", areaIconCls);
+				String jsonParameters = JSONUtil.createJsonParameters(parameterMap, area.getParameters()).toString();
+				String areaName = area.getName();
+				if(area.getId().equals(IAreaConstants.GRAPH_AREA)){
+					areaName = null;
+				}
+				String elementURI = IMenuTreeConstants.AREA+area.getId().toString();
+				Element element = makeElement(doc,"folder", elementURI, "<span style = 'font-size: 12px'> <b>"+area.getDescription()+"</b></span>", area.getIcon(), area.getQtip(), null, Boolean.FALSE, null, areaName, jsonParameters, area.getIcon(), area.getDescription());		
+				root.appendChild(element);
+				
+				if(!area.getId().equals(IAreaConstants.CHART_AREA) && !area.getId().equals(IAreaConstants.VOIP_CONTROL_AREA)){
+					INetworkAdvancedDAO iNetworkAdvancedDAO = new NetworkAdvancedDAO();
+					List<Network> networks = iNetworkAdvancedDAO.findAll(null, area.getId());
+					for (Network network : networks) {
+						if(iSecurityBL.hasPermission(userId, area.getId(), network.getId(), null)){
+							addNetworkTree(currentDate, userId, doc, element, area, network, elementURI);
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * @param utilityArea 
+	 * @param element 
+	 * @param doc 
+	 * @throws Exception 
+	 * 
+	 */
+	private void addUtilityTree(Integer userId, Document doc, Element element, String parentURI, Network network) throws Exception {
+		IUtilityAdvancedDAO iUtilityAdvancedDAO = new UtilityAdvancedDAO();
+		List<Action> actionList = iUtilityAdvancedDAO.getUtilityParentActions(null,network.getId());
+		ISecurityBL iSecurityBL = new SecurityBL();
+		for (Action action : actionList) {
+			if(iSecurityBL.hasPermission(userId, action.getPath(), null, null)){
+	        	   addUtility(action, doc, element, parentURI, network);
+			}
+
+		}
+
+	}
+
+	/**
+	 * @param action
+	 * @param utilityArea 
+	 * @param element 
+	 * @param doc 
+	 */
+	private void addUtility(Action action, Document doc, Element element, String parentURI, Network network) {
+		if(UserInterfaceUtil.getClassName(action)!=null){
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			String title = UserInterfaceUtil.getNodeTitle(action);
+			String iconCls = UserInterfaceUtil.getNodeIconCls(action);
+			String titlePanel = network.getDescription()+" - "+title;
+			parameterMap.put("title", title);
+			parameterMap.put("iconCls", iconCls);
+			List<Integer> utilityGroupIdList = new ArrayList<Integer>();
+			utilityGroupIdList.add( action.getUtilityGroup().getId());
+			Set<Action> actionChildren = action.getActions();
+			for (Action actionChild : actionChildren) {
+				if(actionChild.getUtilityGroup()!=null){
+					utilityGroupIdList.add(actionChild.getUtilityGroup().getId());
+				}
+			}
+			parameterMap.put(IParameterHttpServletRequestContants.UTILITY_GROUP_ID, utilityGroupIdList);
+//			parameterMap.put(IParameterHttpServletRequestContants.UTILITY_GROUP_ID, action.getUtilityGroup().getId());
+			String childURI = getChildURI(parentURI,action.getId(), IMenuTreeConstants.ACTION);
+			//					Add Utility node
+			Element utilityElement = addLeafElement(doc, element, childURI, title, iconCls, null,null, Boolean.FALSE, null, UserInterfaceUtil.getClassName(action), parameterMap, iconCls, titlePanel);
+		}
+
+	}
+
+	private void addNetworkTree(Date currentDate, Integer userId, Document doc, Element root, Area area, Network network, String parentURI) throws Exception {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+		parameterMap.put("title",area.getDescription()+" - "+ network.getDescription());
+		String nodeTypeIconCls = UserInterfaceUtil.getNodeIconCls(network);
+		parameterMap.put("iconCls", nodeTypeIconCls);
+		String childURI = getChildURI(parentURI,network.getId(), IMenuTreeConstants.NETWORK);
+		//					Add Network node
+		Element networkElement = addFolderElement(doc,root,childURI,network.getDescription(),nodeTypeIconCls,null,null,Boolean.FALSE,null, area.getName(), parameterMap, area.getIcon(), area.getDescription());
+
+		if(area.getId().equals(IAreaConstants.SERVICES_AREA) || area.getId().equals(IAreaConstants.GRAPH_AREA) ){
+			IFunctionAdvancedDAO iFunctionAdvancedDAO = new FunctionAdvancedDAO();
+			List<Function> functions = iFunctionAdvancedDAO.findAll(null, area.getId(), network.getId());
+			ISecurityBL iSecurityBL = new SecurityBL();
+			for (Function function : functions) {
+				if(iSecurityBL.hasPermission(userId, area.getId(), network.getId(), function.getId())){
+					addFunctionTree(doc, currentDate, networkElement, area, network, function, childURI);
+				}
+
+			}
+		}else if (area.getId().equals(IAreaConstants.UTILITY_AREA)){   
+			   addUtilityTree(userId, doc, networkElement, childURI, network);
+		}
+		
+	}
+
+	private void addFunctionTree(Document doc, Date currentDate, Element root, Area area, Network network, Function function, String parentURI) throws Exception {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+		parameterMap.put(IParameterHttpServletRequestContants.FUNCTION_ID, function.getId());
+		parameterMap.put("title", area.getDescription()+" - "+ network.getDescription()+" - "+function.getName());
+		String nodeTypeIconCls = UserInterfaceUtil.getNodeIconCls(function);
+		parameterMap.put("iconCls", nodeTypeIconCls);
+		String childURI = getChildURI(parentURI, function.getId(), IMenuTreeConstants.FUNCTION);
+		//					Add Alarm or Automatism node
+		Element element = addFolderElement(doc,root,childURI,function.getName(),nodeTypeIconCls,null,null,Boolean.FALSE, null, area.getName(), parameterMap, area.getIcon(), area.getDescription());
+
+		if(area.getId().equals(IAreaConstants.SERVICES_AREA)){
+			addRootsTypeNodeTree(doc, currentDate, element, area, network, function, childURI);
+		}
+	}
+
+	private void addRootsTypeNodeTree(Document doc, Date currentDate, Element element, Area area, Network network, Function function, String parentURI) throws Exception {
+		INodeAdvancedDAO iNodeAdvancedDAO = new NodeAdvancedDAO();
+		INodeBL iNodeBL = new NodeBL();
+		List<Type> nodeTypeList = iNodeAdvancedDAO.findNodeTypeByIdNetwork(network.getId());
+		for (Type nodeType : nodeTypeList) {
+			if(iNodeBL.hasService(/*enabled list is not necessary*/null, currentDate, nodeType, function, Boolean.TRUE)){
+				addRootTypeNode(doc, currentDate, element, area, network, function, nodeType, parentURI);
+			}
+		}
+
+	}
+
+	/**
+	 * @param doc
+	 * @param currentDate
+	 * @param root
+	 * @param elementFunctionId 
+	 * @param network 
+	 * @param function
+	 * @param nodeTypeId
+	 * @throws Exception 
+	 */
+	private void addRootTypeNode(Document doc, Date currentDate, Element root, Area area, Network network, Function function, Type nodeType, String parentURI) throws Exception {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+		parameterMap.put(IParameterHttpServletRequestContants.FUNCTION_ID, function.getId());
+		parameterMap.put("nodeTypeId", nodeType.getId());
+		parameterMap.put("title", area.getDescription()+" - "+ network.getDescription()+" - "+function.getName()+ " - "+ nodeType.getDescription());
+		String nodeTypeIconCls = UserInterfaceUtil.getNodeIconCls(nodeType);
+		parameterMap.put("iconCls", nodeTypeIconCls);
+		String childURI = getChildURI(parentURI,nodeType.getId(), IMenuTreeConstants.TYPE_NODE);
+		//					Add UDB type node
+		Element nodeTypeElement = addFolderElement(doc,root,childURI,nodeType.getDescription(),nodeTypeIconCls,null,null,Boolean.FALSE,null, IClassNameUIConstants.SERVICES, parameterMap, area.getIcon(), area.getDescription());
+
+		if(INodeTypeConstants.UDB.equals(nodeType.getId())){
+			addUDB(doc, currentDate, nodeTypeElement, area, network, function, nodeType, childURI);
+		}else {
+			Set<Node> nodeSet = nodeType.getNodes();
+			// Sort node by description
+			List<Node> nodeList = new ArrayList<Node>(nodeSet);
+			Comparator compare = new BeanComparator( "description" );
+			Collections.sort( nodeList, compare );
+			for (Node node : nodeList) {
+				addNode(doc, currentDate, null, nodeTypeElement, area, network, function, node, childURI);
+			}
+		}
+
+	}
+
+
+
+	/**
+	 * @param doc
+	 * @param currentDate
+	 * @param function
+	 * @param udbNodeType
+	 * @param parentURI
+	 * @param udbNodeTypeElement
+	 * @param area 
+	 * @throws Exception 
+	 */
+	private void addUDB(Document doc, Date currentDate, Element udbNodeTypeElement, Area area, Network network, Function function, Type udbNodeType, String parentURI) throws Exception {
+		Map<String, Object> parameterMap;
+		Set<Node> udbNodeSet = udbNodeType.getNodes();
+		// Sort node by description
+		List<Node> udbNodeList = new ArrayList<Node>(udbNodeSet);
+		Comparator compare = new BeanComparator( "description" );
+		Collections.sort( udbNodeList, compare );
+		for (Node udbNode : udbNodeList) {
+			parameterMap = new HashMap<String, Object>();
+			parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+			parameterMap.put(IParameterHttpServletRequestContants.FUNCTION_ID, function.getId());
+			parameterMap.put("nodeId", udbNode.getId());
+			parameterMap.put("title", area.getDescription()+" - "+ network.getDescription()+" - "+function.getName()+ " - "+udbNode.getDescription());
+			String nodeIconCls = UserInterfaceUtil.getNodeIconCls(udbNode);
+			parameterMap.put("iconCls", nodeIconCls);
+			String childURI = getChildURI(parentURI, udbNode.getId(), IMenuTreeConstants.NODE);
+			//					Add UDB node
+			Element udbNodeElement = addFolderElement(doc,udbNodeTypeElement,childURI,udbNode.getDescription(),nodeIconCls,null,null,Boolean.FALSE, null,  IClassNameUIConstants.SERVICES, parameterMap, area.getIcon(), area.getDescription());
+
+			//			Set<Service> udbServiceSet = udbNode.getServices();
+			//			for (Service udbService : udbServiceSet) {
+			//				boolean isToAdd = isToAdd(null, udbNode, udbService, function);
+			//				if(isToAdd){
+			//					addLeaf(doc, udbNodeId, udbNodeElement, udbService);
+			//				}
+			//
+			//			}
+			addLocations(doc, currentDate, udbNodeElement, area, network,function, udbNode, childURI);
+
+		}
+	}
+
+
+
+	/**
+	 * @param doc
+	 * @param currentDate
+	 * @param function
+	 * @param udbNode
+	 * @param parentURI
+	 * @param udbNodeElement
+	 * @throws Exception
+	 */
+	private void addLocations(Document doc, Date currentDate, Element udbNodeElement, Area area, Network network, Function function, Node udbNode, String parentURI) throws Exception {
+		Map<String, Object> parameterMap;
+		INodeAdvancedDAO iNodeAdvancedDAO = new NodeAdvancedDAO();	
+		ILocationDAO iLocationDAO = new LocationDAO();
+		INodeBL iNodeBL = new NodeBL();
+		List<Location> locations = iLocationDAO.findAll();
+		for (Location location : locations) {
+			List<NodeRelation> udbChildren = iNodeAdvancedDAO.findByParentAndLocation(udbNode.getId(), location.getId());
+			if(iNodeBL.hasService(/*enabled list is not necessary*/null, currentDate, udbChildren,function,Boolean.TRUE)){
+				if(udbChildren!=null && udbChildren.size()>0){
+					parameterMap = new HashMap<String, Object>();
+					Integer[] sipServerIdList = new Integer[udbChildren.size()];
+					int i = 0;
+					for (NodeRelation nodeRelation : udbChildren) {
+						sipServerIdList[i] = nodeRelation.getNodeByIdChild().getId();
+						i++;
+					}
+					parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+					parameterMap.put(IParameterHttpServletRequestContants.FUNCTION_ID, function.getId());
+					parameterMap.put("nodeId", sipServerIdList);
+					parameterMap.put("title", area.getDescription()+" - "+ network.getDescription()+" - "+function.getName()+ " - "+location.getName());
+					parameterMap.put("iconCls", "location-icon");
+					String childURI = getChildURI(parentURI,location.getId(),IMenuTreeConstants.LOCATION);
+					//							Add SIP SERVER locations
+					Element locationElement = addFolderElement(doc,udbNodeElement,childURI,location.getName(),"location-icon",null,null,Boolean.FALSE,null, IClassNameUIConstants.SERVICES, parameterMap, area.getIcon(), area.getDescription());
+
+					addUdbChildren(doc, currentDate, udbNode, locationElement, udbChildren, area, network, function, childURI);
+
+				}
+			}
+		}
+	}
+
+
+	private void addUdbChildren(Document doc, Date currentDate, Node udbNode, Element locationElement, List<NodeRelation> udbChildren, Area area, Network network, Function function, String parentURI) throws Exception {
+		for (NodeRelation nodeRelation : udbChildren) {
+			Node childNode = nodeRelation.getNodeByIdChild();
+			addNode(doc, currentDate, udbNode, locationElement, area, network, function, childNode, parentURI);
+		}
+	}
+
+
+	/**
+	 * @param doc
+	 * @param currentDate
+	 * @param parentNode
+	 * @param parentURI
+	 * @param root
+	 * @param network
+	 * @param function
+	 * @param node
+	 * @throws Exception 
+	 */
+	private void addNode(Document doc, Date currentDate, Node parentNode,
+			Element root, Area area, Network network, Function function, Node node, String parentURI) throws Exception {
+		INodeBL iNodeBL = new NodeBL();
+		if(iNodeBL.hasService(/*enabled list is not necessary*/null, currentDate, node, function, Boolean.TRUE)){
+			Map<String, Object> parameterMap = new HashMap<String, Object>();
+			parameterMap.put(IParameterHttpServletRequestContants.NETWORK_ID, network.getId());
+			parameterMap.put(IParameterHttpServletRequestContants.FUNCTION_ID, function.getId());
+			parameterMap.put("nodeId", node.getId());
+			parameterMap.put("title", area.getDescription()+" - "+ network.getDescription()+" - "+function.getName()+ " - "+node.getDescription());
+			String nodeIconCls = UserInterfaceUtil.getNodeIconCls(node);
+			parameterMap.put("iconCls", nodeIconCls);
+			String childURI = getChildURI(parentURI, node.getId(), IMenuTreeConstants.NODE);
+			//									Add node
+			Element nodeElement = addFolderElement(doc,root,childURI,node.getDescription(),nodeIconCls,null,null,Boolean.FALSE,null, IClassNameUIConstants.SERVICES, parameterMap, area.getIcon(), area.getDescription());							
+
+			//			Set<Service> serviceSet = node.getServices();
+			//			for (Service nodeService : serviceSet) {
+			//				boolean isToAdd = isToAdd(parentNode, node, nodeService, function);
+			//				if(isToAdd){
+			//					addLeaf(doc, nodeId, nodeElement, nodeService);							
+			//				}
+			//			}
+			Set<NodeRelation> nodeRelationSet = node.getNodeRelationsForIdParent();
+			// Sort NodeRelation by id
+			List<NodeRelation> nodeRelationList = new ArrayList<NodeRelation>(nodeRelationSet);
+			Comparator compare = new BeanComparator( "id" );
+			Collections.sort( nodeRelationList, compare );
+			for (NodeRelation nodeRelation : nodeRelationList) {
+				Node childNode = nodeRelation.getNodeByIdChild();
+				addNode(doc,currentDate, node, nodeElement, area, network, function, childNode, childURI);
+			}
+		}
+	}
+
+	private String getChildURI (String parentURI, Integer childId, String childType){
+		String uri = parentURI;
+		if(parentURI!=null && childId!=null){
+			uri = parentURI + childType + childId;	
+		}
+		return uri;
+	}
+
+
+	private Element addFolderElement(Document doc, Element root, String id, String title, String icon, String qTip, Boolean checked,Boolean expanded, Boolean disabled, String className, Map<String, Object> parameterMap, String iconPanel, String titlePanel) {
+		String jsonParameters = JSONUtil.createJsonParameters(parameterMap,null).toString();
+		Element child = makeElement(doc,"folder", id,title,icon,qTip,checked,expanded,disabled, className, jsonParameters, iconPanel, titlePanel);		
+		root.appendChild(child);
+		return child;
+	}
+
+	private Element addLeafElement(Document doc, Element root, String id, String title, String icon, String qTip, Boolean checked, Boolean expanded, Boolean disabled, String className, Map<String, Object> parameterMap, String iconPanel, String titlePanel) {
+		String jsonParameters = JSONUtil.createJsonParameters(parameterMap,null).toString();
+		Element child = makeElement(doc,"leaf", id,title,icon,qTip,checked,expanded,disabled, className, jsonParameters, iconPanel, titlePanel);		
+		root.appendChild(child);
+		return child;
+	}
+
+
+	private Element makeElement(Document doc, String type, String id, String title, String icon, String qTip, Boolean checked, Boolean expanded, Boolean disabled, String className, String jsonParameters, String iconPanel, String titlePanel){
+		Element element = doc.createElement(type);
+		element.setAttribute("id",id);
+		element.setAttribute("title",title);
+		element.setAttribute("iconCls", icon);
+		element.setAttribute("qTip", qTip);
+		if(checked!=null){
+			element.setAttribute("checked", checked.toString());
+		}
+		if(disabled!=null){
+			element.setAttribute("disabled", disabled.toString());
+		}
+		element.setAttribute("expanded", expanded.toString());
+		element.setAttribute("className", className);
+
+		if(jsonParameters == null){
+			jsonParameters = (new JSONObject()).toString();
+		}
+
+		element.setAttribute("parameters", jsonParameters);
+		element.setAttribute("iconPanel", iconPanel);
+		element.setAttribute("titlePanel", titlePanel);
+		return element;
+	}
+
+}

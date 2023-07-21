@@ -1,0 +1,207 @@
+Confirm=Conferma
+Error=Errore
+Execution_Job=Esecuzione dell&#39;utility
+Insert_valid_number=Inserire un numero valido
+Loading=Caricamento in corso ...
+Maximum_number_of_processes_reached=Numero massimo di processi raggiunto 
+No=No
+No_Results=Nessun risultato\!
+Output_execution=Output 
+Please_try_again_later=Si prega di riprovare pi&ugrave; tardi
+Process_is_queued_but_not_have_output=Utilily non eseguita. Si prega di riprovare  pi&ugrave; tardi 
+Start=Start
+System_busy_Please_try_later=Sistema occupato. Si prega di riprovare pi&ugrave; tardi
+Telephone_Number=Numero di telefono
+Telephone_number_not_Found=Numero di telefono non trovato
+Warning=Attenzione
+Yes=S&igrave;
+Search_CLI=Trova CLI
+CLI_not_Found=Nessun CLI &egrave; stato trovato.
+
+#Util.InfoCLI
+InfoCLI_Start=Inizio
+InfoCLI=Info CLI
+InfoCLIPoste=Info CLI Poste
+InfoCLIContactCenter= Info CLI Contact Center
+
+#Utility.TiUMManager
+TiUMManager_OK=Verifica
+Enable_Notify=Abilita Notifica
+Disable_Notify=Disabilita Notifica
+Create_Profile=Crea Profilo
+Are_You_Sure_set_Default_Pin=Sei sicuro di voler impostare il PIN di default ?
+Are_You_Sure_Create_Profile=Sei sicuro di voler creare la casella vocale ?
+Set_Default_Pin=Set default PIN
+Change_Pin=Cambio PIN
+Delete_Create_Button=Elimina e Ricrea Profilo
+Delete_Button=Elimina Profilo
+Exit_Button=Esci
+Confirm_Set_Default_Pin=Conferma PIN di default
+Insert_New_Pin=Inserisci un nuovo PIN
+Pin=PIN (4 cifre)
+Are_You_Sure_Change_Pin=Sei sicuro di voler cambiare il PIN ?
+Confirm_Change_Pin=Conferma cambio PIN
+Confirm_Enable_Notify=Conferma abilita/disabilita notifica
+Are_You_Sure_Delete_Profile=Sei sicuro di voler eliminare la casella vocale ?
+Are_You_Sure_Enable_Notify=Sei sicuro di voler abilitare o disabilitare la notifica ?
+Confirm_Delete_Profile=Conferma Elimina Profilo
+Confirm_Delete_Create_Profile=Conferma Elimina e Ricrea
+Confirm_Create_Profile=Conferma creazione casella
+Are_You_Sure_Delete_Create_Profile=Sei sicuro di voler eliminare e ricreare nuovamente la casella vocale ?
+TiUMManager_Insert_valid_number=Inserire un numero di 4 cifre
+TiUMManager_Warning=Attenzione
+
+#Util.GeoArea
+GeoArea_Start=Start
+GeoArea_Start_Alignment=Inizio verifica
+GeoArea_Start_Time=Ora di inizio
+GeoArea_Incorrect_Day_for_GeoArea_Alignment=Giorno non valido
+GeoArea_Incorrect_set_of_Date_Time_for_GeoArea_Alignment= Data non valida
+GeoAlignment_For_this_time_UDBGeo_Alignment_is_already_scheduled_by_VASMONCAT=Per questo data ativit&agrave; gi&agrave; schedulata
+GeoAlignment_Warning=Attenzione
+GeoAlignment_You_must_set_Date_Time_correctly_for_Geo_Alignment=Selezionare una data valida per la schedulazione
+GeoAlignment_Maximum_number_of_processes_reached=Numero massimo di processi raggiunto\:
+GeoAlignment_Please_try_again_later=. Si prega di riprovare pi&ugrave; tardi.
+GeoAlignment_Confirm=Conferma
+GeoAlignment_The_Process_is_queued_successfully=Il processo &egrave; stato accodato con successo.
+GeoArea_Popoup_Windows_Title=GEO AREA Output File
+GeoArea_File_Name=Nome File
+GeoArea_Open_Cli_Udb=Disallineamenti su UDB
+GeoArea_FileDescription_ResultCliUdbPubblic=Cli su UDB
+GeoArea_Misallignment_SSW=Disallineamenti SSW
+GeoArea_Output=Output
+GeoArea_AccordingPanel_Title=Utility
+GeoArea_Panel1Title=Disallineamenti GEO Area rispetto al file modello
+GeoArea_MultiField_Date_Title=Pianificazione
+GeoArea_Misallignment_For_District=Disallineamenti GEO Area per distretto
+
+GeoArea_District=Distretti
+
+
+#Util.CheckCnc
+CheckCnc_Changes_saved_successfully=CNC resettato
+CheckCnc_for_Ipcc_network=Check Cnc per la rete Ipcc
+CheckCnc_Confirm=Conferma
+CheckCnc_Do_you_want_to_delete_record_on_UDB_Sip_Server=<center><b>Vuoi risettare il CNC ?</center></b><br>
+CheckCnc_Error=Errore
+CheckCnc_Execution_Job=Esecuzione dell'utility
+CheckCnc_Insert_valid_number=Inserire un numero valido
+CheckCnc_Loading=Caricamento in corso ....
+CheckCnc_Maximum_number_of_processes_reached=Massimo numero di processi\: 
+CheckCnc_No_Results=Nessun Risultato\!
+CheckCnc_Output_execution=<b>Output:</b>
+CheckCnc_Please_try_again_later=. Si prega di riprovare pi&ugrave; tardi.
+CheckCnc_Process_is_queued_but_not_have_output=Processo accodato senza un output\!
+CheckCnc_Start=Start
+CheckCnc_System_busy_Please_try_later=Sistema occupato. Si prega di riprovare pi&ugrave; tardi
+CheckCnc_Telephone_Number=Numero di telefono
+CheckCnc_Telephone_number_not_Found=Numero di telefono non trovato
+CheckCnc_Warning=Attenzione
+CheckCnc_Yes=S&igrave;
+CheckCnc_No=No
+CheckCnc_OK=OK
+CheckCnc_Numbering_Info=Info numerazione
+CheckCnc_cnc=cnc
+CheckCnc_db=db
+
+#Util.CheckIpLock
+CheckIpLock_Changes_saved_successfully=Modifiche salvate con successo
+CheckIpLock_CheckIP_Lock_for_PK3_network=Check IP Lock per la rete PK3 
+CheckIpLock_Confirm=Conferma
+CheckIpLock_Do_you_want_to_delete_record_on_UDB=<center><b>Vuoi eliminare il record su UDB?</center></b><br>
+CheckIpLock_Error=Errore
+CheckIpLock_Execution_Job=Esecuzione dell'utility
+CheckIpLock_Insert_valid_number=Inserire un numero valido
+CheckIpLock_Loading=Caricamento in corso ...
+CheckIpLock_Maximum_number_of_processes_reached=Massimo numero di processi raggiunti\: 
+CheckIpLock_No=No
+CheckIpLock_No_Results=Nessun risultato\!
+CheckIpLock_Output_execution=<b>Output:</b>
+CheckIpLock_Please_try_again_later=. Si prega di riprovare pi&ugrave; tardi.
+CheckIpLock_Process_is_queued_but_not_have_output=Processo accodato senza un output\!
+CheckIpLock_Start=Inizio
+CheckIpLock_System_busy_Please_try_later=Sistema occupato. Si prega di riprovare pi&ugrave; tardi
+CheckIpLock_Telephone_Number=Numero di telefono
+CheckIpLock_Telephone_number_not_Found=Numero di telefono non trovato
+CheckIpLock_Warning=Attenzione
+CheckIpLock_Yes=S&igrave;
+CheckIpLock_OK=OK
+
+#Util.MyCronjob
+MyCronjob_all=tutti
+MyCronjob_All=Tutti
+MyCronjob_All_Jobs=Tutti i servizi
+MyCronjob_Date=Data
+MyCronjob_Executed=Eseguiti
+MyCronjob_Job_Executed=Processo eseguito
+MyCronjob_Job_Running=Processi in eseguzione
+MyCronjob_Job_Scheduled=Processi Schedulati
+MyCronjob_Loading=Carcamento in corso...
+MyCronjob_Log_Execution_Utility=Esecuzione Log Utility
+MyCronjob_Refresh=Aggiorna
+MyCronjob_Refresh_Data=Aggiorna Data
+MyCronjob_Running=In Esecuzione
+MyCronjob_Scheduled=Schedulati
+MyCronjob_Task=Funzione
+MyCronjob_Tasks=Funzioni
+MyCronjob_This_job_have_no_logs_because_is_scheduled_at= Non puoi visualizzare il Log di un servizio in esecuzione  
+MyCronjob_Utility_Status=Stato Utility 
+MyCronjob_You_dont_have_permission_to_see_log_pending_the_job_is_running=Non sei autorizzato a vedere il processo in esecuzione\! 
+
+#Util.MyCronjobViewLogPanel
+MyCronjobViewLogPanel_Automatic_Refresh=Aggiornamento automatico
+MyCronjobViewLogPanel_End_Execution=Fine Esecuzione
+MyCronjobViewLogPanel_Load_Window_Fail=Esecuzione finestra fallita
+MyCronjobViewLogPanel_Off=Off
+MyCronjobViewLogPanel_On=On
+MyCronjobViewLogPanel_Please_wait_Ensure_that_Button_On_are_pressed=Si prega di attendere ... Assicurarsi che il bottone 'On' sia attivato.
+MyCronjobViewLogPanel_Refresh_OFF=Aggiorna OFF
+MyCronjobViewLogPanel_Refresh_ON=Aggiorna ON
+MyCronjobViewLogPanel_Scheduled=Inizio esecuzione
+MyCronjobViewLogPanel_Utility=Utility
+
+#utility.TiumAlignment
+TiumAlignment_Confirm=Conferma
+TiumAlignment_For_this_time_UDBTiUM_Alignment_is_already_scheduled_by_VASMONCAT=Per questo orario l&#39;allineamento UDB-TiUM &egrave gi&agrave; schedulato da VASMONCAT
+TiumAlignment_Incorrect_Day_for_TiUM_Alignment=Giorno non valido per l&#39;allineamento UDB-TiUM
+TiumAlignment_Incorrect_set_of_Date_Time_for_TiUM_Alignment= Data non valida per l&#39;allineamento UDB-TiUM
+TiumAlignment_Loading=Caricamento in corso ...
+TiumAlignment_Maximum_number_of_processes_reached=Numero massimo di processi raggiunto\: 
+TiumAlignment_Please_try_again_later=. Si prega di riprovare pi&ugrave; tardi.
+TiumAlignment_Start=Inizio
+TiumAlignment_Start_Alignment=Inzio allineamento
+TiumAlignment_Start_Time=Ora di inizio
+TiumAlignment_The_Process_is_queued_successfully=Il processo &egrave; stato accodato con successo.
+TiumAlignment_UDBTiUM_Alignment_for_PK3_network=Allineamento UDB-TiUM per la rete PK3
+TiumAlignment_Warning=Attenzione
+TiumAlignment_You_must_set_Date_Time_correctly_for_TiUM_Alignment=Selezionare una data valida per l&#39;allineamento UDB-TiUM
+
+#  utility.RecoveryService
+RecoveryService_Affected_Services_List=Lista servizi
+RecoveryService_Confirm=Conferma
+RecoveryService_Description=Descrizione
+RecoveryService_End_Recovery=Fine Recovery
+RecoveryService_Incorrect_Date_for_End_Recovery=Data Fine non può precedere Data inizio
+RecoveryService_Incorrect_Date_for_Schedule_Recovery=Data Errata per eseguire il Recovery
+RecoveryService_Incorrect_Date_for_Start_Recovery=Data Inizio errata per eseguire il Recovery 
+RecoveryService_Incorrect_set_of_Date_Time_for_End_Recovery=Data di fine non pu\u00F2 precedere la data di inizio  
+RecoveryService_Incorrect_set_of_Date_Time_for_Schedule_Recovery=Data non valida per eseguire il recovery
+RecoveryService_Incorrect_set_of_Date_Time_for_Start_Recovery=Data non valida per iniziare il recovery
+RecoveryService_Loading=Caricamento in corso ...
+RecoveryService_Maximum_number_of_processes_reached=Massimo numero di processi raggiunto\: 
+RecoveryService_Network=Rete
+RecoveryService_Network_and_Utility=Rete e Utility
+RecoveryService_Please_try_again_later=. Si prega di riprovare pi&ugrave; tardi.
+RecoveryService_Range_of_Recovery=Range di Recovery
+RecoveryService_Schedule_Recovery=Esecuzione Recovery
+RecoveryService_Schedule_Recovery_Process=Esecuzione precessi di Recovery
+RecoveryService_Select_a_Network=Seleziona una Rete
+RecoveryService_Select_an_Utility=Seleziona una Utility
+RecoveryService_Source_Nodes=Nodo Sorgente
+RecoveryService_Start=Start
+RecoveryService_Start_Recovery=Start Recovery
+RecoveryService_Start_Recovery_must_have_Date_Time_before_to_End_Recovery= Start Data/Ora non pu\u00F2 precedere Fine Data/Ora 
+RecoveryService_The_Recovery_Process_is_queued_successfully=Il processo di Recovery &egrave; stato messo in coda
+RecoveryService_Utility=Utility
+RecoveryService_Warning=Attenzione
+RecoveryService_You_must_set_all_field_correctly=&Egrave; necessario impostare tutti i campi correttamente\!

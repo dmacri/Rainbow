@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package it.telecom.integration.dao.security.service;
+
+import it.telecom.integration.dao.generated.Area;
+
+import java.util.List;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IAreaAdvancedDAO {
+
+	/**
+	 * @param enabledNetworkFunctionList
+	 * @return
+	 */
+	List<Area> findAll(List<Integer> enabledNetworkFunctionList);
+
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="chartWithdData" columnCount="4" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="138" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="834"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="chartImage" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="version" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
+	<parameter name="nameService" class="java.lang.String"/>
+	<parameter name="from" class="java.lang.String"/>
+	<parameter name="to" class="java.lang.String"/>
+	<parameter name="logoTelecom" class="java.lang.String"/>
+	<parameter name="logoItaltel" class="java.lang.String"/>
+	<parameter name="sourceAndNameNode" class="java.lang.String"/>
+	<parameter name="networkDescription" class="java.lang.String"/>
+	<parameter name="nodeDescription" class="java.lang.String"/>
+	<parameter name="labelNameType" class="java.lang.String"/>
+	<parameter name="functionDescription" class="java.lang.String"/>
+	<parameter name="nodeTypeDescription" class="java.lang.String"/>
+	<parameter name="labelElements" class="java.lang.String"/>
+	<field name="value" class="java.lang.Number"/>
+	<field name="date" class="java.sql.Timestamp"/>
+	<field name="name" class="java.lang.String"/>
+	<title>
+		<band height="596" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="177" width="554" height="416" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{chartImage}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="40"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<image scaleImage="RealSize">
+					<reportElement x="0" y="0" width="104" height="30"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoTelecom}]]></imageExpression>
+				</image>
+				<image scaleImage="RealSize">
+					<reportElement x="448" y="0" width="107" height="30"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoItaltel}]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="178" y="8" width="194" height="31" forecolor="#666666"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[VASMONCAT]]></text>
+				</staticText>
+			</frame>
+			<textField>
+				<reportElement x="86" y="108" width="229" height="17"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" pdfFontName="Helvetica" pdfEncoding="Cp1250"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nameService}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="60" width="99" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{networkDescription}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="60" width="49" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true" isItalic="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Rete:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="7" y="108" width="76" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{labelNameType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="76" width="76" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true" isItalic="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Tipo Servizio:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="92" width="120" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nodeTypeDescription}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="92" width="76" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true" isItalic="true" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Tipo Nodo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="76" width="113" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{functionDescription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="124" width="76" height="17"/>
+				<textElement verticalAlignment="Top">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{labelElements}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="86" y="125" width="453" height="45"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sourceAndNameNode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="1" width="514" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pagina "+$V{PAGE_NUMBER}+" di"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="514" y="1" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy HH.mm" isBlankWhenNull="true">
+				<reportElement x="168" y="15" width="73" height="19"/>
+				<textElement textAlignment="Justified" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="15" width="165" height="19"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" Report creato da: VasMonCat  Rel.: "+ $P{version}+ "  il"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

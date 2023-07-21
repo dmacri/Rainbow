@@ -1,0 +1,32 @@
+package it.icarcnr.presentation.action.util;
+
+import java.util.*;
+
+public interface ILabelFilesGeoArea {
+
+	public static final Map<String,String> labelFilesTable=Collections.unmodifiableMap(new HashMap<String,String>()
+		{
+			{
+				put("esiti_listageossw_BERSPK3","OPM SSW Milano Bers");
+				put("esiti_listageossw_CTRLPK3","OPM SSW Roma Ctrl");
+				put("esiti_listageossw_FIPK3","OPM SSW Firenze");
+				put("esiti_listageossw_INVPK3","OPM SSW Roma Inv");
+				put("esiti_listageossw_MALPPK3","OPM SSW Milano Malp");
+				put("esiti_listageossw_NAPK3","OPM SSW Napoli");
+				put("esiti_listageossw_PAPK3","OPM SSW Palermo");
+				put("esiti_listageossw_VRPK3","OPM SSW Verona");
+				
+				put("esiti_listageobsh_BOPK0","BSH SSW Bologna");
+				put("esiti_listageobsh_INVPK0","BSH SSW Roma Inv");
+				put("esiti_listageobsh_NAPK0","BSH SSW Napoli");
+				put("esiti_listageossw_BOPK0","OPM SSW Bologna");
+				put("esiti_listageossw_CTRLPK0","OPM SSW Roma Ctrl");
+				put("esiti_listageossw_INVPK0","OPM SSW Roma Inv");
+				put("esiti_listageossw_MIPK0","OPM SSW Milano");
+				put("esiti_listageossw_NAPK0","OPM SSW Napoli");
+				put("esiti_listageossw_VRPK0","OPM SSW Verona");
+				
+			}
+	});
+
+}

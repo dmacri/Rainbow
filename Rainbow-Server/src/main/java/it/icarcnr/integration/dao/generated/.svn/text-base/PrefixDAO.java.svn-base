@@ -1,0 +1,222 @@
+package it.telecom.integration.dao.generated;
+
+import java.util.List;
+import java.util.logging.Level;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+/**
+ * A data access object (DAO) providing persistence and search support for
+ * Prefix entities. Transaction control of the save(), update() and delete()
+ * operations must be handled externally by senders of these methods or must be
+ * manually added to each of these methods for data to be persisted to the JPA
+ * datastore.
+ * 
+ * @see it.telecom.integration.dao.generated.Prefix
+ * @author MyEclipse Persistence Tools
+ */
+
+public class PrefixDAO implements IPrefixDAO {
+	// property constants
+	public static final String PREFIX = "prefix";
+
+	private EntityManager getEntityManager() {
+		return EntityManagerHelper.getEntityManager();
+	}
+
+	/**
+	 * Perform an initial save of a previously unsaved Prefix entity. All
+	 * subsequent persist actions of this entity should use the #update()
+	 * method. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#persist(Object)
+	 * EntityManager#persist} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * PrefixDAO.save(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to persist
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void save(Prefix entity) {
+		EntityManagerHelper.log("saving Prefix instance", Level.INFO, null);
+		try {
+			getEntityManager().persist(entity);
+			EntityManagerHelper.log("save successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("save failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Delete a persistent Prefix entity. This operation must be performed
+	 * within the a database transaction context for the entity's data to be
+	 * permanently deleted from the persistence store, i.e., database. This
+	 * method uses the {@link javax.persistence.EntityManager#remove(Object)
+	 * EntityManager#delete} operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * PrefixDAO.delete(entity);
+	 * EntityManagerHelper.commit();
+	 * entity = null;
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to delete
+	 * @throws RuntimeException
+	 *             when the operation fails
+	 */
+	public void delete(Prefix entity) {
+		EntityManagerHelper.log("deleting Prefix instance", Level.INFO, null);
+		try {
+			entity = getEntityManager().getReference(Prefix.class,
+					entity.getId());
+			getEntityManager().remove(entity);
+			EntityManagerHelper.log("delete successful", Level.INFO, null);
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("delete failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Persist a previously saved Prefix entity and return it or a copy of it to
+	 * the sender. A copy of the Prefix entity parameter is returned when the
+	 * JPA persistence mechanism has not previously been tracking the updated
+	 * entity. This operation must be performed within the a database
+	 * transaction context for the entity's data to be permanently saved to the
+	 * persistence store, i.e., database. This method uses the
+	 * {@link javax.persistence.EntityManager#merge(Object) EntityManager#merge}
+	 * operation.
+	 * 
+	 * <pre>
+	 * EntityManagerHelper.beginTransaction();
+	 * entity = PrefixDAO.update(entity);
+	 * EntityManagerHelper.commit();
+	 * </pre>
+	 * 
+	 * @param entity
+	 *            Prefix entity to update
+	 * @return Prefix the persisted Prefix entity instance, may not be the same
+	 * @throws RuntimeException
+	 *             if the operation fails
+	 */
+	public Prefix update(Prefix entity) {
+		EntityManagerHelper.log("updating Prefix instance", Level.INFO, null);
+		try {
+			Prefix result = getEntityManager().merge(entity);
+			EntityManagerHelper.log("update successful", Level.INFO, null);
+			return result;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("update failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public Prefix findById(Integer id) {
+		EntityManagerHelper.log("finding Prefix instance with id: " + id,
+				Level.INFO, null);
+		try {
+			Prefix instance = getEntityManager().find(Prefix.class, id);
+			return instance;
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	/**
+	 * Find all Prefix entities with a specific property value.
+	 * 
+	 * @param propertyName
+	 *            the name of the Prefix property to query
+	 * @param value
+	 *            the property value to match
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            number of results to return.
+	 * @return List<Prefix> found by query
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Prefix> findByProperty(String propertyName, final Object value,
+			final int... rowStartIdxAndCount) {
+		EntityManagerHelper.log("finding Prefix instance with property: "
+				+ propertyName + ", value: " + value, Level.INFO, null);
+		try {
+			final String queryString = "select model from Prefix model where model."
+					+ propertyName + "= :propertyValue";
+			Query query = getEntityManager().createQuery(queryString);
+			query.setParameter("propertyValue", value);
+			if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+				int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+				if (rowStartIdx > 0) {
+					query.setFirstResult(rowStartIdx);
+				}
+
+				if (rowStartIdxAndCount.length > 1) {
+					int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+					if (rowCount > 0) {
+						query.setMaxResults(rowCount);
+					}
+				}
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+	public List<Prefix> findByPrefix(Object prefix, int... rowStartIdxAndCount) {
+		return findByProperty(PREFIX, prefix, rowStartIdxAndCount);
+	}
+
+	/**
+	 * Find all Prefix entities.
+	 * 
+	 * @param rowStartIdxAndCount
+	 *            Optional int varargs. rowStartIdxAndCount[0] specifies the the
+	 *            row index in the query result-set to begin collecting the
+	 *            results. rowStartIdxAndCount[1] specifies the the maximum
+	 *            count of results to return.
+	 * @return List<Prefix> all Prefix entities
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Prefix> findAll(final int... rowStartIdxAndCount) {
+		EntityManagerHelper.log("finding all Prefix instances", Level.INFO,
+				null);
+		try {
+			final String queryString = "select model from Prefix model";
+			Query query = getEntityManager().createQuery(queryString);
+			if (rowStartIdxAndCount != null && rowStartIdxAndCount.length > 0) {
+				int rowStartIdx = Math.max(0, rowStartIdxAndCount[0]);
+				if (rowStartIdx > 0) {
+					query.setFirstResult(rowStartIdx);
+				}
+
+				if (rowStartIdxAndCount.length > 1) {
+					int rowCount = Math.max(0, rowStartIdxAndCount[1]);
+					if (rowCount > 0) {
+						query.setMaxResults(rowCount);
+					}
+				}
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find all failed", Level.SEVERE, re);
+			throw re;
+		}
+	}
+
+}

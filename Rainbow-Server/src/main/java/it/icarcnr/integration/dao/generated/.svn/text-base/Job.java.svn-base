@@ -1,0 +1,34 @@
+package it.telecom.integration.dao.generated;
+
+import java.sql.Timestamp;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Job entity. @author MyEclipse Persistence Tools
+ */
+@Entity
+@Table(name = "job" )
+public class Job extends AbstractJob implements java.io.Serializable {
+
+	// Constructors
+
+	/** default constructor */
+	public Job() {
+	}
+
+	/** minimal constructor */
+	public Job(Service service, User user, String status, String comment,
+			String serviceStatus, String reason) {
+		super(service, user, status, comment, serviceStatus, reason);
+	}
+
+	/** full constructor */
+	public Job(Service service, User user, Timestamp dateService,
+			Timestamp startDate, Timestamp endDate, String status,
+			String comment, String serviceStatus, String reason) {
+		super(service, user, dateService, startDate, endDate, status, comment,
+				serviceStatus, reason);
+	}
+
+}

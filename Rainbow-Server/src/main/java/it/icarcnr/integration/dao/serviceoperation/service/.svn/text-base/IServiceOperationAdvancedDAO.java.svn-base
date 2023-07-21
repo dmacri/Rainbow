@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package it.telecom.integration.dao.serviceoperation.service;
+
+import it.telecom.integration.dao.generated.ServiceOperation;
+
+import java.util.List;
+
+/**
+ * @author Graziano
+ *
+ */
+public interface IServiceOperationAdvancedDAO {
+	
+	public Integer getServiceOperationId(List<Integer> enabledNetworkFunctionList, Integer serviceId, String operation );
+	
+	public List<ServiceOperation> findAll(List<Integer> enabledNetworkFunctionList, Integer serviceId);
+
+}

@@ -1,0 +1,92 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractNetworkFunction entity provides the base persistence definition of
+ * the NetworkFunction entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractNetworkFunction implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private Function function;
+	private Network network;
+	private Set<ActionNetworkFunction> actionNetworkFunctions = new HashSet<ActionNetworkFunction>(
+			0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractNetworkFunction() {
+	}
+
+	/** minimal constructor */
+	public AbstractNetworkFunction(Network network) {
+		this.network = network;
+	}
+
+	/** full constructor */
+	public AbstractNetworkFunction(Function function, Network network,
+			Set<ActionNetworkFunction> actionNetworkFunctions) {
+		this.function = function;
+		this.network = network;
+		this.actionNetworkFunctions = actionNetworkFunctions;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Function")
+	public Function getFunction() {
+		return this.function;
+	}
+
+	public void setFunction(Function function) {
+		this.function = function;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_Network", nullable = false)
+	public Network getNetwork() {
+		return this.network;
+	}
+
+	public void setNetwork(Network network) {
+		this.network = network;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "networkFunction")
+	public Set<ActionNetworkFunction> getActionNetworkFunctions() {
+		return this.actionNetworkFunctions;
+	}
+
+	public void setActionNetworkFunctions(
+			Set<ActionNetworkFunction> actionNetworkFunctions) {
+		this.actionNetworkFunctions = actionNetworkFunctions;
+	}
+
+}

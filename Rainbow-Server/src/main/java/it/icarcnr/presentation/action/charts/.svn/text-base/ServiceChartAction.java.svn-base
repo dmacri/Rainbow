@@ -1,0 +1,192 @@
+package it.telecom.presentation.action.charts;
+
+import it.telecom.business.charts.impl.ServiceChartBL;
+import it.telecom.business.charts.service.IServiceChartBL;
+import it.telecom.business.charts.util.IChartsConstants.ChartMode;
+import it.telecom.business.report.bean.ChartBean;
+import it.telecom.business.report.bean.ChartBean.ServiceValue;
+import it.telecom.integration.dao.generated.EntityManagerHelper;
+import it.telecom.presentation.action.util.HttpServletResponseUtil;
+import it.telecom.presentation.action.util.IParameterHttpServletRequestContants;
+import it.telecom.presentation.action.util.SecurityUtil;
+import it.telecom.util.IDateFormatUtil;
+import it.telecom.util.JSONUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class ServiceChartAction extends Action {
+
+	private static final Log log = LogFactory.getLog(ServiceChartAction.class);
+
+	@Override
+	public ActionForward execute(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+	throws Exception {
+
+
+		final String method = "execute";
+
+		try {
+
+			List<Integer> enabledNetworkFunctionList = SecurityUtil.getEnabledNetworkFunctionList(request);
+
+			JSONObject result = new JSONObject();
+			JSONArray records = new JSONArray();
+
+			List<Integer> serviceIdList = null;
+
+			String serviceIdListString = request.getParameter(IParameterHttpServletRequestContants.SERVICE_ID);
+			if(serviceIdListString!= null){
+				serviceIdList = JSONUtil.getIntegerList(serviceIdListString);
+			}
+
+			Integer networkId = request.getParameter(IParameterHttpServletRequestContants.NETWORK_ID)!=null?Integer.valueOf(request.getParameter(IParameterHttpServletRequestContants.NETWORK_ID)):null;
+
+			Boolean radioService = Boolean.valueOf(request.getParameter("radioService"));
+			//			Boolean radioNode =  Boolean.valueOf(request.getParameter("radioNode"));
+
+			ChartMode chartMode;
+			if(radioService){
+				chartMode = ChartMode.CHART_BY_SERVICE;
+			}else{
+				chartMode = ChartMode.CHART_BY_NODE;
+			}
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat(IDateFormatUtil.DATE_FORMAT);
+			SimpleDateFormat dateTimeFormat= new SimpleDateFormat(IDateFormatUtil.DATE_TIME_FORMAT);
+			SimpleDateFormat timeDateFormat = new SimpleDateFormat(IDateFormatUtil.TIME_DATE_FORMAT);
+			
+			Date dateStart = dateFormat.parse(request.getParameter("dateStart"));
+			Date timeStart = timeDateFormat.parse(request.getParameter("timeStart"));
+			Date dateEnd = dateFormat.parse(request.getParameter("dateEnd"));
+			Date timeEnd = timeDateFormat.parse(request.getParameter("timeEnd"));
+			Date startDate = new Date(dateStart.getTime()+timeStart.getTime()+60*60*1000);
+			Date endDate = new Date(dateEnd.getTime()+timeEnd.getTime()+60*60*1000);
+
+			IServiceChartBL iServiceChart = new ServiceChartBL();	
+
+			List<ChartBean> chartBeans = iServiceChart.getChartDataBean(enabledNetworkFunctionList,serviceIdList, startDate, endDate, networkId,chartMode);
+
+			boolean singleLine = chartBeans.size()==1;
+			for (ChartBean chartBean : chartBeans) {
+				JSONObject lineRecord = new JSONObject();
+				JSONArray valuesRecord = new JSONArray();
+				StringBuilder nodeDescription = null;
+				if(radioService){
+					lineRecord.put("description", chartBean.getService());
+					nodeDescription = new StringBuilder(chartBean.getNodeByIdNode());
+					
+					if(chartBean.getNodeByIdNodeReceiver()!=null){
+//						nodeDescription.append(chartBean.getNodeByIdNode());
+						nodeDescription.append(" --> ");
+						nodeDescription.append(chartBean.getNodeByIdNodeReceiver());
+					}
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						nodeDescription.append("(");
+						nodeDescription.append(chartBean.getSource());					
+						nodeDescription.append(")");
+					}
+
+				}else{
+					lineRecord.put("description", chartBean.getNodeByIdNode());
+					nodeDescription = new StringBuilder(chartBean.getService());
+					if(chartBean.getNodeByIdNodeReceiver()!=null){
+//						nodeDescription.append(" " +chartBean.getNodeByIdNode());
+						nodeDescription.append("  verso  ");
+						nodeDescription.append(chartBean.getNodeByIdNodeReceiver());
+					}
+
+					
+					if(!chartBean.getNodeByIdNode().equals(chartBean.getSource())){
+						nodeDescription.append("(");
+						chartBean.getSource();
+						nodeDescription.append(")");
+					}
+
+				}
+
+
+				lineRecord.put("node", nodeDescription.toString());
+				lineRecord.put("samplingPeriod", chartBean.getSamplingPeriod());
+				lineRecord.put("startDate", dateTimeFormat.format(startDate));
+				lineRecord.put("endDate", dateTimeFormat.format(endDate));
+				Double maxValue = chartBean.getMaxValue();
+				Double minValue = chartBean.getMinValue();
+
+
+				if(maxValue != null && minValue != null){// DATA TO DRAW
+
+					List<ChartBean.ServiceValue> serviceValues = chartBean.getServiceValueList();
+
+					for (ServiceValue serviceValue : serviceValues) {
+						JSONObject valueRecord = new JSONObject();							
+						valueRecord.put("xValue", dateTimeFormat.format(serviceValue.getDate()));
+						valueRecord.put("yValue", serviceValue.getValue());
+						if(singleLine){
+
+							Collection<Double> valuesCollection = iServiceChart.getCollectionValues(serviceValue);
+							if(!valuesCollection.isEmpty()){
+								Double max = Collections.max(valuesCollection);
+								Double min = Collections.min(valuesCollection);
+
+								if(maxValue<max){
+									maxValue = max;
+								}
+
+								if(minValue>min){
+									minValue = min; 
+								}
+							}
+
+							valueRecord.put("majorValue", serviceValue.getValueCheckMajor());
+							valueRecord.put("criticalValue", serviceValue.getValueCheckCritical());
+							valueRecord.put("secondaryMajorValue", serviceValue.getValueCheckSecondaryMajor());
+							valueRecord.put("secondaryCriticalValue", serviceValue.getValueCheckSecondaryCritical());
+						}
+						valuesRecord.put(valueRecord);
+					}
+
+					lineRecord.put("maxYValue", maxValue);
+					lineRecord.put("minYValue", minValue);
+
+					lineRecord.put("values", valuesRecord);
+					records.put(lineRecord);
+				}
+
+			}
+
+
+			result.put("root", records);
+
+			HttpServletResponseUtil.setJsonResponse(response);
+
+			response.getOutputStream().println(result.toString());
+			response.flushBuffer();
+		} catch (Exception e) {
+			log.error(method,e);
+			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"Internal server error");
+			//			throw e;
+		}
+		finally{
+			EntityManagerHelper.closeEntityManager();
+		}
+		return null;
+	}
+
+}

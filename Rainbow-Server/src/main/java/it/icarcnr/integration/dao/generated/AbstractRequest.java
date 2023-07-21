@@ -1,0 +1,126 @@
+package it.icarcnr.integration.dao.generated;
+
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+
+/**
+ * AbstractRequest entity provides the base persistence definition of the
+ * Request entity. @author MyEclipse Persistence Tools
+ */
+@MappedSuperclass
+public abstract class AbstractRequest implements java.io.Serializable {
+
+	// Fields
+
+	private Integer id;
+	private String name;
+	private String description;
+	private String descriptionExtended;
+	private Integer percentageGapMajor;
+	private Integer percentageGapCritical;
+	private Set<Service> services = new HashSet<Service>(0);
+
+	// Constructors
+
+	/** default constructor */
+	public AbstractRequest() {
+	}
+
+	/** minimal constructor */
+	public AbstractRequest(String name, String description,
+			String descriptionExtended, Integer percentageGapMajor,
+			Integer percentageGapCritical) {
+		this.name = name;
+		this.description = description;
+		this.descriptionExtended = descriptionExtended;
+		this.percentageGapMajor = percentageGapMajor;
+		this.percentageGapCritical = percentageGapCritical;
+	}
+
+	/** full constructor */
+	public AbstractRequest(String name, String description,
+			String descriptionExtended, Integer percentageGapMajor,
+			Integer percentageGapCritical, Set<Service> services) {
+		this.name = name;
+		this.description = description;
+		this.descriptionExtended = descriptionExtended;
+		this.percentageGapMajor = percentageGapMajor;
+		this.percentageGapCritical = percentageGapCritical;
+		this.services = services;
+	}
+
+	// Property accessors
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "ID", unique = true, nullable = false)
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Column(name = "name", nullable = false)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "description", nullable = false)
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Column(name = "description_extended", nullable = false, length = 65535)
+	public String getDescriptionExtended() {
+		return this.descriptionExtended;
+	}
+
+	public void setDescriptionExtended(String descriptionExtended) {
+		this.descriptionExtended = descriptionExtended;
+	}
+
+	@Column(name = "percentage_gap_major", nullable = false)
+	public Integer getPercentageGapMajor() {
+		return this.percentageGapMajor;
+	}
+
+	public void setPercentageGapMajor(Integer percentageGapMajor) {
+		this.percentageGapMajor = percentageGapMajor;
+	}
+
+	@Column(name = "percentage_gap_critical", nullable = false)
+	public Integer getPercentageGapCritical() {
+		return this.percentageGapCritical;
+	}
+
+	public void setPercentageGapCritical(Integer percentageGapCritical) {
+		this.percentageGapCritical = percentageGapCritical;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "request")
+	public Set<Service> getServices() {
+		return this.services;
+	}
+
+	public void setServices(Set<Service> services) {
+		this.services = services;
+	}
+
+}
